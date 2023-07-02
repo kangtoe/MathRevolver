@@ -21,7 +21,9 @@ public class Player : MonoBehaviour
 
 
     [SerializeField]
-    float moveSpeed = 1f;
+    float forwardSpeed = 1f;
+    [SerializeField]
+    float sideSpeed = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +34,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(moveSpeed * transform.forward * Time.deltaTime);
+        transform.Translate(forwardSpeed * transform.forward * Time.deltaTime);
     }
 
 
@@ -41,25 +43,25 @@ public class Player : MonoBehaviour
         Debug.Log("MovePosY_Smooth || targetY :" + targetX);
 
         StopAllCoroutines();
-        StartCoroutine(MovePosX_SmoothCr(targetX));
+        StartCoroutine(MovePosX_SmoothCr(targetX, sideSpeed));
     }
 
-    IEnumerator MovePosX_SmoothCr(float targetX, float duration = 1)
-    {
-        float t = 0;
-        float StartX = transform.position.x;        
-
+    IEnumerator MovePosX_SmoothCr(float targetX, float speed = 1)
+    {            
         while (true)
-        {
-            float lerpedX = Mathf.Lerp(StartX, targetX, t);            
-            transform.position = new Vector3(lerpedX, transform.position.y, transform.position.z);
-            t += Time.fixedDeltaTime / duration;
+        {            
+            float currentX = transform.position.x;
 
-            if (t >= 1)
-            {
-                transform.position = new Vector3(lerpedX, transform.position.y, transform.position.z);
-                yield break;
-            }
+            // 현재 X 위치를 목표 위치 방향으로 조금씩 이동
+            if (targetX > currentX) currentX += Time.fixedDeltaTime * speed;
+            else if (targetX < currentX) currentX -= Time.fixedDeltaTime * speed;
+
+            bool closeEnough = Mathf.Abs(targetX - currentX) <= Time.fixedDeltaTime * speed;
+            if (closeEnough) currentX = targetX;
+            
+            transform.position = new Vector3(currentX, transform.position.y, transform.position.z);            
+            if(currentX == targetX) yield break;
+   
             yield return new WaitForFixedUpdate();
         }        
     }

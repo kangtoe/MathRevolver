@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class CameraManager : MonoBehaviour
 {
     [SerializeField]
@@ -19,9 +20,11 @@ public class CameraManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 pos = transform.position;
+        Vector3 pos = chaseTarget.position;
+        
         // z축으로만 추적함
-        pos.z = chaseTarget.position.z + offset.z;
-        transform.position = pos;
+        Vector3 camCenter = new Vector3(0, 0, pos.z);
+               
+        transform.position = camCenter + offset;
     }
 }
