@@ -4,9 +4,7 @@ using UnityEngine;
 using TMPro;
 
 public class SelectionObject : MonoBehaviour
-{
-    public Color color;
-
+{    
     [SerializeField]
     TMP_Text text;
 
@@ -30,11 +28,7 @@ public class SelectionObject : MonoBehaviour
 
     void OnValidate()
     {
-        Color col = text.color;
-        col.a = color.a;
-        text.color = col;
-
-        //mesh.material.color = color;
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,11 +36,18 @@ public class SelectionObject : MonoBehaviour
         Debug.Log(gameObject + ": OnTriggerEnter = " + other);
 
         if (other.tag == "Player")
-        {
-            
-
+        {            
             ScoreManager.Instance.AddScore(score);
         }
         
+    }
+
+    void ChangeColor(Color color)
+    {
+        Color col = text.color;
+        col.a = color.a;
+        text.color = col;
+
+        mesh.material.color = color;
     }
 }
