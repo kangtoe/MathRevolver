@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class ClickManager : MonoBehaviour
 {
     #region ΩÃ±€≈Ê
-    public static GameManager Instance
+    public static ClickManager Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = FindObjectOfType<GameManager>();
+                instance = FindObjectOfType<ClickManager>();
             }
             return instance;
         }
     }
-    private static GameManager instance;
+    private static ClickManager instance;
     #endregion
 
     public Transform ClickPointObject => clickPointObject;
