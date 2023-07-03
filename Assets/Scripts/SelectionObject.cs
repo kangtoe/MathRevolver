@@ -26,14 +26,10 @@ public class SelectionObject : MonoBehaviour
         
     }
 
-    void OnValidate()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(gameObject + ": OnTriggerEnter = " + other);
+        //Debug.Log(gameObject + ": OnTriggerEnter = " + other);
 
         if (other.tag == "Player")
         {            
@@ -42,12 +38,18 @@ public class SelectionObject : MonoBehaviour
         
     }
 
-    void ChangeColor(Color color)
+    public void SetMateralColor(Color new_color, bool changeAlpha = false)
     {
-        Color col = text.color;
-        col.a = color.a;
-        text.color = col;
-
+        Color color = new_color;
+        if (!changeAlpha) color.a = mesh.material.color.a;
         mesh.material.color = color;
+    }
+
+    public void SetSize(float X, float Z = float.NaN)
+    {
+        Vector3 scale = mesh.transform.localScale ;
+        scale.x = X / 10f;
+        if (!float.IsNaN(Z)) scale.y = Z / 10f;
+        mesh.transform.localScale = scale;
     }
 }
