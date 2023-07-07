@@ -35,14 +35,15 @@ public class ClickManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (UIManager.isOnUI) return;
         ClickCheck();
     }
 
     // 클릭 지점 지면에 클릭 포인터 표시
     void ClickCheck()
-    {
-        // 마우스 오른쪽 입력 처리
-        if (Input.GetMouseButtonDown(1))
+    {        
+        // 마우스 입력 처리
+        if (Input.GetMouseButtonDown(0))
         {
             Vector3? point = GetClickPoint();
             if (point == null)
