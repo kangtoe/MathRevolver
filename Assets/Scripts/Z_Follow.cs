@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectionCreatingArea : MonoBehaviour
+// 해당 스크립트가 적용된 오브젝트에게, 플레이어와 z축으로 일정한 거리를 유지하도록 함
+public class Z_Follow : MonoBehaviour
 {
     float zInterval;
 

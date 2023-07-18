@@ -5,10 +5,10 @@ using UnityEngine;
 public class SelectionCreator : MonoBehaviour
 {
     [SerializeField]
-    Transform creatingPoint;
-
-    [SerializeField]
     GameObject selectionPrefab;
+    
+    [SerializeField]
+    Transform creatingPoint;    
 
     [SerializeField]
     float creatingInterval = 5f;
