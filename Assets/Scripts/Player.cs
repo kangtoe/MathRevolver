@@ -19,11 +19,13 @@ public class Player : MonoBehaviour
     private static Player instance;
     #endregion
 
-
     [SerializeField]
     float forwardSpeed = 1f;
     [SerializeField]
     float sideSpeed = 1f;
+
+    [SerializeField]
+    int damage = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -35,21 +37,24 @@ public class Player : MonoBehaviour
     void Update()
     {
         transform.Translate(forwardSpeed * transform.forward * Time.deltaTime);
+
+        // 공격 검사
     }
 
+    #region X축 이동 제어
 
     public void MovePosX_Smooth(float targetX)
     {
-        Debug.Log("MovePosY_Smooth || targetY :" + targetX);
+        //Debug.Log("MovePosY_Smooth || targetY :" + targetX);
 
         StopAllCoroutines();
         StartCoroutine(MovePosX_SmoothCr(targetX, sideSpeed));
     }
 
     IEnumerator MovePosX_SmoothCr(float targetX, float speed = 1)
-    {            
+    {
         while (true)
-        {            
+        {
             float currentX = transform.position.x;
 
             // 현재 X 위치를 목표 위치 방향으로 조금씩 이동
@@ -58,11 +63,26 @@ public class Player : MonoBehaviour
 
             bool closeEnough = Mathf.Abs(targetX - currentX) <= Time.fixedDeltaTime * speed;
             if (closeEnough) currentX = targetX;
-            
-            transform.position = new Vector3(currentX, transform.position.y, transform.position.z);            
-            if(currentX == targetX) yield break;
-   
+
+            transform.position = new Vector3(currentX, transform.position.y, transform.position.z);
+            if (currentX == targetX) yield break;
+
             yield return new WaitForFixedUpdate();
-        }        
+        }
+    }
+
+    #endregion
+
+    public void Attack()
+    {
+        Enemy target = EnemySpwaner.Instance.GetClosestEnemy();
+        if (target is null)
+        {
+            Debug.Log("target is null");
+            return;
+        }
+
+        Debug.Log("CanBeAttacked : " + target.CanBeAttacked); 
+        target.OnHit(damage);
     }
 }

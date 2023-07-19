@@ -17,31 +17,39 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     int currentHp;
 
+    // 이동
+    [SerializeField]
+    float moveSpeed = 0.1f;
+
     // (z축) player를 지나치지 않았는가?
-    bool isFrontToPlayer => transform.position.z > Player.Instance.transform.position.z;
+    bool IsFrontToPlayer => transform.position.z > Player.Instance.transform.position.z;
+
+    // 현재 공격 가능한가?
+    public bool CanBeAttacked => IsFrontToPlayer && visibleCheck.Visible;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Debug.Log("start");
         AddSelfOnList();
+        currentHp = maxHp;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!visibleCheck.Visible && !isFrontToPlayer) DeleteEnemy();
+        // player를 지나쳐 카메라 벗어남 -> 삭제
+        if (!visibleCheck.Visible && !IsFrontToPlayer) DeleteEnemy();
+
+        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
     }
 
-    void Init()
-    { 
-        
-    }
-
-    void OnHit(int damage)
+    public void OnHit(int damage)
     {
         // todo: 시각적 연출 효과 더하기
         DoHitEffect();
+
+        Vector3 textPos = transform.position + Vector3.right * -0.3f + Vector3.up * 0.5f;
+        Text3dMaker.Instance.MakeText(damage.ToString(), textPos);
 
         currentHp -= damage;
         if (currentHp < 0) currentHp = 0;
@@ -53,7 +61,7 @@ public class Enemy : MonoBehaviour
 
     void OnDie()
     {
-        // todo : animator 파라메터 조절
+        // todo : animator 파라메터 조절 또는 die prefab(파티클 시스템 등) 생성
 
         DeleteEnemy();
     }
@@ -81,14 +89,14 @@ public class Enemy : MonoBehaviour
 
     #endregion
 
-
+    #region 피격 연출
 
     // 흔들림 연출 코루틴 호출
     public void DoHitEffect()
     {
         // 지속시간
         float duration = 0.3f;
-        
+
         StopAllCoroutines();
         StartCoroutine(ShackPosCr(duration));
         StartCoroutine(ColorChangeCr(duration));
@@ -110,14 +118,14 @@ public class Enemy : MonoBehaviour
 
         // 자식 오브젝트 로컬 위치 구하기        
         Vector3 GetPosition()
-        { 
+        {
             return anim.transform.localPosition;
         }
         // 자식 오브젝트 로컬 위치 정하기
         void SetPosition(Vector3 pos)
         {
             anim.transform.localPosition = pos;
-        }    
+        }
 
         Vector3 startPos = GetPosition();
         float leftTime = duration;
@@ -125,8 +133,8 @@ public class Enemy : MonoBehaviour
         bool plusMinus = true;
 
         while (true)
-        {            
-            leftTime -= interval;            
+        {
+            leftTime -= interval;
 
             // 남은 시간 종료 : 원래 위치로
             if (leftTime < 0)
@@ -139,7 +147,7 @@ public class Enemy : MonoBehaviour
             // 초기에는 무작위 값을 사용했으나, 고정 값이 연출상 더 나은 것으로 사료됨
             Vector3 shake;
             if (plusMinus) shake = Vector3.right;
-            else shake = Vector3.left;            
+            else shake = Vector3.left;
             shake *= amount;
 
             // 흔들림 방향 반전
@@ -148,8 +156,12 @@ public class Enemy : MonoBehaviour
             // 흔들림 적용
             Vector3 pos = GetPosition() + shake;
             SetPosition(pos);
-            
+
             yield return new WaitForSeconds(interval);
         }
     }
+
+    #endregion
+
+
 }

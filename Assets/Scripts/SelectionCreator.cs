@@ -44,8 +44,8 @@ public class SelectionCreator : MonoBehaviour
         float size = floorWidth / count;
         float minX = creatingPoint.position.x - (floorWidth / 2f);
         
-        Debug.Log("minX : " + minX);
-        Debug.Log("size : " + size);
+        //Debug.Log("minX : " + minX);
+        //Debug.Log("size : " + size);
 
         for (int i = 0; i < count; i++)
         {            

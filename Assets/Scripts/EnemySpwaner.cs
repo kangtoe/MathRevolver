@@ -68,8 +68,9 @@ public class EnemySpwaner : MonoBehaviour
         pos.x = Random.Range(minX, maxX);
 
         // 적 생성
-        GameObject go = Instantiate(enemyPrefab, null);
+        GameObject go = Instantiate(enemyPrefab);
         go.transform.position = pos;
+        go.transform.rotation = enemyPrefab.transform.rotation;
 
         //Enemy enemy = go.GetComponent<Enemy>();        
     }
@@ -81,7 +82,8 @@ public class EnemySpwaner : MonoBehaviour
         Debug.Log("GetClosestEnemy z : " + z);       
     }
 
-    Enemy GetClosestEnemy()
+    // 공격 가능한 가장 가까운 적 반환 (없으면 null)
+    public Enemy GetClosestEnemy()
     {        
         // list 요소 개수 검사
         if (enemies.Count == 0)
@@ -90,24 +92,43 @@ public class EnemySpwaner : MonoBehaviour
             return null;
         }        
 
-        int closestIndex = 0;
-        float closestRange = enemies[0].transform.position.z;
+        // 가장 나중에 리스트에 추가된(생성된) 적 = 가장 멀리있는 적
+        int closestIndex = -1;
+        float closestPosZ = 0;
 
         for (int i = 0; i < enemies.Count; i++)
-        {
-            float range = enemies[i].transform.position.z;
+        {            
+            // 공격 가능한 적인가?
+            if (!enemies[i].CanBeAttacked) continue;
+
+            float posZ = enemies[i].transform.position.z;
+
+            // 초기화
+            if (closestIndex == -1)
+            {
+                closestPosZ = posZ;
+                closestIndex = i;
+                continue;
+            }                        
 
             // 최단거리 갱신
-            if (range < closestRange)
+            if (posZ < closestPosZ)
             {
-                closestRange = range;
+                closestPosZ = posZ;
                 closestIndex = i;
-                Debug.Log("최단거리 갱신");
+                //Debug.Log("최단거리 갱신");
             }
         }
 
-        Debug.Log("closestIndex : " + closestIndex);
-        Debug.Log("closestRange : " + closestRange);
+        // 조건에 해당하는 적 없음
+        if (closestIndex == -1)
+        {
+            Debug.Log("no enemy can attack : " + closestIndex);
+            return null;
+        }
+
+        //Debug.Log("closestIndex : " + closestIndex);
+        //Debug.Log("closestRange : " + closestPosZ);
         return enemies[closestIndex];
     }
 }
