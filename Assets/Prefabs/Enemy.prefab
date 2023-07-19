@@ -1245,6 +1245,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visibleCheck: {fileID: 7634885675385272973}
   anim: {fileID: 7587113305703243640}
+  maxHp: 0
+  currentHp: 0
 --- !u!136 &7502607062306655989
 CapsuleCollider:
   m_ObjectHideFlags: 0
