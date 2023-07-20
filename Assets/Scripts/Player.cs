@@ -33,10 +33,15 @@ public class Player : MonoBehaviour
     //float lastAttackTime = 0;
     bool canAttack = true;
 
+    // ÄÚ·çÆ¾
+    Coroutine moveCr;
+    Coroutine attackCr;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(AttackCheckCr(attackInterval));   
+        attackCr = StartCoroutine(AttackCheckCr(attackInterval));   
     }
 
     // Update is called once per frame
@@ -51,9 +56,9 @@ public class Player : MonoBehaviour
     public void MovePosX_Smooth(float targetX)
     {
         //Debug.Log("MovePosY_Smooth || targetY :" + targetX);
-
-        StopAllCoroutines();
-        StartCoroutine(MovePosX_SmoothCr(targetX, sideSpeed));
+        
+        if (moveCr != null) StopCoroutine(moveCr);        
+        moveCr = StartCoroutine(MovePosX_SmoothCr(targetX, sideSpeed));
     }
 
     IEnumerator MovePosX_SmoothCr(float targetX, float speed = 1)
