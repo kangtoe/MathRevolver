@@ -28,6 +28,9 @@ public class EnemySpwaner : MonoBehaviour
 
     public List<Enemy> enemies = new List<Enemy>();
 
+    // 디버그용
+    int enemyNumber = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +72,7 @@ public class EnemySpwaner : MonoBehaviour
 
         // 적 생성
         GameObject go = Instantiate(enemyPrefab);
+        go.name += enemyNumber; enemyNumber++;
         go.transform.position = pos;
         go.transform.rotation = enemyPrefab.transform.rotation;
 

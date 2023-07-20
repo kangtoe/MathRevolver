@@ -19,26 +19,31 @@ public class Player : MonoBehaviour
     private static Player instance;
     #endregion
 
+    [Header("이동")]    
     [SerializeField]
     float forwardSpeed = 1f;
     [SerializeField]
     float sideSpeed = 1f;
 
+    [Header("공격")]    
     [SerializeField]
     int damage = 10;
+    [SerializeField]
+    float attackInterval = 1;
+    //float lastAttackTime = 0;
+    bool canAttack = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(AttackCheckCr(attackInterval));   
     }
 
     // Update is called once per frame
     void Update()
     {
+        // 전방으로 이동 (z축 이동)
         transform.Translate(forwardSpeed * transform.forward * Time.deltaTime);
-
-        // 공격 검사
     }
 
     #region X축 이동 제어
@@ -73,16 +78,46 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    public void Attack()
+    #region 공격
+
+    // 공격 검사
+    IEnumerator AttackCheckCr(float interval)
     {
+        while (true)
+        {
+            if (canAttack)
+            {
+                TryAtack();
+            }
+
+            yield return new WaitForSeconds(interval);
+        }
+    }
+
+    void TryAtack()
+    {        
         Enemy target = EnemySpwaner.Instance.GetClosestEnemy();
+
+        Debug.Log("TryAtack");
+
+        // 가장 가까운 적 공격
         if (target is null)
         {
             Debug.Log("target is null");
             return;
         }
+        else Debug.Log("target :" + target.name);
 
-        Debug.Log("CanBeAttacked : " + target.CanBeAttacked); 
+        //lastAttackTime = Time.time;
+        Attack(target);
+    }
+
+    void Attack(Enemy target)
+    {
         target.OnHit(damage);
     }
+
+    #endregion
+
+
 }

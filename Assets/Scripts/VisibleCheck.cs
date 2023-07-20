@@ -11,14 +11,14 @@ public class VisibleCheck : MonoBehaviour
     private void OnBecameVisible()
     {
         visible = true;
-        Debug.Log("OnBecameVisible");
-        PlayerFarCheck();
+        //Debug.Log("OnBecameVisible");
+        //PlayerFarCheck();
     }
 
     private void OnBecameInvisible()
     {
         visible = false;
-        Debug.Log("OnBecameInvisible");        
+        //Debug.Log("OnBecameInvisible");        
     }
 
     void PlayerFarCheck()

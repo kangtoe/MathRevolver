@@ -740,19 +740,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 678814643}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1659889824}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: Attack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &678814643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,7 +826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 7502607062306655998, guid: 0cff8eab6dfe90b4ea06e8aff996fc6d, type: 3}
   spwanPoint: {fileID: 1793055995}
-  spwanInterval: 8
+  spwanInterval: 1
   enemies: []
 --- !u!1 &904003897
 GameObject:
@@ -2663,6 +2651,7 @@ MonoBehaviour:
   forwardSpeed: 1
   sideSpeed: 1
   damage: 10
+  attackInterval: 1
 --- !u!54 &1659889825
 Rigidbody:
   m_ObjectHideFlags: 0
