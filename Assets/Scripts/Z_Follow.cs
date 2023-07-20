@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// ÇØ´ç ½ºÅ©¸³Æ®°¡ Àû¿ëµÈ ¿ÀºêÁ§Æ®¿¡°Ô, ÇÃ·¹ÀÌ¾î¿Í zÃàÀ¸·Î ÀÏÁ¤ÇÑ °Å¸®¸¦ À¯ÁöÇÏµµ·Ï ÇÔ
+// í•´ë‹¹ ìŠ¤í¬ë¦½íŠ¸ê°€ ì ìš©ëœ ì˜¤ë¸Œì íŠ¸ì—ê²Œ, í”Œë ˆì´ì–´ì™€ zì¶•ìœ¼ë¡œ ì¼ì •í•œ ê±°ë¦¬ë¥¼ ìœ ì§€í•˜ë„ë¡ í•¨
 public class Z_Follow : MonoBehaviour
-{
+{ 
     float zInterval;
 
     Vector3 playerPos => Player.Instance.transform.position;

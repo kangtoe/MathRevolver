@@ -12,7 +12,7 @@ public class SelectionCreator : MonoBehaviour
 
     [SerializeField]
     float creatingInterval = 5f;
-
+     
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +29,7 @@ public class SelectionCreator : MonoBehaviour
     {
         while (true)
         {
-            // ¼±ÅÃÁö ¿ÀºêÁ§Æ® »ı¼º
+            // ì„ íƒì§€ ì˜¤ë¸Œì íŠ¸ ìƒì„±
             //GameObject go = Instantiate(selectionPrefab, transform);
             //go.transform.position = creatingPoint.position;
             CreateSelection(4);
@@ -49,19 +49,19 @@ public class SelectionCreator : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {            
-            // ¼±ÅÃÁö ¿ÀºêÁ§Æ® »ı¼º
+            // ì„ íƒì§€ ì˜¤ë¸Œì íŠ¸ ìƒì„±
             GameObject go = Instantiate(selectionPrefab, transform);
 
-            // À§Ä¡ ¼³Á¤
+            // ìœ„ì¹˜ ì„¤ì •
             Vector3 pos = creatingPoint.position;
             float pointX = minX + ( (size * i) + (size * (i + 1)) ) / 2f;
             go.transform.position = new Vector3(pointX, pos.y, pos.z);                        
 
-            // »çÀÌÁî ¼³Á¤
+            // ì‚¬ì´ì¦ˆ ì„¤ì •
             SelectionObject selection = go.GetComponent<SelectionObject>();
             selection.SetSize(size);
 
-            // »ö ¼³Á¤. ÇÏµå ÄÚµùµÊ
+            // ìƒ‰ ì„¤ì •. í•˜ë“œ ì½”ë”©ë¨
             Color color;
             if (i % 3 == 0) color = Color.red;
             else if (i % 2 ==0) color = Color.green;
