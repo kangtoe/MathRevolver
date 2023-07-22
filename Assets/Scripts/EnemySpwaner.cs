@@ -28,7 +28,7 @@ public class EnemySpwaner : MonoBehaviour
 
     public List<Enemy> enemies = new List<Enemy>();
 
-    // µğ¹ö±×¿ë
+    // ë””ë²„ê·¸ìš©
     int enemyNumber = 0;
 
     // Start is called before the first frame update
@@ -47,7 +47,7 @@ public class EnemySpwaner : MonoBehaviour
     {
         while (true)
         {
-            // ¼±ÅÃÁö ¿ÀºêÁ§Æ® »ı¼º
+            // ì„ íƒì§€ ì˜¤ë¸Œì íŠ¸ ìƒì„±
             //GameObject go = Instantiate(selectionPrefab, transform);
             //go.transform.position = creatingPoint.position;
             Spwan(enemyPrefab);
@@ -60,17 +60,17 @@ public class EnemySpwaner : MonoBehaviour
     {
         Vector3 pos = spwanPoint.position;
 
-        // ÃßÈÄ Àü¿ª¿¡¼­ »ç¿ëÇÏ´Â º¯¼ö·Î ¼öÁ¤ÇÒ °Í
+        // ì¶”í›„ ì „ì—­ì—ì„œ ì‚¬ìš©í•˜ëŠ” ë³€ìˆ˜ë¡œ ìˆ˜ì •í•  ê²ƒ
         float floorWidth = 10;
         float margin = 1;
 
-        // spwanPoint»óÀÇ ¹«ÀÛÀ§ x À§Ä¡ ±¸ÇÏ±â
+        // spwanPointìƒì˜ ë¬´ì‘ìœ„ x ìœ„ì¹˜ êµ¬í•˜ê¸°
         float spwanWidth = floorWidth - margin;        
         float minX = spwanPoint.position.x - (spwanWidth / 2f);
         float maxX = spwanPoint.position.x + (spwanWidth / 2f);
         pos.x = Random.Range(minX, maxX);
 
-        // Àû »ı¼º
+        // ì  ìƒì„±
         GameObject go = Instantiate(enemyPrefab);
         go.name += enemyNumber; enemyNumber++;
         go.transform.position = pos;
@@ -81,33 +81,33 @@ public class EnemySpwaner : MonoBehaviour
 
     public void DebugFunc()
     {
-        Enemy enemy = GetClosestEnemy();
+        Enemy enemy = GetClosestEnemy_Z();
         float z = enemy.transform.position.z;
         Debug.Log("GetClosestEnemy z : " + z);       
     }
 
-    // °ø°İ °¡´ÉÇÑ °¡Àå °¡±î¿î Àû ¹İÈ¯ (¾øÀ¸¸é null)
-    public Enemy GetClosestEnemy()
+    // ê³µê²© ê°€ëŠ¥í•œ ê°€ì¥ ê°€ê¹Œìš´ ì  ë°˜í™˜ (ì—†ìœ¼ë©´ null)
+    public Enemy GetClosestEnemy_Z()
     {        
-        // list ¿ä¼Ò °³¼ö °Ë»ç
+        // list ìš”ì†Œ ê°œìˆ˜ ê²€ì‚¬
         if (enemies.Count == 0)
         {
             Debug.Log("enemies.Count == 0");
             return null;
         }        
 
-        // °¡Àå ³ªÁß¿¡ ¸®½ºÆ®¿¡ Ãß°¡µÈ(»ı¼ºµÈ) Àû = °¡Àå ¸Ö¸®ÀÖ´Â Àû
+        // ê°€ì¥ ë‚˜ì¤‘ì— ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€ëœ(ìƒì„±ëœ) ì  = ê°€ì¥ ë©€ë¦¬ìˆëŠ” ì 
         int closestIndex = -1;
         float closestPosZ = 0;
 
         for (int i = 0; i < enemies.Count; i++)
         {            
-            // °ø°İ °¡´ÉÇÑ ÀûÀÎ°¡?
+            // ê³µê²© ê°€ëŠ¥í•œ ì ì¸ê°€?
             if (!enemies[i].CanBeAttacked) continue;
 
             float posZ = enemies[i].transform.position.z;
 
-            // ÃÊ±âÈ­
+            // ì´ˆê¸°í™”
             if (closestIndex == -1)
             {
                 closestPosZ = posZ;
@@ -115,16 +115,65 @@ public class EnemySpwaner : MonoBehaviour
                 continue;
             }                        
 
-            // ÃÖ´Ü°Å¸® °»½Å
+            // ìµœë‹¨ê±°ë¦¬ ê°±ì‹ 
             if (posZ < closestPosZ)
             {
                 closestPosZ = posZ;
                 closestIndex = i;
-                //Debug.Log("ÃÖ´Ü°Å¸® °»½Å");
+                //Debug.Log("ìµœë‹¨ê±°ë¦¬ ê°±ì‹ ");
             }
         }
 
-        // Á¶°Ç¿¡ ÇØ´çÇÏ´Â Àû ¾øÀ½
+        // ì¡°ê±´ì— í•´ë‹¹í•˜ëŠ” ì  ì—†ìŒ
+        if (closestIndex == -1)
+        {
+            Debug.Log("no enemy can attack : " + closestIndex);
+            return null;
+        }
+
+        //Debug.Log("closestIndex : " + closestIndex);
+        //Debug.Log("closestRange : " + closestPosZ);
+        return enemies[closestIndex];
+    }
+
+    public Enemy GetClosestEnemy_Transform(Transform tf)
+    {
+        // list ìš”ì†Œ ê°œìˆ˜ ê²€ì‚¬
+        if (enemies.Count == 0)
+        {
+            Debug.Log("enemies.Count == 0");
+            return null;
+        }
+
+        // ê°€ì¥ ë‚˜ì¤‘ì— ë¦¬ìŠ¤íŠ¸ì— ì¶”ê°€ëœ(ìƒì„±ëœ) ì  = ê°€ì¥ ë©€ë¦¬ìˆëŠ” ì 
+        int closestIndex = -1;
+        float closestRange = 0;
+
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            // ê³µê²© ê°€ëŠ¥í•œ ì ì¸ê°€?
+            if (!enemies[i].CanBeAttacked) continue;
+
+            float range = Vector3.Distance(tf.position, enemies[i].transform.position);
+
+            // ì´ˆê¸°í™”
+            if (closestIndex == -1)
+            {
+                closestRange = range;
+                closestIndex = i;
+                continue;
+            }
+
+            // ìµœë‹¨ê±°ë¦¬ ê°±ì‹ 
+            if (range < closestRange)
+            {
+                closestRange = range;
+                closestIndex = i;
+                //Debug.Log("ìµœë‹¨ê±°ë¦¬ ê°±ì‹ ");
+            }
+        }
+
+        // ì¡°ê±´ì— í•´ë‹¹í•˜ëŠ” ì  ì—†ìŒ
         if (closestIndex == -1)
         {
             Debug.Log("no enemy can attack : " + closestIndex);

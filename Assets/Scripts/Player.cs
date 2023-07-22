@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    #region ½Ì±ÛÅæ
+    #region ì‹±ê¸€í†¤
     public static Player Instance
     {
         get
@@ -19,13 +19,13 @@ public class Player : MonoBehaviour
     private static Player instance;
     #endregion
 
-    [Header("ÀÌµ¿")]    
+    [Header("ì´ë™")]    
     [SerializeField]
     float forwardSpeed = 1f;
     [SerializeField]
     float sideSpeed = 1f;
 
-    [Header("°ø°Ý")]    
+    [Header("ê³µê²©")]    
     [SerializeField]
     int damage = 10;
     [SerializeField]
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
     //float lastAttackTime = 0;
     bool canAttack = true;
 
-    // ÄÚ·çÆ¾
+    // ì½”ë£¨í‹´
     Coroutine moveCr;
     Coroutine attackCr;
 
@@ -47,11 +47,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Àü¹æÀ¸·Î ÀÌµ¿ (zÃà ÀÌµ¿)
+        // ì „ë°©ìœ¼ë¡œ ì´ë™ (zì¶• ì´ë™)
         transform.Translate(forwardSpeed * transform.forward * Time.deltaTime);
     }
 
-    #region XÃà ÀÌµ¿ Á¦¾î
+    #region Xì¶• ì´ë™ ì œì–´
 
     public void MovePosX_Smooth(float targetX)
     {
@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
         {
             float currentX = transform.position.x;
 
-            // ÇöÀç X À§Ä¡¸¦ ¸ñÇ¥ À§Ä¡ ¹æÇâÀ¸·Î Á¶±Ý¾¿ ÀÌµ¿
+            // í˜„ìž¬ X ìœ„ì¹˜ë¥¼ ëª©í‘œ ìœ„ì¹˜ ë°©í–¥ìœ¼ë¡œ ì¡°ê¸ˆì”© ì´ë™
             if (targetX > currentX) currentX += Time.fixedDeltaTime * speed;
             else if (targetX < currentX) currentX -= Time.fixedDeltaTime * speed;
 
@@ -83,9 +83,9 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    #region °ø°Ý
+    #region ê³µê²©
 
-    // °ø°Ý °Ë»ç
+    // ê³µê²© ê²€ì‚¬
     IEnumerator AttackCheckCr(float interval)
     {
         while (true)
@@ -100,12 +100,13 @@ public class Player : MonoBehaviour
     }
 
     void TryAtack()
-    {        
-        Enemy target = EnemySpwaner.Instance.GetClosestEnemy();
+    {
+        //Enemy target = EnemySpwaner.Instance.GetClosestEnemy_Z();
+        Enemy target = EnemySpwaner.Instance.GetClosestEnemy_Transform(transform);
 
         Debug.Log("TryAtack");
 
-        // °¡Àå °¡±î¿î Àû °ø°Ý
+        // ê°€ìž¥ ê°€ê¹Œìš´ ì  ê³µê²©
         if (target is null)
         {
             Debug.Log("target is null");
