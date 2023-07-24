@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
         //Enemy target = EnemySpwaner.Instance.GetClosestEnemy_Z();
         Enemy target = EnemySpwaner.Instance.GetClosestEnemy_Transform(transform);
 
-        Debug.Log("TryAtack");
+        //bug.Log("TryAtack");
 
         // 가장 가까운 적 공격
         if (target is null)
@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
             Debug.Log("target is null");
             return;
         }
-        else Debug.Log("target :" + target.name);
+        //else Debug.Log("target :" + target.name);
 
         //lastAttackTime = Time.time;
         Attack(target);
