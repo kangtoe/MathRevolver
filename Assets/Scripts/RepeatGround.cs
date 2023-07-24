@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RepeatGround : MonoBehaviour
 {
-    #region ½Ì±ÛÅæ
+    #region ì‹±ê¸€í†¤
     public static RepeatGround Instance
     {
         get
@@ -25,7 +25,7 @@ public class RepeatGround : MonoBehaviour
     [SerializeField]
     float groundSize = 10;
 
-    [Header("µğ¹ö±ë ¿ë")]
+    [Header("ë””ë²„ê¹… ìš©")]
     [SerializeField]
     List<GameObject> spwanedGrounds;
 
@@ -43,20 +43,25 @@ public class RepeatGround : MonoBehaviour
     {
         int preSpwaned = 2;
 
-        // playerÀÇ À§Ä¡ °Ë»ç
+        // playerì˜ ìœ„ì¹˜ ê²€ì‚¬
         Vector3 playerPos = currentPlayer.transform.position;
         Vector3 spwanCheckPos = spwanedGrounds[spwanedGrounds.Count - preSpwaned].transform.position;
         if (playerPos.z >= spwanCheckPos.z)
         {
             Vector3 spwanPoint = spwanCheckPos + new Vector3(0, 0, groundSize * preSpwaned);
 
-            // »õ·Î¿î ±×¶ó¿îµå ½ºÆù
+            // ìƒˆë¡œìš´ ê·¸ë¼ìš´ë“œ ìŠ¤í°
             GameObject go = Instantiate(groundPrefabs, transform);
             go.transform.position = spwanPoint;
             spwanedGrounds.Add(go);
+
+            // ì½œë¼ì´ë” ë¦¬ì…‹
+            MeshCollider collider =  go.GetComponent<MeshCollider>();
+            Destroy(collider);
+            go.AddComponent<MeshCollider>();            
         }
 
         // TODO
-        // spwanedGrounds Áß Ä«¸Ş¶ó¿¡¼­ ¿ÏÀüÈ÷ ¹ş¾î³­ °ÍÀº Á¦°ÅÇÒ °Í
+        // spwanedGrounds ì¤‘ ì¹´ë©”ë¼ì—ì„œ ì™„ì „íˆ ë²—ì–´ë‚œ ê²ƒì€ ì œê±°í•  ê²ƒ
     }
 }

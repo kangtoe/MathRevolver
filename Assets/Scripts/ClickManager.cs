@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ClickManager : MonoBehaviour
 {
-    #region ½Ì±ÛÅæ
+    #region ì‹±ê¸€í†¤
     public static ClickManager Instance
     {
         get
@@ -39,16 +39,16 @@ public class ClickManager : MonoBehaviour
         ClickCheck();
     }
 
-    // Å¬¸¯ ÁöÁ¡ Áö¸é¿¡ Å¬¸¯ Æ÷ÀÎÅÍ Ç¥½Ã
+    // í´ë¦­ ì§€ì  ì§€ë©´ì— í´ë¦­ í¬ì¸í„° í‘œì‹œ
     void ClickCheck()
     {        
-        // ¸¶¿ì½º ÀÔ·Â Ã³¸®
+        // ë§ˆìš°ìŠ¤ ì…ë ¥ ì²˜ë¦¬
         if (Input.GetMouseButtonDown(0))
         {
             Vector3? point = GetClickPoint();
             if (point == null)
             {
-                Debug.Log("Å¬¸¯ ÁöÁ¡ Ground ¹°Ã¼ ¾øÀ½");
+                Debug.Log("í´ë¦­ ì§€ì  Ground ë¬¼ì²´ ì—†ìŒ");
                 return;
             }
 
@@ -58,7 +58,7 @@ public class ClickManager : MonoBehaviour
         }
     }
 
-    // ¸¶¿ì½º Å¬¸¯ ÁöÁ¡ ¾Ë¾Æ³»±â
+    // ë§ˆìš°ìŠ¤ í´ë¦­ ì§€ì  ì•Œì•„ë‚´ê¸°
     Vector3? GetClickPoint()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
