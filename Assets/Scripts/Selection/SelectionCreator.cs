@@ -48,7 +48,7 @@ public class SelectionCreator : MonoBehaviour
             }            
             else
             {
-                CreateSelection_Power(4);
+                CreateSelection_Power();
                 spwanCount++;
             }
 
@@ -58,36 +58,18 @@ public class SelectionCreator : MonoBehaviour
         }
     }
 
-    void CreateSelection_Power(int count)
-    {        
-        float floorWidth = 10;
-        float size = floorWidth / count;
-        float minX = creatingPoint.position.x - (floorWidth / 2f);
+    void CreateSelection_Power()
+    {
+        List<int> testIntList = new List<int>() { 100, 200, 300 };
+
+        // 선택지 오브젝트 생성
+        GameObject go = Instantiate(selectionPrefab_Power, transform);
         
-        //Debug.Log("minX : " + minX);
-        //Debug.Log("size : " + size);
+        // 위치 설정
+        go.transform.position = creatingPoint.position;
 
-        for (int i = 0; i < count; i++)
-        {            
-            // 선택지 오브젝트 생성
-            GameObject go = Instantiate(selectionPrefab_Power, transform);
-
-            // 위치 설정
-            Vector3 pos = creatingPoint.position;
-            float pointX = minX + ( (size * i) + (size * (i + 1)) ) / 2f;
-            go.transform.position = new Vector3(pointX, pos.y, pos.z);                        
-
-            // 사이즈 설정
-            SelectionObject_Power selection = go.GetComponent<SelectionObject_Power>();
-            selection.SetSize(size);
-
-            // 색 설정. 하드 코딩됨
-            Color color;
-            if (i % 3 == 0) color = Color.red;
-            else if (i % 2 ==0) color = Color.green;
-            else color = Color.blue;
-            selection.SetMateralColor(color);
-        }                
+        SelectionObject_Power selection = go.GetComponent<SelectionObject_Power>();
+        selection.CreateElement(testIntList);
     }
 
     void CreateSelection_Math()

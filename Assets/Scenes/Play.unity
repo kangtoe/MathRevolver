@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8081f106db74b3f4f828197bcbad317e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionPrefab_Power: {fileID: 7888360049068581542, guid: 4fe0690aa55257248b67a8f30c2f18c0, type: 3}
+  selectionPrefab_Power: {fileID: 1912754302918552300, guid: 4fe0690aa55257248b67a8f30c2f18c0, type: 3}
   selectionPrefab_Math: {fileID: 7888360049068581542, guid: 19f2da9af8af41443a45bd2f5adc9cc5, type: 3}
   creatingPoint: {fileID: 7888360048686185028}
   creatingInterval: 5
@@ -1780,7 +1780,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24828
+  m_Name: pb_Mesh23638
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1949,7 +1949,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24764
+  m_Name: pb_Mesh23574
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3026,7 +3026,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659889822}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.5}
+  m_LocalPosition: {x: -0.1, y: 0, z: 2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3870,7 +3870,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24910
+  m_Name: pb_Mesh23720
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4423,7 +4423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8974848841342732721, guid: 1b1c1681d135f4f408e853b379c4e090, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.412
+      value: -0.512
       objectReference: {fileID: 0}
     - target: {fileID: 8974848841342732721, guid: 1b1c1681d135f4f408e853b379c4e090, type: 3}
       propertyPath: m_LocalPosition.y
