@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7888360049068581528}
-  - component: {fileID: 7888360049068581543}
+  - component: {fileID: 3922167394271009338}
   - component: {fileID: 7888360049068581529}
   m_Layer: 0
-  m_Name: SelectionObject
+  m_Name: SelectionObject_Math
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7888360049068581543
+--- !u!114 &3922167394271009338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,13 +44,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7888360049068581542}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 876784bde82cdd14cbf5a414cfe4a70a, type: 3}
+  m_Script: {fileID: 11500000, guid: 66634d269a432a34e8621a15c5d31bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 1, a: 0.6}
-  text: {fileID: 7888360050169258674}
-  mesh: {fileID: 7888360049681505494}
-  score: 100
 --- !u!54 &7888360049068581529
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -265,7 +261,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: test
+  m_text: MATH
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

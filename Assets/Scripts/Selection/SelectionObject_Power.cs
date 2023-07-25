@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class SelectionObject : MonoBehaviour
+public class SelectionObject_Power : MonoBehaviour
 {    
     [SerializeField]
     TMP_Text text;
@@ -14,19 +14,6 @@ public class SelectionObject : MonoBehaviour
     [SerializeField]
     int score = 100;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log(gameObject + ": OnTriggerEnter = " + other);
@@ -34,8 +21,7 @@ public class SelectionObject : MonoBehaviour
         if (other.tag == "Player")
         {            
             ScoreManager.Instance.AddScore(score);
-        }
-        
+        }        
     }
 
     public void SetMateralColor(Color new_color, bool changeAlpha = false)

@@ -168,9 +168,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8081f106db74b3f4f828197bcbad317e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionPrefab: {fileID: 7888360049068581542, guid: 4fe0690aa55257248b67a8f30c2f18c0, type: 3}
+  selectionPrefab_Power: {fileID: 7888360049068581542, guid: 4fe0690aa55257248b67a8f30c2f18c0, type: 3}
+  selectionPrefab_Math: {fileID: 7888360049068581542, guid: 19f2da9af8af41443a45bd2f5adc9cc5, type: 3}
   creatingPoint: {fileID: 7888360048686185028}
   creatingInterval: 5
+  adventCount: 3
 --- !u!1001 &24225628
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1778,7 +1780,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh63322
+  m_Name: pb_Mesh24828
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1947,7 +1949,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh63064
+  m_Name: pb_Mesh24764
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3045,8 +3047,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 286a74d086a143d41b154dc575cf341a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 1
-  sideSpeed: 1
+  forwardSpeed: 3
+  sideSpeed: 3
   damage: 10
   attackInterval: 1
 --- !u!54 &1659889825
@@ -3063,7 +3065,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!136 &1659889826
 CapsuleCollider:
@@ -3075,8 +3077,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 1
+  m_Radius: 0.3
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &1706152404
@@ -3868,7 +3870,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh83950
+  m_Name: pb_Mesh24910
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
