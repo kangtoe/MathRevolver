@@ -4,7 +4,10 @@ using UnityEngine;
 
 [ExecuteAlways]
 public class Revolver : MonoBehaviour
-{    
+{
+    [SerializeField]
+    ParticleSystem ps;
+
     [SerializeField]
     GameObject movePoint;
 
@@ -46,5 +49,10 @@ public class Revolver : MonoBehaviour
     void Look()
     { 
     
+    }
+
+    public void Shoot()
+    {
+        ps.Play();
     }
 }

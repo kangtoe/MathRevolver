@@ -33,6 +33,12 @@ public class Player : MonoBehaviour
     //float lastAttackTime = 0;
     bool canAttack = true;
 
+    [Header("공격 이펙트")]
+    [SerializeField]
+    ParticleSystem nozzle;
+    [SerializeField]
+    ParticleSystem trail;
+
     // 코루틴
     Coroutine moveCr;
     Coroutine attackCr;
@@ -120,6 +126,11 @@ public class Player : MonoBehaviour
 
     void Attack(Enemy target)
     {
+        // 사격 시각 효과
+        nozzle.Play();
+        trail.Play();
+        trail.transform.LookAt(target.transform.position);
+
         target.OnHit(damage);
     }
 
