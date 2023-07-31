@@ -7,7 +7,9 @@ using WjChallenge;
 public enum CurrentStatus { WAITING, DIAGNOSIS, LEARNING }
 public class WJ_Sample : MonoBehaviour
 {
-    [SerializeField] WJ_Connector       wj_conn;
+    //[SerializeField] WJ_Connector       wj_conn;
+    WJ_Connector wj_conn => WJ_Connector.Instance;
+
     [SerializeField] CurrentStatus      currentStatus;
     public CurrentStatus                CurrentStatus => currentStatus;
 
@@ -51,10 +53,10 @@ public class WJ_Sample : MonoBehaviour
             case CurrentStatus.WAITING:
                 panel_diag_chooseDiff.SetActive(true);
                 break;
-        }
+        }        
 
         if (wj_conn != null)
-        {
+        {            
             wj_conn.onGetDiagnosis.AddListener(() => GetDiagnosis());
             wj_conn.onGetLearning.AddListener(() => GetLearning(0));
         }

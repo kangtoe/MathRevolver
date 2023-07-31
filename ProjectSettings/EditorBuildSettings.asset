@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Play.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Diagmostic.unity
+    path: Assets/Scenes/Diagnostic.unity
     guid: ca0e3b606a8a42b4aba8032718d9581d
   m_configObjects: {}

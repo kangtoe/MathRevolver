@@ -8,6 +8,21 @@ using WjChallenge;
 
 public class WJ_Connector : MonoBehaviour
 {
+    #region 싱글톤
+    public static WJ_Connector Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<WJ_Connector>();
+            }
+            return instance;
+        }
+    }
+    private static WJ_Connector instance;
+    #endregion
+
     [Header("My Info")]
     public string strGameCD;        //게임코드
     public string strGameKey;       //게임키(Api Key)
@@ -42,7 +57,11 @@ public class WJ_Connector : MonoBehaviour
     #endregion
 
     private void Awake()
-    {
+    {        
+        // 모든 씬에서 하나만 유지
+        if (Instance != this) Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
+
         if (SystemInfo.deviceType == DeviceType.Desktop) 
             strDeviceNm = "PC";
         else 

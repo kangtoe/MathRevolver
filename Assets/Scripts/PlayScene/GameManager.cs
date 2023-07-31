@@ -4,10 +4,28 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    #region 싱글톤
+    public static GameManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<GameManager>();
+            }
+            return instance;
+        }
+    }
+    private static GameManager instance;
+    #endregion
+
     // Start is called before the first frame update
     void Awake()
     {
-        DontDestroyOnLoad(this);
+        // 모든 씬에서 하나만 유지
+        if (Instance != this) Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
+
         Init();
     }
 
