@@ -107,6 +107,9 @@ public class WJ_Sample : MonoBehaviour
     /// </summary>
     private void MakeQuestion(string textCn, string qstCn, string qstCransr, string qstWransr)
     {
+        Debug.Log("MakeQuestion");
+        DiagomosticManager.Instance.StartTimeBar();
+
         panel_diag_chooseDiff.SetActive(false);
         panel_question.SetActive(true);
 
@@ -147,22 +150,39 @@ public class WJ_Sample : MonoBehaviour
     /// <summary>
     /// 답을 고르고 맞았는 지 체크
     /// </summary>
-    public void SelectAnswer(int _idx)
+    public void SelectAnswer(int _idx = -1)
     {
+        Debug.Log("SelectAnswer idx : " + _idx);
+        DiagomosticManager.Instance.InitTimeBar();
+
         bool isCorrect;
         string ansrCwYn = "N";
 
         switch (currentStatus)
         {
             case CurrentStatus.DIAGNOSIS:
-                isCorrect   = textAnsr[_idx].text.CompareTo(wj_conn.cDiagnotics.data.qstCransr) == 0 ? true : false;
-                ansrCwYn    = isCorrect ? "Y" : "N";
 
-                isSolvingQuestion = false;
+                string ansr;
 
-                wj_conn.Diagnosis_SelectAnswer(textAnsr[_idx].text, ansrCwYn, (int)(questionSolveTime * 1000));
+                if (_idx == -1)
+                {
+                    // 답안 제출하지 못함 (공란?)
+                    ansr = "";
+                }
+                else
+                {
+                    // 답안 평가
+                    ansr = textAnsr[_idx].text;                    
+                    isCorrect = ansr.CompareTo(wj_conn.cDiagnotics.data.qstCransr) == 0 ? true : false;
+                    ansrCwYn = isCorrect ? "Y" : "N";
+                }                
 
-                wj_displayText.SetState("진단평가 중", textAnsr[_idx].text, ansrCwYn, questionSolveTime + " 초");
+                isSolvingQuestion = false;                
+
+                // 커넥터 통해 문제 답안 결과 보내기
+                wj_conn.Diagnosis_SelectAnswer(ansr, ansrCwYn, (int)(questionSolveTime * 1000));
+
+                wj_displayText.SetState("진단평가 중", ansr, ansrCwYn, questionSolveTime + " 초");
 
                 panel_question.SetActive(false);
                 questionSolveTime = 0;

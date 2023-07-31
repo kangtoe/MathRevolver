@@ -32,7 +32,11 @@ public class ScoreManager : MonoBehaviour
 
     void LimitScore()
     {
-        if (score < 1) score = 1;
+        if (score < 1)
+        {
+            Debug.Log("score limited");
+            score = 1;
+        } 
     }
 
     void SyncUI()
