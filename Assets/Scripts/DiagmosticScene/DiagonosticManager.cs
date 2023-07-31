@@ -5,21 +5,21 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 // 웅진 API 샘플과 결합하여 활용
-public class DiagomosticManager : MonoBehaviour
+public class DiagonosticManager : MonoBehaviour
 {
     #region 싱글톤
-    public static DiagomosticManager Instance
+    public static DiagonosticManager Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = FindObjectOfType<DiagomosticManager>();
+                instance = FindObjectOfType<DiagonosticManager>();
             }
             return instance;
         }
     }
-    private static DiagomosticManager instance;
+    private static DiagonosticManager instance;
     #endregion
 
     [Header("문제당 풀이시간")]
@@ -53,6 +53,7 @@ public class DiagomosticManager : MonoBehaviour
     public void InitTimeBar()
     {
         StopAllCoroutines();
+        timeGage.fillAmount = 1;
     }
 
     IEnumerator TimeBarCr()

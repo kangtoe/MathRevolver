@@ -123,6 +123,8 @@ public class WJ_Connector : MonoBehaviour
     /// </summary>
     private IEnumerator Send_Learning()
     {
+        //Debug.Log("Send_Learning start");
+
         Request_Learning_Setting request = new Request_Learning_Setting();
 
         request.gameCd = strGameCD;
@@ -141,6 +143,7 @@ public class WJ_Connector : MonoBehaviour
 
         cMyAnsrs = new List<Learning_MyAnsr>();
 
+        //Debug.Log("Send_Learning end");
         yield return null;
     }
 
@@ -176,7 +179,7 @@ public class WJ_Connector : MonoBehaviour
     private IEnumerator UWR_Post<TRequest, TResponse>(TRequest request, string url, bool isSendAuth)
     where TRequest : class
     where TResponse : class
-    {
+    {        
         string strBody = JsonUtility.ToJson(request);
 
         using (UnityWebRequest uwr = UnityWebRequest.Post(url, string.Empty))
@@ -194,7 +197,7 @@ public class WJ_Connector : MonoBehaviour
 
             yield return uwr.SendWebRequest();
 
-            Debug.Log($"□Request => {strBody}");
+            //Debug.Log($"□Request => {strBody}");
 
             if (uwr.error == null)  //성공 시
             {
@@ -206,8 +209,12 @@ public class WJ_Connector : MonoBehaviour
                 catch (Exception e) { Debug.LogError(e.Message); }
 
                 cDiagnotics = null;
-                cLearnSet = null;
+                // 임시적 처리 : output = ResponselearnSet 이외의 호출 (Send_Learning 이외의 호출)에서는 초기화 없음 
+                // -> 코루틴 호출 순서가 뒤바뀔 때, 일단 이전 데이터 셋의 문제 사용
+                //cLearnSet = null; 
                 cLearnProg = null;
+
+                Debug.Log("UWR_Post || output :" + output.ToString());
 
                 switch (output)
                 {
@@ -216,7 +223,8 @@ public class WJ_Connector : MonoBehaviour
                         qstCransr = cDiagnotics.data.qstCransr;
                         break;
 
-                    case Response_Learning_Setting ResponselearnSet:
+                    case Response_Learning_Setting ResponselearnSet:                        
+                        //Debug.Log("cLearnSet = ResponselearnSet");
                         cLearnSet = ResponselearnSet;
                         break;
 
@@ -237,7 +245,7 @@ public class WJ_Connector : MonoBehaviour
                 Debug.LogError(uwr.error.ToString());
             }
 
-            Debug.Log($"■Response => {uwr.downloadHandler.text}");
+            //Debug.Log($"■Response => {uwr.downloadHandler.text}");
             uwr.Dispose();
         }
     }
@@ -251,7 +259,7 @@ public class WJ_Connector : MonoBehaviour
     }
 
     public void Learning_GetQuestion()
-    {
+    {        
         StartCoroutine(Send_Learning());
     }
 
@@ -276,6 +284,8 @@ public class WJ_Connector : MonoBehaviour
     /// </summary>
     public void Learning_SelectAnswer(int _index, string _cransr, string _ansrYn, long _slvTime = 5000)
     {
+        //Debug.Log("Learning_SelectAnswer");
+
         if(cMyAnsrs == null) cMyAnsrs = new List<Learning_MyAnsr>();
 
         cMyAnsrs.Add(new Learning_MyAnsr(cLearnSet.data.qsts[_index - 1].qstCd, _cransr, _ansrYn, 0));

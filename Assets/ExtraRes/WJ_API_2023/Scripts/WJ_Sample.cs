@@ -108,7 +108,7 @@ public class WJ_Sample : MonoBehaviour
     private void MakeQuestion(string textCn, string qstCn, string qstCransr, string qstWransr)
     {
         Debug.Log("MakeQuestion");
-        DiagomosticManager.Instance.StartTimeBar();
+        DiagonosticManager.Instance.StartTimeBar();
 
         panel_diag_chooseDiff.SetActive(false);
         panel_question.SetActive(true);
@@ -147,35 +147,29 @@ public class WJ_Sample : MonoBehaviour
         isSolvingQuestion = true;
     }
 
+    int loop = 0;
+
     /// <summary>
     /// 답을 고르고 맞았는 지 체크
     /// </summary>
     public void SelectAnswer(int _idx = -1)
     {
         Debug.Log("SelectAnswer idx : " + _idx);
-        DiagomosticManager.Instance.InitTimeBar();
+        DiagonosticManager.Instance.InitTimeBar();
 
         bool isCorrect;
         string ansrCwYn = "N";
+        string ansr;
 
         switch (currentStatus)
         {
-            case CurrentStatus.DIAGNOSIS:
+            case CurrentStatus.DIAGNOSIS:                
+                if (_idx == -1) ansr = ""; // 답안 제출하지 못함 (공란?)                
+                else ansr = textAnsr[_idx].text;               
 
-                string ansr;
-
-                if (_idx == -1)
-                {
-                    // 답안 제출하지 못함 (공란?)
-                    ansr = "";
-                }
-                else
-                {
-                    // 답안 평가
-                    ansr = textAnsr[_idx].text;                    
-                    isCorrect = ansr.CompareTo(wj_conn.cDiagnotics.data.qstCransr) == 0 ? true : false;
-                    ansrCwYn = isCorrect ? "Y" : "N";
-                }                
+                // 답안 평가
+                isCorrect = ansr.CompareTo(wj_conn.cDiagnotics.data.qstCransr) == 0 ? true : false;
+                ansrCwYn = isCorrect ? "Y" : "N";
 
                 isSolvingQuestion = false;                
 
@@ -189,20 +183,37 @@ public class WJ_Sample : MonoBehaviour
                 break;
 
             case CurrentStatus.LEARNING:
-                isCorrect   = textAnsr[_idx].text.CompareTo(wj_conn.cLearnSet.data.qsts[currentQuestionIndex].qstCransr) == 0 ? true : false;
-                ansrCwYn    = isCorrect ? "Y" : "N";
+                if (_idx == -1) ansr = ""; // 답안 제출하지 못함 (공란?)                
+                else ansr = textAnsr[_idx].text;
+
+                // 답안 평가
+                Debug.Log("loop : " + loop + " || currentQuestionIndex : " + currentQuestionIndex);
+
+                //if (wj_conn == null) Debug.Log("null 6");
+                //if (wj_conn.cLearnSet == null) Debug.Log("null 5");
+                //if (wj_conn.cLearnSet.data == null) Debug.Log("null 4");
+                //if (wj_conn.cLearnSet.data.qsts == null) Debug.Log("null 3");
+                //if (wj_conn.cLearnSet.data.qsts[currentQuestionIndex] == null) Debug.Log("null 2");
+                //if (wj_conn.cLearnSet.data.qsts[currentQuestionIndex].qstCransr == null) Debug.Log("null 1");             
+
+                isCorrect = ansr.CompareTo(wj_conn.cLearnSet.data.qsts[currentQuestionIndex].qstCransr) == 0 ? true : false;
+                ansrCwYn = isCorrect ? "Y" : "N";
 
                 isSolvingQuestion = false;
                 currentQuestionIndex++;
 
-                wj_conn.Learning_SelectAnswer(currentQuestionIndex, textAnsr[_idx].text, ansrCwYn, (int)(questionSolveTime * 1000));
+                // 커넥터 통해 문제 답안 결과 보내기
+                wj_conn.Learning_SelectAnswer(currentQuestionIndex, ansr, ansrCwYn, (int)(questionSolveTime * 1000));
 
-                wj_displayText.SetState("문제풀이 중", textAnsr[_idx].text, ansrCwYn, questionSolveTime + " 초");
-
-                if (currentQuestionIndex >= 8) 
+                wj_displayText.SetState("문제풀이 중", ansr, ansrCwYn, questionSolveTime + " 초");
+                
+                if (currentQuestionIndex >= 8)
                 {
-                    panel_question.SetActive(false);
-                    wj_displayText.SetState("문제풀이 완료", "", "", "");
+                    //panel_question.SetActive(false);
+                    //wj_displayText.SetState("문제풀이 완료", "", "", "");
+
+                    loop++;
+                    ButtonEvent_GetLearning();
                 }
                 else GetLearning(currentQuestionIndex);
 
@@ -226,6 +237,7 @@ public class WJ_Sample : MonoBehaviour
     }
     public void ButtonEvent_GetLearning()
     {
+        //Debug.Log("ButtonEvent_GetLearning");
         wj_conn.Learning_GetQuestion();
         wj_displayText.SetState("문제풀이 중", "-", "-", "-");
     }
