@@ -5,7 +5,7 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    #region ½Ì±ÛÅæ
+    #region ì‹±ê¸€í†¤
     public static ScoreManager Instance
     {
         get
@@ -25,23 +25,31 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     TMP_Text scoreText;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        SetScore(100);
     }
 
-    // Update is called once per frame
-    void Update()
+    void LimitScore()
     {
-        
+        if (score < 1) score = 1;
     }
 
-    public void AddScore(int val)
-    {
-        score += val;
-
+    void SyncUI()
+    {        
         string str = "SCORE? : ";
         scoreText.text = str + score;
+    }  
+
+    public void SetScore(int i)
+    {
+        score = i;
+        LimitScore();
+        SyncUI();
+    }
+
+    public int GetScore()
+    {
+        return score;
     }
 }

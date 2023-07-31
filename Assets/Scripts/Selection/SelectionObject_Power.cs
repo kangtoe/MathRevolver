@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SelectionObject_Power : MonoBehaviour
 {
+    ScoreManager ScoreManager => ScoreManager.Instance;
+
     [Header("디버그용 : 섹션에 해당하는 선택지들")]
     [SerializeField]
     List<SelectionObject_Power_Element> elements = new List<SelectionObject_Power_Element>();
@@ -19,7 +21,7 @@ public class SelectionObject_Power : MonoBehaviour
         {
             // 어느 선택지에 가장 가까운지 판별하여, 해당 선택지에 해당하는 효과 적용
             SelectionObject_Power_Element selection = GetClosestSelection(other.transform.position);
-            selection.DoEffect();
+            selection.OnSelected();
         }        
     }
 
@@ -42,14 +44,15 @@ public class SelectionObject_Power : MonoBehaviour
         return closestelement;
     }
 
-    // 선택지에 대한 값 리스트를 받아 실제 선택지 생성
-    // 임시로 int 리스트를 받지만, 추후에는 정의된 수식 클래스 인스턴스를 받아 해당하는 동작으로 처리 할 수 있도록 할것
-    public void CreateElement(List<int> strs)
-    {
-        int count = strs.Count;
+    // 실제 선택지 생성    
+    public void CreateElement(int count)
+    {        
         float floorWidth = 10;
         float size = floorWidth / count;
         float minX = transform.position.x - (floorWidth / 2f);
+
+        // 해당 인덱스의 요소는 무조건 Add 연산
+        int addIdx = Random.Range(0, count);
 
         for (int i = 0; i < count; i++)
         {
@@ -57,6 +60,10 @@ public class SelectionObject_Power : MonoBehaviour
             GameObject go =  Instantiate(elementPrefab, transform);
             SelectionObject_Power_Element element = go.GetComponent<SelectionObject_Power_Element>();
 
+            // 선택지 내용 설정
+            if (i == addIdx) element.SetCalc(CalcType.Add);
+            else element.SetCalc();
+                
             // 사이즈 설정            
             element.SetSize(size);
 
@@ -64,9 +71,6 @@ public class SelectionObject_Power : MonoBehaviour
             Vector3 pos = transform.position;
             float pointX = minX + ((size * i) + (size * (i + 1))) / 2f;
             go.transform.position = new Vector3(pointX, pos.y, pos.z);
-
-            // 점수 설정            
-            element.SetScore(strs[i]);
 
             // 색 설정. 하드 코딩됨
             Color color;
@@ -77,5 +81,5 @@ public class SelectionObject_Power : MonoBehaviour
 
             elements.Add(element);
         }
-    }
+    }  
 }

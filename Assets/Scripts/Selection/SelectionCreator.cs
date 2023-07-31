@@ -50,26 +50,10 @@ public class SelectionCreator : MonoBehaviour
             {
                 CreateSelection_Power();
                 spwanCount++;
-            }
-
-            
+            }            
 
             yield return new WaitForSeconds(creatingInterval);
         }
-    }
-
-    void CreateSelection_Power()
-    {
-        List<int> testIntList = new List<int>() { 100, 200, 300 };
-
-        // 선택지 오브젝트 생성
-        GameObject go = Instantiate(selectionPrefab_Power, transform);
-        
-        // 위치 설정
-        go.transform.position = creatingPoint.position;
-
-        SelectionObject_Power selection = go.GetComponent<SelectionObject_Power>();
-        selection.CreateElement(testIntList);
     }
 
     void CreateSelection_Math()
@@ -81,4 +65,22 @@ public class SelectionCreator : MonoBehaviour
         Vector3 pos = creatingPoint.position;
         go.transform.position = pos;        
     }
+
+    #region 전투력 선택지
+
+    void CreateSelection_Power()
+    {        
+        // 선택지 오브젝트 생성
+        GameObject go = Instantiate(selectionPrefab_Power, transform);
+
+        // 위치 설정
+        go.transform.position = creatingPoint.position;
+
+        SelectionObject_Power selection = go.GetComponent<SelectionObject_Power>();
+        selection.CreateElement(3);
+    }
+
+
+
+    #endregion
 }
