@@ -181,6 +181,8 @@ public class WJ_Sample : MonoBehaviour
                 wj_displayText.SetState("진단평가 중", ansr, ansrCwYn, questionSolveTime + " 초");
 
                 panel_question.SetActive(false);
+                GameManager.Instance.OnDiagonosticComplete();
+
                 questionSolveTime = 0;
                 break;
 
@@ -237,11 +239,17 @@ public class WJ_Sample : MonoBehaviour
         currentStatus = CurrentStatus.DIAGNOSIS;
         wj_conn.FirstRun_Diagnosis(a);
     }
+
     public void ButtonEvent_GetLearning()
     {
         //Debug.Log("ButtonEvent_GetLearning");
         wj_conn.Learning_GetQuestion();
         wj_displayText.SetState("문제풀이 중", "-", "-", "-");
+    }
+
+    public void ButtonEvent_EvaluateDiagonostic()
+    { 
+    
     }
     #endregion
 }

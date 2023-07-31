@@ -59,14 +59,14 @@ public class SceneChanger : MonoBehaviour
     // scene 에서 나갈때 호출, 인수는 전환 대상 scene
     IEnumerator SceneChangeCr(string seceneName)
     {
-        Debug.Log("SceneChangeCr : " + seceneName);
+        //Debug.Log("SceneChangeCr : " + seceneName);
 
         Time.timeScale = 1f; // GamePause가 먼저 호출된 경우 대비
 
         if (isChanging) yield break;
         isChanging = true;
 
-        Debug.Log("SceneChangeCr2 : " + seceneName);
+        //Debug.Log("SceneChangeCr2 : " + seceneName);
 
         float f = 0;
         SetFadeAlpha(f);        

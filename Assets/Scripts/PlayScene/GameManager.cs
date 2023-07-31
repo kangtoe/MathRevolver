@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     #endregion
 
+    public bool DiagonosticCompleted => diagonosticCompleted;
+    bool diagonosticCompleted = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -39,5 +42,10 @@ public class GameManager : MonoBehaviour
         //해상도를 설정값에 따라 변경
         //3번째 파라미터는 풀스크린 모드를 설정 > true : 풀스크린, false : 창모드
         //Screen.SetResolution(setWidth, setHeight, true);
+    }
+
+    public void OnDiagonosticComplete()
+    {
+        diagonosticCompleted = true;
     }
 }
