@@ -44,6 +44,11 @@ public class GameManager : MonoBehaviour
         //Screen.SetResolution(setWidth, setHeight, true);
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     public void OnDiagonosticComplete()
     {
         diagonosticCompleted = true;

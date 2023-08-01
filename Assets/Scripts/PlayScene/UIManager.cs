@@ -77,8 +77,6 @@ public class UIManager : MonoBehaviour
 
             t += Time.deltaTime / flashDuration;
 
-
-
             if (t >= 1) break;
 
             yield return null;
@@ -87,6 +85,6 @@ public class UIManager : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        GameManager.Instance.Quit();
     }
 }
