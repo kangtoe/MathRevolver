@@ -26,6 +26,13 @@ public class EnemySpwaner : MonoBehaviour
     [SerializeField]
     float spwanInterval = 5f;
 
+    [SerializeField]
+    float spwanDelay = 3f;
+
+    [Header("보정 계수 : 최적해 * 보정계수 = 스폰 적 체력")]
+    [SerializeField]
+    float compensator = 0.5f;
+
     public List<Enemy> enemies = new List<Enemy>();
 
     // 디버그용
@@ -45,6 +52,8 @@ public class EnemySpwaner : MonoBehaviour
 
     IEnumerator SpwanEnemy()
     {
+        yield return new WaitForSeconds(spwanDelay);
+
         while (true)
         {
             // 선택지 오브젝트 생성
@@ -78,8 +87,8 @@ public class EnemySpwaner : MonoBehaviour
 
         // 체력 설정
         Enemy enemy = go.GetComponent<Enemy>();
-        int optimal = ScoreManager.Instance.OptimalScore;
-        enemy.Init(optimal);
+        int health = (int)(ScoreManager.Instance.OptimalScore * compensator);
+        enemy.Init(health);
     }
 
     public void DebugFunc()
@@ -139,7 +148,7 @@ public class EnemySpwaner : MonoBehaviour
         return enemies[closestIndex];
     }
 
-    public Enemy GetClosestEnemy_Transform(Transform tf)
+    public Enemy GetClosestEnemy_Transform(Transform tf, float range = -1) // range = -1 : 사거리 제한 없음
     {
         // list 요소 개수 검사
         if (enemies.Count == 0)
@@ -157,20 +166,22 @@ public class EnemySpwaner : MonoBehaviour
             // 공격 가능한 적인가?
             if (!enemies[i].CanBeAttacked) continue;
 
-            float range = Vector3.Distance(tf.position, enemies[i].transform.position);
+            // 공격 가능 거리 검사
+            float dist = Vector3.Distance(tf.position, enemies[i].transform.position);            
+            if(!(range == -1) && dist > range) continue;
 
             // 초기화
             if (closestIndex == -1)
             {
-                closestRange = range;
+                closestRange = dist;
                 closestIndex = i;
                 continue;
             }
 
             // 최단거리 갱신
-            if (range < closestRange)
+            if (dist < closestRange)
             {
-                closestRange = range;
+                closestRange = dist;
                 closestIndex = i;
                 //Debug.Log("최단거리 갱신");
             }

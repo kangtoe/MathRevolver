@@ -1103,7 +1103,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 7502607062306655998, guid: 0cff8eab6dfe90b4ea06e8aff996fc6d, type: 3}
   spwanPoint: {fileID: 1793055995}
-  spwanInterval: 1
+  spwanInterval: 5
+  spwanDelay: 3
+  compensator: 0.5
   enemies: []
 --- !u!1 &882741410
 GameObject:
@@ -3565,8 +3567,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardSpeed: 3
   sideSpeed: 3
-  damage: 10
   attackInterval: 1
+  attackRange: 8
   nozzle: {fileID: 4259922064391648377}
   trail: {fileID: 4260148626927876947}
 --- !u!54 &1659889825

@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     float attackInterval = 1;
     //float lastAttackTime = 0;
     bool canAttack = true;
+    [SerializeField]
+    float attackRange = 5f;
 
     [Header("공격 이펙트")]
     [SerializeField]
@@ -54,7 +56,13 @@ public class Player : MonoBehaviour
     void Update()
     {
         // 전방으로 이동 (z축 이동)
-        transform.Translate(forwardSpeed * transform.forward * Time.deltaTime);
+        transform.Translate(forwardSpeed * transform.forward * Time.deltaTime);        
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
     #region X축 이동 제어
@@ -108,7 +116,7 @@ public class Player : MonoBehaviour
     void TryAtack()
     {
         //Enemy target = EnemySpwaner.Instance.GetClosestEnemy_Z();
-        Enemy target = EnemySpwaner.Instance.GetClosestEnemy_Transform(transform);
+        Enemy target = EnemySpwaner.Instance.GetClosestEnemy_Transform(transform, attackRange);
 
         //bug.Log("TryAtack");
 
