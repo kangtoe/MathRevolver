@@ -63,12 +63,14 @@ public class SelectionObject_Power_Element : MonoBehaviour
     // 연산 타입만 고정
     public void SetCalc(CalcType _type)
     {
-        int score = ScoreManager.GetScore();
+        //int score = ScoreManager.GetScore();
+        int optimalScore = ScoreManager.GetOptimalScore();
 
         // 합연산 변수 구하기
         int _pulsVal = 0;
-        int ran1 = Random.Range(score / 2, score * 2);        
-        int numLen = score.ToString().Length;        
+        int ran1 = Random.Range(optimalScore / 2, optimalScore * 2);
+        // 합연산 변수 -> 앞 두자리까지 반올림
+        int numLen = optimalScore.ToString().Length;        
         float factor = Mathf.Pow(10, numLen - 2);        
         float roundedNumber = Mathf.Round(ran1 / factor) * factor;        
         _pulsVal = (int)roundedNumber;

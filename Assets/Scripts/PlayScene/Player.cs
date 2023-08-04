@@ -26,8 +26,8 @@ public class Player : MonoBehaviour
     float sideSpeed = 1f;
 
     [Header("공격")]    
-    [SerializeField]
-    int damage = 10;
+    //[SerializeField]
+    //int damage = 10;
     [SerializeField]
     float attackInterval = 1;
     //float lastAttackTime = 0;
@@ -131,6 +131,7 @@ public class Player : MonoBehaviour
         trail.Play();
         trail.transform.LookAt(target.transform.position);
 
+        int damage = ScoreManager.Instance.GetScore();
         target.OnHit(damage);
     }
 

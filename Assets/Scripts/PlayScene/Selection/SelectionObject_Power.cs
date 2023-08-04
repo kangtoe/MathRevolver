@@ -52,7 +52,7 @@ public class SelectionObject_Power : MonoBehaviour
         float minX = transform.position.x - (floorWidth / 2f);
 
         // 최적해
-        int optimalScore = ScoreManager.Instance.OptimalScore;
+        int optimalScore = ScoreManager.Instance.GetOptimalScore();
         int optimalScore_tmp = 0;
 
         // 해당 인덱스의 요소는 무조건 Add 연산

@@ -67,4 +67,9 @@ public class ScoreManager : MonoBehaviour
     {
         optimalScore = i;
     }
+
+    public int GetOptimalScore()
+    {
+        return optimalScore;
+    }
 }

@@ -10,21 +10,21 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     Animator anim;
 
-    // Ã¼·Â
+    // ì²´ë ¥
     [SerializeField]
     int maxHp;
-    [Header("µğ¹ö±×¿ë : ÇöÀç Ã¼·Â")]
+    [Header("ë””ë²„ê·¸ìš© : í˜„ì¬ ì²´ë ¥")]
     [SerializeField]
     int currentHp;
 
-    // ÀÌµ¿
+    // ì´ë™
     [SerializeField]
     float moveSpeed = 0.1f;
 
-    // (zÃà) player¸¦ Áö³ªÄ¡Áö ¾Ê¾Ò´Â°¡?
+    // (zì¶•) playerë¥¼ ì§€ë‚˜ì¹˜ì§€ ì•Šì•˜ëŠ”ê°€?
     bool IsFrontToPlayer => transform.position.z > Player.Instance.transform.position.z;
 
-    // ÇöÀç °ø°İ °¡´ÉÇÑ°¡?
+    // í˜„ì¬ ê³µê²© ê°€ëŠ¥í•œê°€?
     public bool CanBeAttacked => IsFrontToPlayer && visibleCheck.Visible;
 
     // Start is called before the first frame update
@@ -37,15 +37,20 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // player¸¦ Áö³ªÃÄ Ä«¸Ş¶ó ¹ş¾î³² -> »èÁ¦
+        // playerë¥¼ ì§€ë‚˜ì³ ì¹´ë©”ë¼ ë²—ì–´ë‚¨ -> ì‚­ì œ
         if (!visibleCheck.Visible && !IsFrontToPlayer) DeleteEnemy();
 
         transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
     }
 
+    public void Init(int _maxHp)
+    {
+        currentHp = maxHp = _maxHp;
+    }
+
     public void OnHit(int damage)
     {
-        // todo: ½Ã°¢Àû ¿¬Ãâ È¿°ú ´õÇÏ±â
+        // todo: ì‹œê°ì  ì—°ì¶œ íš¨ê³¼ ë”í•˜ê¸°
         DoHitEffect();
 
         Vector3 textPos = transform.position + Vector3.right * -0.3f + Vector3.up * 0.5f;
@@ -54,34 +59,34 @@ public class Enemy : MonoBehaviour
         currentHp -= damage;
         if (currentHp < 0) currentHp = 0;
 
-        // todo : UI ¹İ¿µ
+        // todo : UI ë°˜ì˜
 
         if (currentHp == 0) OnDie();
     }
 
     void OnDie()
     {
-        // todo : animator ÆÄ¶ó¸ŞÅÍ Á¶Àı ¶Ç´Â die prefab(ÆÄÆ¼Å¬ ½Ã½ºÅÛ µî) »ı¼º
+        // todo : animator íŒŒë¼ë©”í„° ì¡°ì ˆ ë˜ëŠ” die prefab(íŒŒí‹°í´ ì‹œìŠ¤í…œ ë“±) ìƒì„±
 
         DeleteEnemy();
     }
 
-    // »ç¶óÁú ¶§ Ã³¸® (Á¡¼ö °¨¼Ò ¿¬Ãâ µî..)
+    // ì‚¬ë¼ì§ˆ ë•Œ ì²˜ë¦¬ (ì ìˆ˜ ê°ì†Œ ì—°ì¶œ ë“±..)
     void DeleteEnemy()
     {
         DeleteSelfOnList();
         Destroy(gameObject);
     }
 
-    #region Àû ¸®½ºÆ® °ü¸®
+    #region ì  ë¦¬ìŠ¤íŠ¸ ê´€ë¦¬
 
-    // Àû ¸®½ºÆ®¿¡ µî·Ï
+    // ì  ë¦¬ìŠ¤íŠ¸ì— ë“±ë¡
     void AddSelfOnList()
     {
         EnemySpwaner.Instance.enemies.Add(this);
     }
 
-    // Àû ¸®½ºÆ®¿¡¼­ ÇØÁ¦
+    // ì  ë¦¬ìŠ¤íŠ¸ì—ì„œ í•´ì œ
     void DeleteSelfOnList()
     {
         EnemySpwaner.Instance.enemies.Remove(this);
@@ -89,12 +94,12 @@ public class Enemy : MonoBehaviour
 
     #endregion
 
-    #region ÇÇ°İ ¿¬Ãâ
+    #region í”¼ê²© ì—°ì¶œ
 
-    // Èçµé¸² ¿¬Ãâ ÄÚ·çÆ¾ È£Ãâ
+    // í”ë“¤ë¦¼ ì—°ì¶œ ì½”ë£¨í‹´ í˜¸ì¶œ
     public void DoHitEffect()
     {
-        // Áö¼Ó½Ã°£
+        // ì§€ì†ì‹œê°„
         float duration = 0.3f;
 
         StopAllCoroutines();
@@ -102,26 +107,26 @@ public class Enemy : MonoBehaviour
         StartCoroutine(ColorChangeCr(duration));
     }
 
-    // todo : »ö»ó º¯°æ ÄÚ·çÆ¾
+    // todo : ìƒ‰ìƒ ë³€ê²½ ì½”ë£¨í‹´
     IEnumerator ColorChangeCr(float duration)
     {
         yield return null;
     }
 
-    // Èçµé¸² ¿¬Ãâ ÄÚ·çÆ¾
+    // í”ë“¤ë¦¼ ì—°ì¶œ ì½”ë£¨í‹´
     IEnumerator ShackPosCr(float duration)
     {
-        // ÄÚ·çÆ¾ °£°İ
+        // ì½”ë£¨í‹´ ê°„ê²©
         float interval = 0.05f;
-        // Èçµé¸² Á¤µµ
+        // í”ë“¤ë¦¼ ì •ë„
         float amount = 0.1f;
 
-        // ÀÚ½Ä ¿ÀºêÁ§Æ® ·ÎÄÃ À§Ä¡ ±¸ÇÏ±â        
+        // ìì‹ ì˜¤ë¸Œì íŠ¸ ë¡œì»¬ ìœ„ì¹˜ êµ¬í•˜ê¸°        
         Vector3 GetPosition()
         {
             return anim.transform.localPosition;
         }
-        // ÀÚ½Ä ¿ÀºêÁ§Æ® ·ÎÄÃ À§Ä¡ Á¤ÇÏ±â
+        // ìì‹ ì˜¤ë¸Œì íŠ¸ ë¡œì»¬ ìœ„ì¹˜ ì •í•˜ê¸°
         void SetPosition(Vector3 pos)
         {
             anim.transform.localPosition = pos;
@@ -136,24 +141,24 @@ public class Enemy : MonoBehaviour
         {
             leftTime -= interval;
 
-            // ³²Àº ½Ã°£ Á¾·á : ¿ø·¡ À§Ä¡·Î
+            // ë‚¨ì€ ì‹œê°„ ì¢…ë£Œ : ì›ë˜ ìœ„ì¹˜ë¡œ
             if (leftTime < 0)
             {
                 SetPosition(startPos);
                 break;
             }
 
-            // Èçµé¸² ±¸ÇÏ±â
-            // ÃÊ±â¿¡´Â ¹«ÀÛÀ§ °ªÀ» »ç¿ëÇßÀ¸³ª, °íÁ¤ °ªÀÌ ¿¬Ãâ»ó ´õ ³ªÀº °ÍÀ¸·Î »ç·áµÊ
+            // í”ë“¤ë¦¼ êµ¬í•˜ê¸°
+            // ì´ˆê¸°ì—ëŠ” ë¬´ì‘ìœ„ ê°’ì„ ì‚¬ìš©í–ˆìœ¼ë‚˜, ê³ ì • ê°’ì´ ì—°ì¶œìƒ ë” ë‚˜ì€ ê²ƒìœ¼ë¡œ ì‚¬ë£Œë¨
             Vector3 shake;
             if (plusMinus) shake = Vector3.right;
             else shake = Vector3.left;
             shake *= amount;
 
-            // Èçµé¸² ¹æÇâ ¹İÀü
+            // í”ë“¤ë¦¼ ë°©í–¥ ë°˜ì „
             plusMinus = !plusMinus;
 
-            // Èçµé¸² Àû¿ë
+            // í”ë“¤ë¦¼ ì ìš©
             Vector3 pos = GetPosition() + shake;
             SetPosition(pos);
 

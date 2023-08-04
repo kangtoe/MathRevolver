@@ -76,7 +76,10 @@ public class EnemySpwaner : MonoBehaviour
         go.transform.position = pos;
         go.transform.rotation = enemyPrefab.transform.rotation;
 
-        //Enemy enemy = go.GetComponent<Enemy>();        
+        // 체력 설정
+        Enemy enemy = go.GetComponent<Enemy>();
+        int optimal = ScoreManager.Instance.OptimalScore;
+        enemy.Init(optimal);
     }
 
     public void DebugFunc()
