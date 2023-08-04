@@ -227,10 +227,8 @@ public class WJ_Connector : MonoBehaviour
                 }
                 catch (Exception e) { Debug.LogError(e.Message); }
 
-                cDiagnotics = null;
-                // 임시적 처리 : output = ResponselearnSet 이외의 호출 (Send_Learning 이외의 호출)에서는 초기화 없음 
-                // -> 코루틴 호출 순서가 뒤바뀔 때, 일단 이전 데이터 셋의 문제 사용
-                //cLearnSet = null; 
+                cDiagnotics = null;                
+                cLearnSet = null;
                 cLearnProg = null;
 
                 Debug.Log("UWR_Post || output :" + output.ToString());
@@ -303,11 +301,11 @@ public class WJ_Connector : MonoBehaviour
     /// </summary>
     public void Learning_SelectAnswer(int _index, string _cransr, string _ansrYn, long _slvTime = 5000)
     {
-        //Debug.Log("Learning_SelectAnswer");
+        //Debug.Log("Learning_SelectAnswer _index : " + _index);
 
         if(cMyAnsrs == null) cMyAnsrs = new List<Learning_MyAnsr>();
 
-        cMyAnsrs.Add(new Learning_MyAnsr(cLearnSet.data.qsts[_index - 1].qstCd, _cransr, _ansrYn, 0));
+        cMyAnsrs.Add(new Learning_MyAnsr(cLearnSet.data.qsts[_index].qstCd, _cransr, _ansrYn, 0));
 
         if(cMyAnsrs.Count >= 8)
         {

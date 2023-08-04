@@ -966,9 +966,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1906482047}
-        m_TargetAssemblyTypeName: CameraManager, Assembly-CSharp
-        m_MethodName: ShakeDebug
+      - m_Target: {fileID: 1901632799}
+        m_TargetAssemblyTypeName: WJ_Sample_Play, Assembly-CSharp
+        m_MethodName: StartQuestion
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4294,13 +4294,10 @@ MonoBehaviour:
   - {fileID: 6267151148959302943}
   - {fileID: 6267151149064869804}
   - {fileID: 6267151147718834194}
+  dataSetting: 0
   wj_displayText: {fileID: 6267151147420057122}
-  getLearningButton: {fileID: 0}
   timeLimit: 10
   timeGage: {fileID: 8412890947344209579}
-  onTimeEnd:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1906482045
 GameObject:
   m_ObjectHideFlags: 0
@@ -24705,10 +24702,10 @@ RectTransform:
   m_Father: {fileID: 6267151147554703446}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -416.23}
+  m_SizeDelta: {x: 1618, y: 610}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6267151147584453259
 GameObject:
@@ -24920,7 +24917,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 50, y: 304}
   m_SizeDelta: {x: 500, y: 200}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &6267151147889343114

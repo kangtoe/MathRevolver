@@ -6,7 +6,20 @@ using UnityEngine.Events;
 
 // Play 씬에서, mathpid 발판을 밟았을 때 학습 문제 표시 및 체점
 public class WJ_Sample_Play : MonoBehaviour
-{    
+{
+    public static WJ_Sample_Play Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<WJ_Sample_Play>();
+            }
+            return instance;
+        }
+    }
+    private static WJ_Sample_Play instance;
+
     WJ_Connector wj_conn => WJ_Connector.Instance;       
 
     [Header("Panels")]    
@@ -23,29 +36,21 @@ public class WJ_Sample_Play : MonoBehaviour
     float questionSolveTime;
 
     [Header("For Debug")]
-    [SerializeField] WJ_DisplayText wj_displayText;         //텍스트 표시용(필수X)
-    [SerializeField] Button getLearningButton;      //문제 받아오기 버튼
+    [SerializeField] bool dataSetting = false; // 데이터 갱신 중?
+    [SerializeField] WJ_DisplayText wj_displayText;         //텍스트 표시용(필수X)    
+
+    #region 유니티 콜백
 
     private void Awake()
     {
+        // 버튼의 TEXDraw 컴포넌트 알아오기
         textAnsr = new TEXDraw[btAnsr.Length];
         for (int i = 0; i < btAnsr.Length; ++i)
-
             textAnsr[i] = btAnsr[i].GetComponentInChildren<TEXDraw>();
 
         wj_displayText.SetState("대기중", "", "", "");
-    }
 
-    private void OnEnable()
-    {
-        ButtonEvent_GetLearning();
-
-        if (wj_conn != null)
-        {
-            // 0번 문제 받아오기
-            wj_conn.onGetLearning.AddListener(() => GetLearning(0));
-        }
-        else Debug.LogError("Cannot find Connector");        
+        panel_question.SetActive(false);
     }
 
     private void Update()
@@ -53,23 +58,42 @@ public class WJ_Sample_Play : MonoBehaviour
         if (isSolvingQuestion) questionSolveTime += Time.deltaTime;
     }
 
+    #endregion
+
+    // 문제 풀이 시작
+    public void StartQuestion()
+    {
+        panel_question.SetActive(true);
+
+        // 문제 표기
+        if (currentQuestionIndex % 8 == 0)
+        {
+            loop++;
+            DoNewQuestions();
+        }
+        else
+        {
+            DoNextQuestions();
+        }
+    }
+
     /// <summary>
-    ///  n 번째 학습 문제 받아오기
+    ///  n 번째 학습 문제 받아와, 문제 표기
     /// </summary>
     private void GetLearning(int _index)
     {
-        if (_index == 0) currentQuestionIndex = 0;
+        //Debug.Log("GetLearning");
+        //if (_index == 0) currentQuestionIndex = 0;
 
-        MakeQuestion(wj_conn.cLearnSet.data.qsts[_index].textCn,
-                    wj_conn.cLearnSet.data.qsts[_index].qstCn,
-                    wj_conn.cLearnSet.data.qsts[_index].qstCransr,
-                    wj_conn.cLearnSet.data.qsts[_index].qstWransr);
+        dataSetting = false;
+        WjChallenge.Learning_Question qst = wj_conn.cLearnSet.data.qsts[_index];
+        MakeQuestion(qst.textCn, qst.qstCn, qst.qstCransr, qst.qstWransr);                   
     }
 
     /// <summary>
     /// 받아온 데이터를 가지고 문제를 표시
     /// </summary>
-    private void MakeQuestion(string textCn, string qstCn, string qstCransr, string qstWransr)
+    void MakeQuestion(string textCn, string qstCn, string qstCransr, string qstWransr)
     {
         Debug.Log("MakeQuestion");
         StartTimeBar();
@@ -125,11 +149,13 @@ public class WJ_Sample_Play : MonoBehaviour
     /// </summary>
     public void SelectAnswer(int _idx = -1)
     {
+        if (dataSetting) Debug.Log("데이터 받아오는 중");
+
         Debug.Log("SelectAnswer idx : " + _idx);
         InitTimeBar();
 
         bool isCorrect;
-        string ansrCwYn = "N";
+        string ansrCwYn;
         string ansr;
 
         if (_idx == -1) ansr = ""; // 답안 제출하지 못함 (공란?)                
@@ -139,52 +165,53 @@ public class WJ_Sample_Play : MonoBehaviour
         Debug.Log("loop : " + loop + " || currentQuestionIndex : " + currentQuestionIndex);
 
         //if (wj_conn == null) Debug.Log("null 6");
-        //if (wj_conn.cLearnSet == null) Debug.Log("null 5");
-        //if (wj_conn.cLearnSet.data == null) Debug.Log("null 4");
+        if (wj_conn.cLearnSet == null) Debug.Log("null 5");
+        if (wj_conn.cLearnSet.data == null) Debug.Log("null 4");
         //if (wj_conn.cLearnSet.data.qsts == null) Debug.Log("null 3");
         //if (wj_conn.cLearnSet.data.qsts[currentQuestionIndex] == null) Debug.Log("null 2");
         //if (wj_conn.cLearnSet.data.qsts[currentQuestionIndex].qstCransr == null) Debug.Log("null 1");             
 
         isCorrect = ansr.CompareTo(wj_conn.cLearnSet.data.qsts[currentQuestionIndex].qstCransr) == 0 ? true : false;
         ansrCwYn = isCorrect ? "Y" : "N";
-
-        isSolvingQuestion = false;
-        currentQuestionIndex++;
-
+        
         // 커넥터 통해 문제 답안 결과 보내기
         wj_conn.Learning_SelectAnswer(currentQuestionIndex, ansr, ansrCwYn, (int)(questionSolveTime * 1000));
 
         wj_displayText.SetState("문제풀이 중", ansr, ansrCwYn, questionSolveTime + " 초");
-
-        if (currentQuestionIndex >= 8)
-        {
-            //panel_question.SetActive(false);
-            //wj_displayText.SetState("문제풀이 완료", "", "", "");
-
-            loop++;
-            ButtonEvent_GetLearning();
-        }
-        else GetLearning(currentQuestionIndex);
-
+        isSolvingQuestion = false;
         questionSolveTime = 0;
+        
+        currentQuestionIndex++;
+        currentQuestionIndex %= 8;
+
+        panel_question.SetActive(false);
     }
 
-    public void DisplayCurrentState(string state, string myAnswer, string isCorrect, string svTime)
+    // 새로운 문제들 받아와 표기
+    public void DoNewQuestions()
     {
-        if (wj_displayText == null) return;
+        if (wj_conn == null) Debug.LogError("Cannot find Connector");
 
-        wj_displayText.SetState(state, myAnswer, isCorrect, svTime);
-    }
-
-    #region Unity ButtonEvent
-
-    public void ButtonEvent_GetLearning()
-    {
-        //Debug.Log("ButtonEvent_GetLearning");
-        wj_conn.Learning_GetQuestion();
         wj_displayText.SetState("문제풀이 중", "-", "-", "-");
+
+        dataSetting = true;
+        // 문제 정보를 새롭게 받아올 때, 0번 문제를 UI에 표시하도록 이밴트 등록
+        wj_conn.onGetLearning.AddListener(() => GetLearning(0));
+        // 문제 정보를 새롭게 받아옴
+        wj_conn.Learning_GetQuestion();        
     }
-    #endregion
+
+    // 다음 문제를 표기
+    public void DoNextQuestions()
+    {
+        GetLearning(currentQuestionIndex);
+    }
+
+    // 문제 풀이 시간 초과
+    void OnOverTime()
+    {
+        SelectAnswer(-1);
+    }
 
     #region 시간 게이지
 
@@ -196,7 +223,7 @@ public class WJ_Sample_Play : MonoBehaviour
     Image timeGage;
 
     [SerializeField]
-    public UnityEvent onTimeEnd;
+    //public UnityEvent onTimeEnd;
 
     public void StartTimeBar()
     {
@@ -223,7 +250,10 @@ public class WJ_Sample_Play : MonoBehaviour
         }
 
         Debug.Log("time end");
-        onTimeEnd.Invoke();
+
+        // 문제 풀이 시간 초과
+        //onTimeEnd.Invoke();
+        OnOverTime();
     }
 
     #endregion
