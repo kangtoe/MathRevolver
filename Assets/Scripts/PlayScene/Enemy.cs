@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using TMPro;
 
 public class Enemy : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Enemy : MonoBehaviour
     [Header("디버그용 : 현재 체력")]
     [SerializeField]
     int currentHp;
+    [SerializeField]
+    TMPro.TextMeshPro text;
 
     // 이동
     [SerializeField]
@@ -30,8 +33,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AddSelfOnList();
-        currentHp = maxHp;
+        AddSelfOnList();        
     }
 
     // Update is called once per frame
@@ -46,6 +48,7 @@ public class Enemy : MonoBehaviour
     public void Init(int _maxHp)
     {
         currentHp = maxHp = _maxHp;
+        text.text = currentHp.ToString();
     }
 
     public void OnHit(int damage)
@@ -59,7 +62,8 @@ public class Enemy : MonoBehaviour
         currentHp -= damage;
         if (currentHp < 0) currentHp = 0;
 
-        // todo : UI 반영
+        // UI 반영
+        text.text = currentHp.ToString();
 
         if (currentHp == 0) OnDie();
     }

@@ -26,14 +26,15 @@ public class Player : MonoBehaviour
     float sideSpeed = 1f;
 
     [Header("공격")]    
-    //[SerializeField]
-    //int damage = 10;
     [SerializeField]
     float attackInterval = 1;
     //float lastAttackTime = 0;
     bool canAttack = true;
     [SerializeField]
     float attackRange = 5f;
+    //[SerializeField]
+    //int damage = 10;
+    int damage => (int)(ScoreManager.Instance.GetScore());
 
     [Header("공격 이펙트")]
     [SerializeField]
@@ -138,8 +139,7 @@ public class Player : MonoBehaviour
         nozzle.Play();
         trail.Play();
         trail.transform.LookAt(target.transform.position);
-
-        int damage = ScoreManager.Instance.GetScore();
+        
         target.OnHit(damage);
     }
 
