@@ -1233,6 +1233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bb5b725b010860408b83294a6800619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  optimalScore: 0
   scoreText: {fileID: 2062233457}
 --- !u!1001 &956479447
 PrefabInstance:
@@ -14931,7 +14932,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
