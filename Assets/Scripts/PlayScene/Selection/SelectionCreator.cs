@@ -80,7 +80,5 @@ public class SelectionCreator : MonoBehaviour
         selection.CreateElement(3);
     }
 
-
-
     #endregion
 }

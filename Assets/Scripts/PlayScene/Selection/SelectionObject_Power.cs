@@ -51,6 +51,10 @@ public class SelectionObject_Power : MonoBehaviour
         float size = floorWidth / count;
         float minX = transform.position.x - (floorWidth / 2f);
 
+        // 최적해
+        int optimalScore = ScoreManager.Instance.OptimalScore;
+        int optimalScore_tmp = 0;
+
         // 해당 인덱스의 요소는 무조건 Add 연산
         int addIdx = Random.Range(0, count);
 
@@ -79,7 +83,14 @@ public class SelectionObject_Power : MonoBehaviour
             else color = Color.blue;
             element.SetColor(color);
 
+            // 최적해 구하기
+            int preCalc = element.PreCalc(optimalScore);
+            if (preCalc > optimalScore_tmp) optimalScore_tmp = preCalc;
+
             elements.Add(element);
         }
-    }  
+
+        // 최적해 갱신
+        ScoreManager.SetOptimalScore(optimalScore_tmp);
+    }
 }

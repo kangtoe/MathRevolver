@@ -20,7 +20,12 @@ public class ScoreManager : MonoBehaviour
     private static ScoreManager instance;
     #endregion
 
-    int score = 0;
+    int currentScore = 0;
+
+    // 최적해 점수 : 가장 높은 결과값의 선택지만을 택했을 때 낼 수 있는 값
+    [SerializeField]
+    int optimalScore = 0;
+    public int OptimalScore => optimalScore;
 
     [SerializeField]
     TMP_Text scoreText;
@@ -28,32 +33,38 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         SetScore(100);
+        SetOptimalScore(currentScore);
     }
 
     void LimitScore()
     {
-        if (score < 1)
+        if (currentScore < 1)
         {
             Debug.Log("score limited");
-            score = 1;
+            currentScore = 1;
         } 
     }
 
     void SyncUI()
     {        
         string str = "SCORE? : ";
-        scoreText.text = str + score;
+        scoreText.text = str + currentScore;
     }  
 
     public void SetScore(int i)
     {
-        score = i;
+        currentScore = i;
         LimitScore();
         SyncUI();
     }
 
     public int GetScore()
     {
-        return score;
+        return currentScore;
+    }
+
+    public void SetOptimalScore(int i)
+    {
+        optimalScore = i;
     }
 }

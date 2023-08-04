@@ -117,28 +117,33 @@ public class SelectionObject_Power_Element : MonoBehaviour
         }
     }
 
+    // 선택지 결과 반영
     public void OnSelected()
     {
-        int score = ScoreManager.GetScore();        
+        int score = ScoreManager.GetScore();
 
+        // 텍스트에 정보 매핑
+        int result = PreCalc(score);
+        ScoreManager.SetScore(result);
+    }
+
+    // 선택지 연산 결과 계산해보기
+    public int PreCalc(int i)
+    {        
         // 텍스트에 정보 매핑
         switch (type)
         {
             case CalcType.Add:
-                ScoreManager.SetScore(score + plusVal);
-                break;
+                return i + plusVal;                
             case CalcType.Substract:
-                ScoreManager.SetScore(score - plusVal);
-                break;
+                return i - plusVal;                
             case CalcType.Multiply:
-                ScoreManager.SetScore(score * multVal);
-                break;
+                return i * multVal;                
             case CalcType.Divide:
-                ScoreManager.SetScore(score / multVal);
-                break;
+                return i / multVal;
             default:
                 Debug.Log("calc type undefind : " + type);
-                break;
+                return -1;
         }
     }
 }
