@@ -709,7 +709,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1659889827}
+      - m_Target: {fileID: 1501845974}
         m_TargetAssemblyTypeName: Skill, Assembly-CSharp
         m_MethodName: UseSkill
         m_Mode: 1
@@ -1296,6 +1296,7 @@ Transform:
   - {fileID: 586025216}
   - {fileID: 1054247106}
   - {fileID: 1901632798}
+  - {fileID: 1501845975}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1414,7 +1415,7 @@ ParticleSystem:
   m_GameObject: {fileID: 704944225}
   serializedVersion: 8
   lengthInSec: 2
-  simulationSpeed: 0.25
+  simulationSpeed: 0.2
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -1422,7 +1423,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -7757,7 +7758,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -12991,6 +12992,55 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1501845973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1501845975}
+  - component: {fileID: 1501845974}
+  m_Layer: 0
+  m_Name: Skill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1501845974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501845973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bf7afbd0296c2344941be1ed3e245c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fill: {fileID: 1582161822}
+  coolTime: 5
+  coolTimeLeft: 0
+  skillActiveTime: 5
+  isSkillActive: 0
+--- !u!4 &1501845975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501845973}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 687333386}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1527980314
 GameObject:
   m_ObjectHideFlags: 0
@@ -13693,7 +13743,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1659889823}
   - component: {fileID: 1659889824}
-  - component: {fileID: 1659889827}
   - component: {fileID: 1659889825}
   - component: {fileID: 1659889826}
   m_Layer: 0
@@ -13734,11 +13783,11 @@ MonoBehaviour:
   forwardSpeed: 3
   sideSpeed: 3
   attackInterval: 0.33
-  attackRange: 8
+  attackRange: 10
   nozzle: {fileID: 4259922064391648377}
   trailNomal: {fileID: 4260148626927876947}
   trailSkill: {fileID: 704944228}
-  skill: {fileID: 1659889827}
+  skill: {fileID: 1501845974}
 --- !u!54 &1659889825
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13769,24 +13818,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &1659889827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659889822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bf7afbd0296c2344941be1ed3e245c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fill: {fileID: 1582161822}
-  coolTime: 5
-  coolTimeLeft: 0
-  skillActiveTime: 5
-  skillDamageMult: 5
-  isSkillActive: 0
 --- !u!1 &1697966500
 GameObject:
   m_ObjectHideFlags: 0
@@ -15776,7 +15807,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -20356,7 +20387,7 @@ ParticleSystem:
   m_GameObject: {fileID: 4168877017437323615}
   serializedVersion: 8
   lengthInSec: 2
-  simulationSpeed: 0.25
+  simulationSpeed: 0.2
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -20364,7 +20395,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -25141,7 +25172,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -29918,7 +29949,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:

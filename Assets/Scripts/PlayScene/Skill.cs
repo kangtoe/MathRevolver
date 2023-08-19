@@ -17,11 +17,6 @@ public class Skill : MonoBehaviour
     [SerializeField]
     float skillActiveTime = 3f;
 
-    // 스킬 피해량 배수
-    public float SkillDamageMult => skillDamageMult;
-    [SerializeField]
-    float skillDamageMult = 5f;
-
     public bool IsSkillActive => isSkillActive;
     [SerializeField] // 디버그용
     bool isSkillActive;

@@ -22,8 +22,28 @@ public class Player : MonoBehaviour
     [Header("이동")]    
     [SerializeField]
     float forwardSpeed = 1f;
+    float ForwardSpeed
+    {
+        get
+        {
+            float mult = 1;
+            if (skill.IsSkillActive) mult = 1.5f;
+
+            return forwardSpeed * mult;
+        }
+    }
+
     [SerializeField]
     float sideSpeed = 1f;
+    float SideSpeed
+    {
+        get {
+            float mult = 1;
+            if (skill.IsSkillActive) mult = 1.5f;
+
+            return sideSpeed * mult;
+        }        
+    } 
 
     [Header("공격")]    
     [SerializeField]
@@ -41,7 +61,7 @@ public class Player : MonoBehaviour
             int val;
             val = ScoreManager.Instance.GetScore();
             // 스킬 발동중 피해증폭
-            if (skill.IsSkillActive) val = (int)(val * skill.SkillDamageMult);
+            if (skill.IsSkillActive) val = 999999; //val = (int)(val * skill.SkillDamageMult);
 
             return val;
         }
@@ -75,7 +95,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         // 전방으로 이동 (z축 이동)
-        transform.Translate(forwardSpeed * transform.forward * Time.deltaTime);        
+        transform.Translate(ForwardSpeed * transform.forward * Time.deltaTime);        
     }
 
     private void OnDrawGizmos()
@@ -91,20 +111,20 @@ public class Player : MonoBehaviour
         //Debug.Log("MovePosY_Smooth || targetY :" + targetX);
         
         if (moveCr != null) StopCoroutine(moveCr);        
-        moveCr = StartCoroutine(MovePosX_SmoothCr(targetX, sideSpeed));
+        moveCr = StartCoroutine(MovePosX_SmoothCr(targetX));
     }
 
-    IEnumerator MovePosX_SmoothCr(float targetX, float speed = 1)
+    IEnumerator MovePosX_SmoothCr(float targetX)
     {
         while (true)
         {
             float currentX = transform.position.x;
 
             // 현재 X 위치를 목표 위치 방향으로 조금씩 이동
-            if (targetX > currentX) currentX += Time.fixedDeltaTime * speed;
-            else if (targetX < currentX) currentX -= Time.fixedDeltaTime * speed;
+            if (targetX > currentX) currentX += Time.fixedDeltaTime * SideSpeed;
+            else if (targetX < currentX) currentX -= Time.fixedDeltaTime * SideSpeed;
 
-            bool closeEnough = Mathf.Abs(targetX - currentX) <= Time.fixedDeltaTime * speed;
+            bool closeEnough = Mathf.Abs(targetX - currentX) <= Time.fixedDeltaTime * SideSpeed;
             if (closeEnough) currentX = targetX;
 
             transform.position = new Vector3(currentX, transform.position.y, transform.position.z);
