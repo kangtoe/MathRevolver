@@ -34,13 +34,31 @@ public class Player : MonoBehaviour
     float attackRange = 5f;
     //[SerializeField]
     //int damage = 10;
-    int damage => (int)(ScoreManager.Instance.GetScore());
+    int Damage
+    {
+        get
+        {
+            int val;
+            val = ScoreManager.Instance.GetScore();
+            // 스킬 발동중 피해증폭
+            if (skill.IsSkillActive) val = (int)(val * skill.SkillDamageMult);
 
-    [Header("공격 이펙트")]
+            return val;
+        }
+    }
+
+
+    [Header("공격 이펙트")]    
     [SerializeField]
     ParticleSystem nozzle;
     [SerializeField]
-    ParticleSystem trail;
+    ParticleSystem trailNomal;
+    [SerializeField]
+    ParticleSystem trailSkill;
+
+    [Header("스킬")]
+    [SerializeField]
+    Skill skill;
 
     // 코루틴
     Coroutine moveCr;
@@ -135,12 +153,20 @@ public class Player : MonoBehaviour
 
     void Attack(Enemy target)
     {
-        // 사격 시각 효과
         nozzle.Play();
-        trail.Play();
-        trail.transform.LookAt(target.transform.position);
+        // 사격 시각 효과
+        if (skill.IsSkillActive)
+        {
+            trailSkill.Play();
+            trailSkill.transform.LookAt(target.transform.position);
+        }
+        else
+        {            
+            trailNomal.Play();
+            trailNomal.transform.LookAt(target.transform.position);
+        }        
         
-        target.OnHit(damage);
+        target.OnHit(Damage);
     }
 
     #endregion

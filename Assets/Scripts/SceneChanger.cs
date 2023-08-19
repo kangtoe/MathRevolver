@@ -28,7 +28,7 @@ public class SceneChanger : MonoBehaviour
     float fadeSpeed = 1;    
     [SerializeField]
     Image fadeImage;
-    // scene 전환 도중 다른 전환 방지    
+    // scene 전환 도중 다른 전환 방지
     bool isChanging = false;
 
     // Start is called before the first frame update

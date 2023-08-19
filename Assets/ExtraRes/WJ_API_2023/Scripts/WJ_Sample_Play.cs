@@ -50,7 +50,8 @@ public class WJ_Sample_Play : MonoBehaviour
 
         wj_displayText.SetState("대기중", "", "", "");
 
-        panel_question.SetActive(false);
+        //panel_question.SetActive(false);
+        InactivePanel();
     }
 
     private void Update()
@@ -63,7 +64,8 @@ public class WJ_Sample_Play : MonoBehaviour
     // 문제 풀이 시작
     public void StartQuestion()
     {
-        panel_question.SetActive(true);
+        ActivePanel();
+        //panel_question.SetActive(true);
 
         // 문제 표기
         if (currentQuestionIndex % 8 == 0)
@@ -97,8 +99,9 @@ public class WJ_Sample_Play : MonoBehaviour
     {
         Debug.Log("MakeQuestion");
         StartTimeBar();
-       
-        panel_question.SetActive(true);
+
+        //panel_question.SetActive(true);
+        ActivePanel();
 
         string correctAnswer;
         string[] wrongAnswers;
@@ -184,7 +187,8 @@ public class WJ_Sample_Play : MonoBehaviour
         currentQuestionIndex++;
         currentQuestionIndex %= 8;
 
-        panel_question.SetActive(false);
+        //panel_question.SetActive(false);
+        InactivePanel();        
     }
 
     // 새로운 문제들 받아와 표기
@@ -195,7 +199,7 @@ public class WJ_Sample_Play : MonoBehaviour
         wj_displayText.SetState("문제풀이 중", "-", "-", "-");
 
         dataSetting = true;
-        // 문제 정보를 새롭게 받아올 때, 0번 문제를 UI에 표시하도록 이밴트 등록
+        // 문제 정보를 새롭게 받아올 때, 0번 문제를 UI에 표시하도록 이벤트 등록
         wj_conn.onGetLearning.AddListener(() => GetLearning(0));
         // 문제 정보를 새롭게 받아옴
         wj_conn.Learning_GetQuestion();        
@@ -242,7 +246,7 @@ public class WJ_Sample_Play : MonoBehaviour
         float leftTime = timeLimit;
         while (true)
         {
-            leftTime -= Time.deltaTime;
+            leftTime -= Time.unscaledDeltaTime;
             float ratio = Mathf.Clamp01(leftTime / timeLimit);
             timeGage.fillAmount = ratio;
             yield return null;
@@ -257,5 +261,24 @@ public class WJ_Sample_Play : MonoBehaviour
     }
 
     #endregion
+
+    #region 판넬 제어
+
+    float timeScaleOnActivePanel = 0.1f;
+
+    void ActivePanel()
+    {
+        TimeManager.Instance.SetScale(timeScaleOnActivePanel);
+        panel_question.SetActive(true);
+    }
+
+    void InactivePanel()
+    {
+        TimeManager.Instance.SetScale(1);
+        panel_question.SetActive(false);
+    }
+
+    #endregion
+
 
 }
