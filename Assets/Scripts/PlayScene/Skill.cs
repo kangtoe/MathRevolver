@@ -49,10 +49,12 @@ public class Skill : MonoBehaviour
     {
         // 스킬효과 활성화
         isSkillActive = true;
+        SelectionCreator.Instance.ActiveAllOptimalVFX(true);
 
         yield return new WaitForSeconds(skillActiveTime);
 
         // 스킬효과 비활성화
         isSkillActive = false;
+        SelectionCreator.Instance.ActiveAllOptimalVFX(false);
     }
 }

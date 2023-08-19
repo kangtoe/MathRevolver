@@ -11,7 +11,21 @@ public class SelectionObject_Power : MonoBehaviour
     List<SelectionObject_Power_Element> elements = new List<SelectionObject_Power_Element>();
 
     [SerializeField]
-    GameObject elementPrefab;    
+    GameObject elementPrefab;
+
+    [SerializeField]
+    SelectionObject_Power_Element optimalSelect;
+    public SelectionObject_Power_Element OptimalSelect => optimalSelect;
+
+    private void OnEnable()
+    {
+        SelectionCreator.Instance.AddToList(this);
+    }
+
+    private void OnDisable()
+    {
+        SelectionCreator.Instance.DeleteOnList(this);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -59,10 +73,12 @@ public class SelectionObject_Power : MonoBehaviour
         int addIdx = Random.Range(0, count);
 
         for (int i = 0; i < count; i++)
-        {
+        {           
             // 선택지 오브젝트 생성
             GameObject go =  Instantiate(elementPrefab, transform);
             SelectionObject_Power_Element element = go.GetComponent<SelectionObject_Power_Element>();
+
+            element.EnableVFX(false);
 
             // 선택지 내용 설정
             if (i == addIdx) element.SetCalc(CalcType.Add);
@@ -85,12 +101,17 @@ public class SelectionObject_Power : MonoBehaviour
 
             // 최적해 구하기
             int preCalc = element.PreCalc(optimalScore);
-            if (preCalc > optimalScore_tmp) optimalScore_tmp = preCalc;
+            if (preCalc > optimalScore_tmp)
+            {
+                optimalScore_tmp = preCalc;
+                optimalSelect = element;
+            } 
 
             elements.Add(element);
         }
 
         // 최적해 갱신
         ScoreManager.SetOptimalScore(optimalScore_tmp);
+        //optimalSelect.EnableVFX(true);
     }
 }

@@ -304,6 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 8404752460783828392}
   mesh: {fileID: 1014503141065803997}
+  vfx: {fileID: 6529553104565384220}
   type: 0
   plusVal: 0
   multVal: 0
@@ -317,6 +318,18 @@ PrefabInstance:
     - target: {fileID: 1481440290192140, guid: dba36fe0effedff439276e1def1eb09d, type: 3}
       propertyPath: m_Name
       value: FX_LightRayCube_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1481440290192140, guid: dba36fe0effedff439276e1def1eb09d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4042105469209592, guid: dba36fe0effedff439276e1def1eb09d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4042105469209592, guid: dba36fe0effedff439276e1def1eb09d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4927059292654576, guid: dba36fe0effedff439276e1def1eb09d, type: 3}
       propertyPath: m_RootOrder
@@ -379,5 +392,10 @@ PrefabInstance:
 --- !u!4 &6523854982985712864 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4927059292654576, guid: dba36fe0effedff439276e1def1eb09d, type: 3}
+  m_PrefabInstance: {fileID: 6528216873906704144}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6529553104565384220 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1481440290192140, guid: dba36fe0effedff439276e1def1eb09d, type: 3}
   m_PrefabInstance: {fileID: 6528216873906704144}
   m_PrefabAsset: {fileID: 0}

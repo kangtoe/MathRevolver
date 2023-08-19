@@ -22,6 +22,9 @@ public class SelectionObject_Power_Element : MonoBehaviour
     [SerializeField]
     MeshRenderer mesh;
 
+    [SerializeField]
+    GameObject vfx;
+
     [Header("연산 종류")]
     [SerializeField]
     CalcType type;
@@ -147,5 +150,10 @@ public class SelectionObject_Power_Element : MonoBehaviour
                 Debug.Log("calc type undefind : " + type);
                 return -1;
         }
+    }
+
+    public void EnableVFX(bool enable)
+    {
+        vfx.SetActive(enable);
     }
 }
