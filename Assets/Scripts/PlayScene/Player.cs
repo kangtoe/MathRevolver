@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
 
     [Header("스킬")]
     [SerializeField]
-    Skill skill;
+    SkillControl skill;
 
     // 코루틴
     Coroutine moveCr;

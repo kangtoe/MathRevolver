@@ -6,6 +6,9 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     [SerializeField]
+    Transform cameraRoot;
+
+    [SerializeField]
     Transform chaseTarget;
 
     [SerializeField]
@@ -28,8 +31,8 @@ public class CameraManager : MonoBehaviour
         
         // z축으로만 추적함
         Vector3 camCenter = new Vector3(0, 0, pos.z);
-               
-        transform.position = camCenter + offset;
+
+        cameraRoot.position = camCenter + offset;
     }
 
     public void ShakeDebug()
