@@ -162,7 +162,7 @@ public class Player : MonoBehaviour
         // 가장 가까운 적 공격
         if (target is null)
         {
-            Debug.Log("target is null");
+            //Debug.Log("target is null");
             return;
         }
         //else Debug.Log("target :" + target.name);

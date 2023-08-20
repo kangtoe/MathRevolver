@@ -5,6 +5,21 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class CameraManager : MonoBehaviour
 {
+    #region 싱글톤
+    public static CameraManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<CameraManager>();
+            }
+            return instance;
+        }
+    }
+    private static CameraManager instance;
+    #endregion
+
     [SerializeField]
     Transform cameraRoot;
 

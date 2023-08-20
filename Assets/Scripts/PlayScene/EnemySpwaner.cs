@@ -153,7 +153,7 @@ public class EnemySpwaner : MonoBehaviour
         // list 요소 개수 검사
         if (enemies.Count == 0)
         {
-            Debug.Log("enemies.Count == 0");
+            //Debug.Log("enemies.Count == 0");
             return null;
         }
 
@@ -190,7 +190,7 @@ public class EnemySpwaner : MonoBehaviour
         // 조건에 해당하는 적 없음
         if (closestIndex == -1)
         {
-            Debug.Log("no enemy can attack : " + closestIndex);
+            //Debug.Log("no enemy can attack : " + closestIndex);
             return null;
         }
 
