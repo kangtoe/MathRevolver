@@ -40,7 +40,12 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         // player를 지나쳐 카메라 벗어남 -> 삭제
-        if (!visibleCheck.Visible && !IsFrontToPlayer) DeleteEnemy();
+        if (!visibleCheck.Visible && !IsFrontToPlayer)
+        {
+            Debug.Log("적 지나침 : " + gameObject.name);
+            HeartsManager.Instance.HeartLost();
+            DeleteEnemy();
+        } 
 
         transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
     }

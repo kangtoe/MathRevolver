@@ -38,7 +38,8 @@ public class SkillControl : MonoBehaviour
         {
             return;
         }
-
+        // 이전 스킬 코루틴 중지
+        StopAllCoroutines();
         Debug.Log("스킬 사용");
         StartCoroutine(SkillCr());
         coolTimeLeft = coolTime;

@@ -2,8 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeartsConrol : MonoBehaviour
+public class HeartsManager : MonoBehaviour
 {
+    #region 싱글톤
+    public static HeartsManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<HeartsManager>();
+            }
+            return instance;
+        }
+    }
+    private static HeartsManager instance;
+    #endregion
+
     [SerializeField]
     Transform heartUiParent;
 
