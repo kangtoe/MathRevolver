@@ -38,6 +38,8 @@ public class SelectionCreator : MonoBehaviour
     int adventCount = 1; // '전투력 선택지: 매스피드 선택지' 출현비에서 에서 전투력 선택지의 비율
     int spwanCount = 0;
 
+    bool OnActiveAllOptimalVFX;
+
     // Start is called before the first frame update
     void Start()
     {        
@@ -88,10 +90,18 @@ public class SelectionCreator : MonoBehaviour
     // 모든 최적 선택지 VFX 활성화 제어
     public void ActiveAllOptimalVFX(bool active)
     {
+        OnActiveAllOptimalVFX = active;
+        UpdateOptimalSelectVFX();
+    }
+
+    // OnActiveAllOptimalVFX -> 모든 선택지 섹션에 반영
+    void UpdateOptimalSelectVFX()
+    {
+        // 현존하는 모든 최적 선택지 표시
         foreach (SelectionObject_Power selection in SelectionObject_PowerList)
         {
-            selection.OptimalSelect.EnableVFX(active);
-        }            
+            selection.OptimalSelect.EnableVFX(OnActiveAllOptimalVFX);
+        }
     }
 
     #region 전투력 선택지
@@ -106,6 +116,8 @@ public class SelectionCreator : MonoBehaviour
 
         SelectionObject_Power selection = go.GetComponent<SelectionObject_Power>();
         selection.CreateElement(3);
+
+        UpdateOptimalSelectVFX();
     }
 
     #endregion

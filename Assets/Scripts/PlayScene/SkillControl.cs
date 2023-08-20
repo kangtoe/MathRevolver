@@ -21,6 +21,15 @@ public class SkillControl : MonoBehaviour
     [SerializeField] // 디버그용
     bool isSkillActive;
 
+    // 디버그용
+    [SerializeField] 
+    Text activeCheck;
+
+    private void Start()
+    {
+        activeCheck.enabled = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -51,11 +60,13 @@ public class SkillControl : MonoBehaviour
         // 스킬효과 활성화
         isSkillActive = true;
         SelectionCreator.Instance.ActiveAllOptimalVFX(true);
+        activeCheck.enabled = true;
 
         yield return new WaitForSeconds(skillActiveTime);
 
         // 스킬효과 비활성화
         isSkillActive = false;
         SelectionCreator.Instance.ActiveAllOptimalVFX(false);
+        activeCheck.enabled = false;
     }
 }
