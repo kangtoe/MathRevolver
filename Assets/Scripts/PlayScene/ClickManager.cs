@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class ClickManager : MonoBehaviour
 {
@@ -34,15 +36,20 @@ public class ClickManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (UIManager.isOnUI) return;
+    {        
         ClickCheck();
     }
 
     // 클릭 지점 지면에 클릭 포인터 표시
     void ClickCheck()
-    {        
-        // 마우스 입력 처리
+    {
+        // ui 클릭시 지면 이동 입력은 무시
+        if (EventSystem.current.IsPointerOverGameObject() == true)
+        {
+            return;
+        }
+
+            // 마우스 입력 처리
         if (Input.GetMouseButtonDown(0))
         {
             Vector3? point = GetClickPoint();

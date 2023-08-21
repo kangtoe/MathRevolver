@@ -20,8 +20,7 @@ public class UIManager : MonoBehaviour
 
     [Header("옵션")]
     [SerializeField]
-    GameObject optionUI;
-    public static bool isOnUI;
+    GameObject optionUI;    
     float timeScaleOnMenu = 0.5f;
 
     [Header("화면 점멸")]
@@ -46,15 +45,13 @@ public class UIManager : MonoBehaviour
     }
 
     public void OnOptionMenu()
-    {
-        isOnUI = true;
+    {        
         optionUI.SetActive(true);
         Time.timeScale = timeScaleOnMenu;
     }
 
     public void OffOptionMenu()
-    {
-        isOnUI = false;
+    {        
         optionUI.SetActive(false);
         Time.timeScale = 1;
     }
