@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.177579, g: 0.22232252, b: 0.3045191, a: 1}
+  m_IndirectSpecularColor: {r: 0.17757872, g: 0.2223221, b: 0.30451828, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -38685,7 +38685,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 419237fa41d409748a486888209ea9a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundPrefabs: {fileID: 1537528575244989623, guid: 1ee7a9cc04fc06244a7661667047a137, type: 3}
+  groundPrefabs:
+  - {fileID: 1537528575244989623, guid: 1ee7a9cc04fc06244a7661667047a137, type: 3}
+  - {fileID: 1537528575244989623, guid: cc90927c422182c4399e2f99b47566cc, type: 3}
+  - {fileID: 1537528575244989623, guid: 414d519aa93946e40aaa05b54690a1ac, type: 3}
+  - {fileID: 1537528575244989623, guid: 48c4bce53ff32704495df8e1769e349b, type: 3}
   groundSize: 10
   spwanedGrounds:
   - {fileID: 1931488411}
@@ -39252,7 +39256,7 @@ MonoBehaviour:
   coolTimeLeft: 0
   skillActiveTime: 5
   isSkillActive: 0
-  activeCheck: {fileID: 0}
+  activeCheck: {fileID: 1457941858}
 --- !u!4 &1501845975
 Transform:
   m_ObjectHideFlags: 0

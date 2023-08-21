@@ -18,14 +18,14 @@ public class RepeatGround : MonoBehaviour
     }
     private static RepeatGround instance;
     #endregion
-    
+
+
     [SerializeField]
-    GameObject groundPrefabs;
+    GameObject[] groundPrefabs;
 
     [SerializeField]
     float groundSize = 10;
-
-    [Header("디버깅 용")]
+    
     [SerializeField]
     List<GameObject> spwanedGrounds;
 
@@ -50,8 +50,12 @@ public class RepeatGround : MonoBehaviour
         {
             Vector3 spwanPoint = spwanCheckPos + new Vector3(0, 0, groundSize * preSpwaned);
 
+            // 생성할 그라운드 찾기
+            int idx = Random.Range(0, groundPrefabs.Length);
+            GameObject nextGround = groundPrefabs[idx];
+
             // 새로운 그라운드 스폰
-            GameObject go = Instantiate(groundPrefabs, transform);
+            GameObject go = Instantiate(nextGround, transform);
             go.transform.position = spwanPoint;
             spwanedGrounds.Add(go);
 
@@ -64,4 +68,6 @@ public class RepeatGround : MonoBehaviour
         // TODO
         // spwanedGrounds 중 카메라에서 완전히 벗어난 것은 제거할 것
     }
+
+    
 }
