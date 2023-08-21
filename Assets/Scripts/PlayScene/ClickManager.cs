@@ -27,6 +27,24 @@ public class ClickManager : MonoBehaviour
     
     [SerializeField]
     LayerMask groundLayerMask;
+   
+    [Header("클릭 가능 영역")]
+    [SerializeField]
+    GameObject ClickAreaXAnchor; // 영역 x좌표 기준 : 플레이어 케릭터
+    [SerializeField]
+    Vector2 clickAreaSize = new Vector2(10, 15);
+    [SerializeField]
+    Vector3 clickAreaOffset = new Vector3(0, 0, 5);
+    Bounds checkArea
+    {
+        get
+        {
+            Vector3 vec = new Vector3(clickAreaSize.x, 1, clickAreaSize.y);
+            Vector3 center = new Vector3(0,0, ClickAreaXAnchor.transform.position.z) + clickAreaOffset;
+            return new Bounds(center, vec);
+        }
+    }
+    
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +56,12 @@ public class ClickManager : MonoBehaviour
     void Update()
     {        
         ClickCheck();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(checkArea.center, checkArea.size);
     }
 
     // 클릭 지점 지면에 클릭 포인터 표시
@@ -57,6 +81,12 @@ public class ClickManager : MonoBehaviour
             {
                 Debug.Log("클릭 지점 Ground 물체 없음");
                 return;
+            }
+
+            // 클릭 영역 외부 클릭 시, 이동 위치 영역 내로 재조정
+            if (checkArea.Contains(point.Value) == false)
+            {
+                point = checkArea.ClosestPoint(point.Value);                
             }
 
             ClickPointer.Instance.SetPointer(point.Value);

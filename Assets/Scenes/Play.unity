@@ -40178,6 +40178,9 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  ClickAreaXAnchor: {fileID: 1659889822}
+  clickAreaSize: {x: 10, y: 15}
+  clickAreaOffset: {x: 0, y: 0, z: 5}
 --- !u!4 &1706152406
 Transform:
   m_ObjectHideFlags: 0
