@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Text3dMaker : MonoBehaviour
 {
-    #region ½Ì±ÛÅæ
+    #region ì‹±ê¸€í†¤
     public static Text3dMaker Instance
     {
         get
@@ -22,19 +22,21 @@ public class Text3dMaker : MonoBehaviour
     [SerializeField]
     GameObject textPrefab;
 
-    public GameObject MakeText(string str, Vector3 pos)
+    public GameObject MakeText(string str, Vector3 pos, Transform preant = null)
     {
         //Quaternion quat = Camera.main.transform.rotation;
-        Quaternion quat = textPrefab.transform.rotation;
-        GameObject go = Instantiate(textPrefab, pos, quat);
+        //Quaternion quat = textPrefab.transform.rotation;
+
+        GameObject go = Instantiate(textPrefab, preant);
+        go.transform.localPosition = pos;
         go.GetComponent<TextMesh>().text = str;
 
-        // ¶Ù¾î¿À¸£´Â ¹°¸® È¿°ú Ãß°¡
+        // ë›°ì–´ì˜¤ë¥´ëŠ” ë¬¼ë¦¬ íš¨ê³¼ ì¶”ê°€
         {
             //Vector3 vec = Random.onUnitSphere * 5;
             //if (vec.y < 0) vec.y *= -1;
             //vec += Vector3.up * 1.5f;
-            // Áß·Â È°¼ºÈ­ ÇÒ°Í
+            // ì¤‘ë ¥ í™œì„±í™” í• ê²ƒ
             //go.GetComponent<Rigidbody>().AddForce(vec, ForceMode.Impulse);
         }        
 

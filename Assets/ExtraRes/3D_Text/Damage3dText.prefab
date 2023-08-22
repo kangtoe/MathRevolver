@@ -92,7 +92,7 @@ TextMesh:
   m_Anchor: 4
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 50
+  m_FontSize: 100
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageUI: {fileID: 1636067196799486862}
   selfText: {fileID: 1636067196799489137}
-  moveSpeed: 1
+  moveSpeed: 0.5
   fadeSpeed: 1
 --- !u!54 &6059151105206692357
 Rigidbody:

@@ -18,6 +18,7 @@ public class SelectionObject_Power_Element : MonoBehaviour
 
     [SerializeField]
     TMP_Text text;
+    public string Text => text.text;
 
     [SerializeField]
     MeshRenderer mesh;
@@ -33,15 +34,29 @@ public class SelectionObject_Power_Element : MonoBehaviour
     int plusVal;
     [Header("곱연산 계수")]
     [SerializeField]
-    int multVal;
+    int multVal;    
 
-    public void SetColor(Color new_color, bool changeAlpha = false)
+    public void SetMeshColor(Color new_color, bool changeAlpha = false)
     {
         Debug.Log("set colot alpha : " + new_color.a);
 
         Color color = new_color;
         if (!changeAlpha) color.a = mesh.material.color.a;
         mesh.material.color = color;
+    }
+
+    public void SetTextColor(Color new_color, bool changeAlpha = false)
+    {
+        Color color = new_color;
+        if (!changeAlpha) color.a = text.color.a;
+        text.color = color;
+    }
+
+    public void SetTextAlpha(float a)
+    {
+        Color color = text.color;
+        color.a = a;
+        text.color = color;
     }
 
     public void SetPos(Vector3 pos)
@@ -161,20 +176,19 @@ public class SelectionObject_Power_Element : MonoBehaviour
         vfx.SetActive(enable);
     }
 
-    public void FadeColor(float duration, float targetAlpha, float startAlpha = -1)
+    public void FadeColor(float duration, float targetAlpha, float meshStartAlpha = -1, float textStartAlpha = -1, bool inactiveMeshOnEnd = false)
     {
         // 시작 알파 값 지정 없는 경우, 기존 알파값 사용
-        if (startAlpha == -1) startAlpha = mesh.material.color.a;
+        if (meshStartAlpha == -1) meshStartAlpha = mesh.material.color.a;
+        if (textStartAlpha == -1) textStartAlpha = text.color.a;
 
         StopAllCoroutines();        
-        StartCoroutine(FadeColorCr(duration, targetAlpha, startAlpha));
+        StartCoroutine(FadeColorCr(duration, targetAlpha, meshStartAlpha, textStartAlpha, inactiveMeshOnEnd));
     }
 
-    IEnumerator FadeColorCr(float duration, float targetAlpha, float startAlpha)
-    {
-        Debug.Log("startAlpha : " + startAlpha);
-
-        float interval = 0.1f;
+    IEnumerator FadeColorCr(float duration, float targetAlpha, float meshStartAlpha, float textStartAlpha, bool inactiveMeshOnEnd)
+    {        
+        float interval = 0.05f;
 
         float t = 0;
         while (true)
@@ -182,16 +196,24 @@ public class SelectionObject_Power_Element : MonoBehaviour
             t += interval / duration;
 
             if (t > 1) t = 1;
-            float a = Mathf.Lerp(startAlpha, targetAlpha, t);
-            Debug.Log("a :" + a);
+            float meshAlpha = Mathf.Lerp(meshStartAlpha, targetAlpha, t);
+            float textAlpha = Mathf.Lerp(textStartAlpha, targetAlpha, t);
 
-            Color color = mesh.material.color;
-            color.a = a;
-            SetColor(color, true);
+            Color color;
 
-            if (t == 1) break;
+            // mesh 색 변경            
+            color = mesh.material.color;
+            color.a = meshAlpha;
+            SetMeshColor(color, true);
+            
+            // text 색 변경
+            SetTextAlpha(textAlpha);            
 
             yield return new WaitForSeconds(interval);
-        }        
+
+            if (t == 1) break;
+        }
+
+        if (inactiveMeshOnEnd) mesh.enabled = false;
     }
 }

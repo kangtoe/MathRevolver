@@ -5736,6 +5736,37 @@ Transform:
   m_Father: {fileID: 1451533565}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!1 &216382015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 216382016}
+  m_Layer: 0
+  m_Name: TextPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &216382016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216382015}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1659889823}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &324486284 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1738125173834032542, guid: b354b27325ba4904ea3a7b8921ae1420, type: 3}
@@ -39799,6 +39830,7 @@ Transform:
   m_Children:
   - {fileID: 386910929}
   - {fileID: 1194072712}
+  - {fileID: 216382016}
   m_Father: {fileID: 2080780499}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -39822,6 +39854,7 @@ MonoBehaviour:
   trailNomal: {fileID: 501886777}
   trailSkill: {fileID: 1707834770}
   skill: {fileID: 1501845974}
+  textPoint: {fileID: 216382016}
 --- !u!54 &1659889825
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -46132,6 +46165,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3171621199521506460, guid: b354b27325ba4904ea3a7b8921ae1420, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 6826356584042200720, guid: b354b27325ba4904ea3a7b8921ae1420, type: 3}
       propertyPath: m_Name
       value: HeartUI

@@ -80,6 +80,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     SkillControl skill;
 
+    [Header("텍스트 출력")]
+    [SerializeField]
+    Transform textPoint;
+
     // 코루틴
     Coroutine moveCr;
     Coroutine attackCr;
@@ -194,5 +198,8 @@ public class Player : MonoBehaviour
 
     #endregion
 
-
+    public void MakeText(string str)
+    {
+        Text3dMaker.Instance.MakeText(str, Vector3.zero ,textPoint);
+    }
 }

@@ -37,12 +37,17 @@ public class SelectionObject_Power : MonoBehaviour
             SelectionObject_Power_Element selection = GetClosestSelection(other.transform.position);
             selection.OnSelected();
 
+            // 선택지 페이드 아웃
             foreach (SelectionObject_Power_Element element in elements)
             {
-                if (element == selection) element.FadeColor(1f, 0f, 1);
-                else element.FadeColor(1f, 0f);
+                if (element == selection) element.FadeColor(2f, 0f, 1, -1, true);
+                else element.FadeColor(0.5f, 0f, -1, -1, true);
             }
-            
+
+            // 플레이어 택스트 생성
+            Player.Instance.MakeText(selection.Text);
+
+
         }        
     }
 
@@ -104,7 +109,7 @@ public class SelectionObject_Power : MonoBehaviour
             if (i % 3 == 0) color = Color.red;
             else if (i % 2 == 0) color = Color.green;
             else color = Color.blue;
-            element.SetColor(color);
+            element.SetMeshColor(color);
 
             // 최적해 구하기
             int preCalc = element.PreCalc(optimalScore);
