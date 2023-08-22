@@ -174,16 +174,19 @@ public class Player : MonoBehaviour
     void Attack(Enemy target)
     {
         nozzle.Play();
+
+        Vector3 point = target.GetComponent<Collider>().ClosestPoint(trailSkill.transform.position);
+
         // 사격 시각 효과
         if (skill.IsSkillActive)
         {
             trailSkill.Play();
-            trailSkill.transform.LookAt(target.transform.position);
+            trailSkill.transform.LookAt(point);
         }
         else
         {            
             trailNomal.Play();
-            trailNomal.transform.LookAt(target.transform.position);
+            trailNomal.transform.LookAt(point);
         }        
         
         target.OnHit(Damage);
