@@ -36,6 +36,13 @@ public class SelectionObject_Power : MonoBehaviour
             // 어느 선택지에 가장 가까운지 판별하여, 해당 선택지에 해당하는 효과 적용
             SelectionObject_Power_Element selection = GetClosestSelection(other.transform.position);
             selection.OnSelected();
+
+            foreach (SelectionObject_Power_Element element in elements)
+            {
+                if (element == selection) element.FadeColor(1f, 0f, 1);
+                else element.FadeColor(1f, 0f);
+            }
+            
         }        
     }
 

@@ -37,6 +37,8 @@ public class SelectionObject_Power_Element : MonoBehaviour
 
     public void SetColor(Color new_color, bool changeAlpha = false)
     {
+        Debug.Log("set colot alpha : " + new_color.a);
+
         Color color = new_color;
         if (!changeAlpha) color.a = mesh.material.color.a;
         mesh.material.color = color;
@@ -130,6 +132,8 @@ public class SelectionObject_Power_Element : MonoBehaviour
         // 텍스트에 정보 매핑
         int result = PreCalc(score);
         ScoreManager.SetScore(result);
+
+
     }
 
     // 선택지 연산 결과 계산해보기
@@ -155,5 +159,39 @@ public class SelectionObject_Power_Element : MonoBehaviour
     public void EnableVFX(bool enable)
     {
         vfx.SetActive(enable);
+    }
+
+    public void FadeColor(float duration, float targetAlpha, float startAlpha = -1)
+    {
+        // 시작 알파 값 지정 없는 경우, 기존 알파값 사용
+        if (startAlpha == -1) startAlpha = mesh.material.color.a;
+
+        StopAllCoroutines();        
+        StartCoroutine(FadeColorCr(duration, targetAlpha, startAlpha));
+    }
+
+    IEnumerator FadeColorCr(float duration, float targetAlpha, float startAlpha)
+    {
+        Debug.Log("startAlpha : " + startAlpha);
+
+        float interval = 0.1f;
+
+        float t = 0;
+        while (true)
+        {
+            t += interval / duration;
+
+            if (t > 1) t = 1;
+            float a = Mathf.Lerp(startAlpha, targetAlpha, t);
+            Debug.Log("a :" + a);
+
+            Color color = mesh.material.color;
+            color.a = a;
+            SetColor(color, true);
+
+            if (t == 1) break;
+
+            yield return new WaitForSeconds(interval);
+        }        
     }
 }
