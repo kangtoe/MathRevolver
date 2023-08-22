@@ -20,8 +20,13 @@ public class UIManager : MonoBehaviour
 
     [Header("옵션")]
     [SerializeField]
-    GameObject optionUI;    
+    GameObject optionUI;
+    [SerializeField]
     float timeScaleOnMenu = 0.5f;
+
+    [Header("게임오버")]
+    [SerializeField]
+    GameObject overUI;
 
     [Header("화면 점멸")]
     [SerializeField]
@@ -35,7 +40,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        OffOptionMenu();
+        ActiveOptionUI(false);        
     }
 
     // Update is called once per frame
@@ -44,16 +49,18 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void OnOptionMenu()
-    {        
-        optionUI.SetActive(true);
-        Time.timeScale = timeScaleOnMenu;
-    }
+    public void ActiveOptionUI(bool active)
+    {
+        optionUI.SetActive(active);
 
-    public void OffOptionMenu()
-    {        
-        optionUI.SetActive(false);
-        Time.timeScale = 1;
+        if (active == true)
+        {
+            TimeManager.Instance.SetScale(timeScaleOnMenu);
+        }
+        if (active == false)
+        {
+            TimeManager.Instance.SetScale(1);
+        }
     }
 
     public void Flash()
