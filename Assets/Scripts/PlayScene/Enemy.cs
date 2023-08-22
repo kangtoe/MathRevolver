@@ -57,12 +57,12 @@ public class Enemy : MonoBehaviour
     }
 
     public void OnHit(int damage)
-    {
-        // todo: 시각적 연출 효과 더하기
+    {        
         DoHitEffect();
 
-        Vector3 textPos = transform.position + Vector3.right * -0.3f + Vector3.up * 0.5f;
-        Text3dMaker.Instance.MakeText(damage.ToString(), textPos);
+        // 피해량 텍스트로 표기
+        //Vector3 textPos = transform.position + Vector3.right * -0.3f + Vector3.up * 0.5f;
+        //Text3dMaker.Instance.MakeText(damage.ToString(), textPos);
 
         currentHp -= damage;
         if (currentHp < 0) currentHp = 0;
@@ -109,11 +109,17 @@ public class Enemy : MonoBehaviour
     public void DoHitEffect()
     {
         // 지속시간
-        float duration = 0.3f;
+        float duration = 0.15f;
 
         StopAllCoroutines();
-        StartCoroutine(ShackPosCr(duration));
+        StartCoroutine(ShackPosCr(duration, anim.transform, 0.1f));
+        StartCoroutine(ShackPosCr(duration, text.transform, 0.05f));
         StartCoroutine(ColorChangeCr(duration));
+    }
+
+    IEnumerator ShackUiCr()
+    {
+        yield return null;
     }
 
     // todo : 색상 변경 코루틴
@@ -123,25 +129,9 @@ public class Enemy : MonoBehaviour
     }
 
     // 흔들림 연출 코루틴
-    IEnumerator ShackPosCr(float duration)
+    IEnumerator ShackPosCr(float duration, Transform tf, float amount = 0.1f, float interval = 0.05f)
     {
-        // 코루틴 간격
-        float interval = 0.05f;
-        // 흔들림 정도
-        float amount = 0.1f;
-
-        // 자식 오브젝트 로컬 위치 구하기        
-        Vector3 GetPosition()
-        {
-            return anim.transform.localPosition;
-        }
-        // 자식 오브젝트 로컬 위치 정하기
-        void SetPosition(Vector3 pos)
-        {
-            anim.transform.localPosition = pos;
-        }
-
-        Vector3 startPos = GetPosition();
+        Vector3 startPos = tf.localPosition;
         float leftTime = duration;
 
         bool plusMinus = true;
@@ -153,7 +143,7 @@ public class Enemy : MonoBehaviour
             // 남은 시간 종료 : 원래 위치로
             if (leftTime < 0)
             {
-                SetPosition(startPos);
+                tf.localPosition = startPos;
                 break;
             }
 
@@ -168,8 +158,7 @@ public class Enemy : MonoBehaviour
             plusMinus = !plusMinus;
 
             // 흔들림 적용
-            Vector3 pos = GetPosition() + shake;
-            SetPosition(pos);
+            tf.localPosition += shake;
 
             yield return new WaitForSeconds(interval);
         }

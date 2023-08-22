@@ -38756,7 +38756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionUI: {fileID: 455133668}
-  timeScaleOnMenu: 0.5
+  timeScaleOnMenu: 1
   overUI: {fileID: 0}
   flashPanel: {fileID: 631432284}
   flashDuration: 0.5
@@ -39349,7 +39349,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uC2A4\uD0AC \n\uC2DC\uAC04 \uC99D\uAC00"
+  m_Text: "\uC2A4\uD0AC \uC9C0\uC18D\n\uC2DC\uAC04 \uC99D\uAC00"
 --- !u!222 &1566559572
 CanvasRenderer:
   m_ObjectHideFlags: 0

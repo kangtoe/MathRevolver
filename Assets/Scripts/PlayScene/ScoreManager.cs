@@ -39,17 +39,14 @@ public class ScoreManager : MonoBehaviour
         SetOptimalScore(currentScore);
     }
 
-    void LimitScore()
-    {
-        if (currentScore < 1)
-        {
-            Debug.Log("score limited");
-            currentScore = 1;
-        } 
-    }
-
     public void SetScore(int i, bool countEffect = true)
     {
+        // 점수 제한 -> 1 이하로 떨어지지 않음
+        if (i < 1)
+        {
+            i = 1;
+        }    
+
         float duration = 0;
         if (countEffect) duration = countDuration;
         StopAllCoroutines();
