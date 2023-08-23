@@ -19,20 +19,36 @@ public class UpgradeControl : MonoBehaviour
     private static UpgradeControl instance;
     #endregion
 
-    [SerializeField]
-    GameObject upgradeUI;
-
     [Header("레벨 한계")]
     [SerializeField]
     int maxLv = 10;
 
-    [Header("현재 레벨")]
+    [Header("공격 속도")] // 초당 공격 횟수
     [SerializeField]
     int attackSpeedLv;
     [SerializeField]
+    float attackSpeedMin = 1; 
+    [SerializeField]
+    float attackSpeedMax = 0.5f;
+    float CurrentAttackSpeed => Mathf.Lerp(attackSpeedMin, attackSpeedMax, (float)attackSpeedLv / maxLv);
+
+    [Header("스킬 지속 시간")]
+    [SerializeField]
     int skillTimeLv;
     [SerializeField]
+    float skillTimeMin = 3;
+    [SerializeField]
+    float skillTimeMax = 6;
+    float CurrentSkillTime => Mathf.Lerp(skillTimeMin, skillTimeMax, (float)skillTimeLv / maxLv);
+
+    [Header("문제 풀이 시간")]        
+    [SerializeField]
     int solvingTimeLv;
+    [SerializeField]
+    float solvingTimeMin = 5;
+    [SerializeField]
+    float solvingTimeMax = 10;
+    float CurrentSlovingTime => Mathf.Lerp(solvingTimeMin, solvingTimeMax, (float)solvingTimeLv / maxLv);
 
     [Header("제어할 UI")]
     [SerializeField]
@@ -54,8 +70,62 @@ public class UpgradeControl : MonoBehaviour
         InitButtons();
     }
 
+    #region 텍스트 갱신
+
+    void UpdateAttackSpeedText()
+    {
+        string str;
+
+        // level 텍스트 갱신
+        str = levelText;
+        if (attackSpeedLv == maxLv) str += "MAX";
+        else str += attackSpeedLv;
+        attackSpeedBtn.SetLevelText(str);
+
+        // desc 텍스트 갱신
+        str = "공격 간격 : " +  CurrentAttackSpeed + "초";
+        attackSpeedBtn.SetDescText(str);
+    }
+
+    void UpdateSkillTimeText()
+    {
+        string str;
+
+        // level 텍스트 갱신
+        str = levelText;
+        if (skillTimeLv == maxLv) str += "MAX";
+        else str += skillTimeLv;
+        skillTimeBtn.SetLevelText(str);
+
+        // desc 텍스트 갱신
+        str = "스킬 지속 : " + CurrentSkillTime + "초";
+        skillTimeBtn.SetDescText(str);
+    }
+
+    void UpdateSlovingTimeText()
+    {
+        string str;
+
+        // level 텍스트 갱신
+        str = levelText;
+        if (solvingTimeLv == maxLv) str += "MAX";
+        else str += solvingTimeLv;
+        solvingTimeBtn.SetLevelText(str);
+
+        // desc 텍스트 갱신
+        str = "풀이 시간 : " + CurrentSlovingTime + "초";
+        solvingTimeBtn.SetDescText(str);
+    }
+
+    #endregion
+
+
     void InitButtons()
     {
+        UpdateAttackSpeedText();
+        UpdateSkillTimeText();
+        UpdateSlovingTimeText();
+
         // attackSpeedBtn 버튼 초기화
         attackSpeedBtn.SetLevelText(levelText + attackSpeedLv);
         attackSpeedBtn.Button.onClick.AddListener(delegate // 클릭 시 처리
@@ -64,13 +134,11 @@ public class UpgradeControl : MonoBehaviour
             attackSpeedLv++;
             attackSpeedLv = Mathf.Clamp(attackSpeedLv, 0, maxLv);
 
-            // 텍스트 갱신
-            string str = levelText;
-            if (attackSpeedLv == maxLv) str += "MAX";
-            else str += attackSpeedLv;
-            attackSpeedBtn.SetLevelText(str);
-            
-            //upgradeUI.SetActive(false);
+            // 텍스트 갱신            
+            UpdateAttackSpeedText();            
+
+            // UI 비활성화
+            //UIManager.Instance.ActiveUpgradeUI(false);
         });
 
         // skillTimeBtn 버튼 초기화
@@ -82,12 +150,10 @@ public class UpgradeControl : MonoBehaviour
             skillTimeLv = Mathf.Clamp(skillTimeLv, 0, maxLv);
 
             // 텍스트 갱신
-            string str = levelText;
-            if (skillTimeLv == maxLv) str += "MAX";
-            else str += skillTimeLv;
-            skillTimeBtn.SetLevelText(str);
+            UpdateSkillTimeText();
 
-            //upgradeUI.SetActive(false);
+            // UI 비활성화
+            //UIManager.Instance.ActiveUpgradeUI(false);
         });
 
         // solvingTimeBtn 버튼 초기화
@@ -99,12 +165,10 @@ public class UpgradeControl : MonoBehaviour
             solvingTimeLv = Mathf.Clamp(solvingTimeLv, 0, maxLv);
 
             // 텍스트 갱신
-            string str = levelText;
-            if (solvingTimeLv == maxLv) str += "MAX";
-            else str += solvingTimeLv;
-            solvingTimeBtn.SetLevelText(str);
+            UpdateSlovingTimeText();
 
-            //upgradeUI.SetActive(false);
+            // UI 비활성화
+            //UIManager.Instance.ActiveUpgradeUI(false);
         });
 
         // recoverHeartBtn 버튼 초기화
@@ -113,7 +177,8 @@ public class UpgradeControl : MonoBehaviour
         {
             // 회복 처리 및 시각 효과
 
-            //upgradeUI.SetActive(false);
+            // UI 비활성화
+            //UIManager.Instance.ActiveUpgradeUI(false);
         });
     }
 }

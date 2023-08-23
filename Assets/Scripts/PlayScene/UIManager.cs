@@ -18,6 +18,10 @@ public class UIManager : MonoBehaviour
     }
     private static UIManager instance;
 
+    [Header("업그레이드")]
+    [SerializeField]
+    GameObject upgradeUI;
+
     [Header("옵션")]
     [SerializeField]
     GameObject optionUI;
@@ -41,6 +45,21 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         ActiveOptionUI(false);        
+    }
+
+    public void ActiveUpgradeUI(bool active)
+    {
+        upgradeUI.SetActive(active);
+
+        // 시간 스케일 조정
+        if (active == true)
+        {
+            TimeManager.Instance.SetScale(0);
+        }
+        if (active == false)
+        {
+            TimeManager.Instance.SetScale(1);
+        }
     }
 
     public void ActiveOverUI(bool active)

@@ -38,7 +38,7 @@ public class SelectionObject_Power_Element : MonoBehaviour
 
     public void SetMeshColor(Color new_color, bool changeAlpha = false)
     {
-        Debug.Log("set colot alpha : " + new_color.a);
+        //Debug.Log("set colot alpha : " + new_color.a);
 
         Color color = new_color;
         if (!changeAlpha) color.a = mesh.material.color.a;

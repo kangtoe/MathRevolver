@@ -12,8 +12,16 @@ public class UpgradeButton : MonoBehaviour
     [SerializeField]
     Text levelText;
 
+    [SerializeField]
+    Text descText;
+
     public void SetLevelText(string str)
     {
         levelText.text = str;
+    }
+
+    public void SetDescText(string str)
+    {
+        descText.text = str;
     }
 }
