@@ -1421,8 +1421,9 @@ MonoBehaviour:
   anim: {fileID: 7587113305703243640}
   maxHp: 100
   currentHp: 0
-  text: {fileID: 4631446286399591205}
+  hpText: {fileID: 4631446286399591205}
   moveSpeed: 0.1
+  dieVfx: {fileID: 1334071670866236, guid: 896b7470dc9f3fa47bb52170d2569601, type: 3}
 --- !u!136 &7502607062306655989
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -12,17 +12,21 @@ public class Enemy : MonoBehaviour
     Animator anim;
 
     // 체력
+    [Header("체력")]
     [SerializeField]
     int maxHp;
-    [Header("디버그용 : 현재 체력")]
     [SerializeField]
-    int currentHp;
+    int currentHp;    
     [SerializeField]
-    TMPro.TextMeshPro text;
+    TMPro.TextMeshPro hpText;
 
-    // 이동
+    [Header("이동속도")]
     [SerializeField]
     float moveSpeed = 0.1f;
+
+    [Header("사망")]
+    [SerializeField]
+    GameObject dieVfx;
 
     // (z축) player를 지나치지 않았는가?
     bool IsFrontToPlayer => transform.position.z > Player.Instance.transform.position.z;
@@ -61,7 +65,7 @@ public class Enemy : MonoBehaviour
     public void Init(int _maxHp)
     {
         currentHp = maxHp = _maxHp;
-        text.text = currentHp.ToString();
+        hpText.text = currentHp.ToString();
     }
 
     public void OnHit(int damage)
@@ -76,7 +80,7 @@ public class Enemy : MonoBehaviour
         if (currentHp < 0) currentHp = 0;
 
         // UI 반영
-        text.text = currentHp.ToString();
+        hpText.text = currentHp.ToString();
 
         if (currentHp == 0) OnDie();
     }
@@ -84,6 +88,8 @@ public class Enemy : MonoBehaviour
     void OnDie()
     {
         // todo : animator 파라메터 조절 또는 die prefab(파티클 시스템 등) 생성
+        Vector3 pos = transform.position + Vector3.up * 0.5f;
+        Instantiate(dieVfx, pos, Quaternion.identity);
 
         DeleteEnemy();
     }
@@ -121,7 +127,7 @@ public class Enemy : MonoBehaviour
 
         StopAllCoroutines();
         StartCoroutine(ShackPosCr(duration, anim.transform, 0.1f));
-        StartCoroutine(ShackPosCr(duration, text.transform, 0.05f));
+        StartCoroutine(ShackPosCr(duration, hpText.transform, 0.05f));
         StartCoroutine(ColorChangeCr(duration));
     }
 
