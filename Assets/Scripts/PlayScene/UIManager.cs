@@ -48,7 +48,6 @@ public class UIManager : MonoBehaviour
         overUI.SetActive(active);
     }
 
-
     public void ActiveOptionUI(bool active)
     {
         optionUI.SetActive(active);
@@ -86,10 +85,5 @@ public class UIManager : MonoBehaviour
 
             yield return null;
         }
-    }
-
-    public void QuitGame()
-    {
-        GameManager.Instance.Quit();
     }
 }

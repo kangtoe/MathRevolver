@@ -12170,13 +12170,15 @@ GameObject:
   - component: {fileID: 544399202}
   - component: {fileID: 544399205}
   - component: {fileID: 544399204}
+  - component: {fileID: 544399207}
+  - component: {fileID: 544399206}
   m_Layer: 5
   m_Name: OverPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &544399202
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12237,6 +12239,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 544399201}
   m_CullTransparentMesh: 1
+--- !u!225 &544399206
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544399201}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &544399207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544399201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9bc57bd6d5da7641ae6a5c2950aacc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDelay: 1
+  fadeDuration: 0.5
+  group: {fileID: 544399206}
 --- !u!1 &576133138
 GameObject:
   m_ObjectHideFlags: 0
@@ -17914,6 +17943,7 @@ Transform:
   - {fileID: 1501845975}
   - {fileID: 974364681}
   - {fileID: 1105489787}
+  - {fileID: 1271003507}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -38812,6 +38842,50 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1271003506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1271003507}
+  - component: {fileID: 1271003508}
+  m_Layer: 0
+  m_Name: PlaySceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1271003507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271003506}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 687333386}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1271003508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271003506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b3efa14c2cbf24409ea45ae9654ef62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1309897187
 GameObject:
   m_ObjectHideFlags: 0
@@ -39521,7 +39595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   optionUI: {fileID: 455133668}
   timeScaleOnMenu: 1
-  overUI: {fileID: 0}
+  overUI: {fileID: 544399201}
   flashPanel: {fileID: 631432284}
   flashDuration: 0.5
   flashMaxAlpha: 0.5
