@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.177579, g: 0.22232252, b: 0.3045191, a: 1}
+  m_IndirectSpecularColor: {r: 0.17757872, g: 0.2223221, b: 0.30451828, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -17118,7 +17118,7 @@ GameObject:
   - component: {fileID: 652165065}
   - component: {fileID: 652165064}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: BestScoreText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32244,9 +32244,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bb5b725b010860408b83294a6800619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentScoreText: {fileID: 2062233457}
+  bestScoreText: {fileID: 652165064}
   countDuration: 0.5
   optimalScore: 0
-  scoreText: {fileID: 2062233457}
 --- !u!1 &915192943
 GameObject:
   m_ObjectHideFlags: 0
@@ -32876,7 +32877,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 120, y: 180, z: 0}
 --- !u!1 &1105314646
 GameObject:
@@ -33195,7 +33196,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1257818784
 GameObject:
@@ -45509,7 +45510,7 @@ Transform:
   m_Children:
   - {fileID: 963194228}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 30, y: -45, z: 0}
 --- !u!1 &1931488411 stripped
 GameObject:
@@ -45769,7 +45770,7 @@ GameObject:
   - component: {fileID: 2062233458}
   - component: {fileID: 2062233457}
   m_Layer: 5
-  m_Name: SocreText (TMP)
+  m_Name: CurrentScoreText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

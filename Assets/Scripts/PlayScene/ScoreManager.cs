@@ -22,19 +22,29 @@ public class ScoreManager : MonoBehaviour
 
     int currentScore = 0;
 
+    int bestScore; // 최고 득점 점수
+    string bestScoreName = "BestScore";
+
+    [SerializeField]
+    TMP_Text currentScoreText;
+    [SerializeField]
+    TMP_Text bestScoreText;
+
+    [Header("숫자 카운팅 효과")]
     [SerializeField]
     float countDuration = 0.5f;
-
-    // 최적해 점수 : 가장 높은 결과값의 선택지만을 택했을 때 낼 수 있는 값
+    
+    [Header("디버깅 : 최적해 점수 (가장 높은 결과값의 선택지를 택했을 때의 값)")]
     [SerializeField]
     int optimalScore = 0;
     public int OptimalScore => optimalScore;
 
-    [SerializeField]
-    TMP_Text scoreText;
-
     private void Awake()
     {
+        // 최고 점수 설정
+        bestScoreText.enabled = false;
+        bestScore = PlayerPrefs.GetInt(bestScoreName);
+                
         SetScore(100, false);
         SetOptimalScore(currentScore);
     }
@@ -47,16 +57,25 @@ public class ScoreManager : MonoBehaviour
             i = 1;
         }    
 
+        // 카운트 효과
         float duration = 0;
         if (countEffect) duration = countDuration;
         StopAllCoroutines();
-        StartCoroutine(CountTextCr(scoreText, currentScore, i, duration));
+        StartCoroutine(CountTextCr(currentScoreText, currentScore, i, duration));
+        
+        // 현재 점수 갱신
         currentScore = i;
 
-        //LimitScore();
+        // 최고 점수 갱신
+        if (currentScore > bestScore)
+        {
+            bestScoreText.enabled = true;
+            bestScore = currentScore;
+            PlayerPrefs.SetInt(bestScoreName, bestScore);
+        }
     }
 
-    public int GetScore()
+    public int GetCurrentScore()
     {
         return currentScore;
     }

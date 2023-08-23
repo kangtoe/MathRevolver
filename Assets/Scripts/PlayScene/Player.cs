@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
         get
         {
             int val;
-            val = ScoreManager.Instance.GetScore();
+            val = ScoreManager.Instance.GetCurrentScore();
             // 스킬 발동중 피해증폭
             if (skill.IsSkillActive) val = 999999; //val = (int)(val * skill.SkillDamageMult);
 

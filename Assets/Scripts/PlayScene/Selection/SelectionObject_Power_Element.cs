@@ -142,7 +142,7 @@ public class SelectionObject_Power_Element : MonoBehaviour
     // 선택지 결과 반영
     public void OnSelected()
     {
-        int score = ScoreManager.GetScore();
+        int score = ScoreManager.GetCurrentScore();
 
         // 텍스트에 정보 매핑
         int result = PreCalc(score);
