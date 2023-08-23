@@ -86,7 +86,8 @@ public class HeartsManager : MonoBehaviour
 
         if (leftHeart == 0)
         {
-            Debug.Log("게임 오버");
+            PlaySceneManager.Instance.GameOver();            
+            //Debug.Log("게임 오버");
         }
     }
 }

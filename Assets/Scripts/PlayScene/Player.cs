@@ -67,8 +67,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    [Header("리볼버")]
+    [SerializeField]
+    GameObject revolver;
 
-    [Header("공격 이펙트")]    
+    [Header("공격 이펙트")]
     [SerializeField]
     ParticleSystem nozzle;
     [SerializeField]
@@ -84,6 +87,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     Transform textPoint;
 
+    [Header("애니메이터")]
+    [SerializeField]
+    Animator anim;
+
+    // 사망
+    bool isDead = false;
+
     // 코루틴
     Coroutine moveCr;
     Coroutine attackCr;
@@ -98,6 +108,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead) return;
+
         // 전방으로 이동 (z축 이동)
         transform.Translate(ForwardSpeed * transform.forward * Time.deltaTime);        
     }
@@ -112,6 +124,7 @@ public class Player : MonoBehaviour
 
     public void MovePosX_Smooth(float targetX)
     {
+        if (isDead) return;
         //Debug.Log("MovePosY_Smooth || targetY :" + targetX);
         
         if (moveCr != null) StopCoroutine(moveCr);        
@@ -197,6 +210,15 @@ public class Player : MonoBehaviour
     }
 
     #endregion
+
+    // 사망
+    public void OnDead()
+    {
+        anim.SetTrigger("dead");
+        revolver.SetActive(false);
+        isDead = true;
+        StopAllCoroutines();        
+    }
 
     public void MakeText(string str)
     {

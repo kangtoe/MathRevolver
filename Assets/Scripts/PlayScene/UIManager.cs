@@ -43,16 +43,17 @@ public class UIManager : MonoBehaviour
         ActiveOptionUI(false);        
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ActiveOverUI(bool active)
     {
-        
+        overUI.SetActive(active);
     }
+
 
     public void ActiveOptionUI(bool active)
     {
         optionUI.SetActive(active);
 
+        // 시간 스케일 조정
         if (active == true)
         {
             TimeManager.Instance.SetScale(timeScaleOnMenu);
