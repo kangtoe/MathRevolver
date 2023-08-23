@@ -50,6 +50,14 @@ public class Enemy : MonoBehaviour
         transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
     }
 
+    private void OnParticleCollision(GameObject other)
+    {
+        //Debug.Log("OnParticleCollision : other = " + other.name);
+
+        int damage = Player.Instance.LastShotDamage;
+        OnHit(damage);
+    }
+
     public void Init(int _maxHp)
     {
         currentHp = maxHp = _maxHp;

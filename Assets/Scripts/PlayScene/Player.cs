@@ -54,18 +54,26 @@ public class Player : MonoBehaviour
     float attackRange = 5f;
     //[SerializeField]
     //int damage = 10;
-    int Damage
+    public int Damage
     {
         get
         {
             int val;
             val = ScoreManager.Instance.GetCurrentScore();
             // 스킬 발동중 피해증폭
-            if (skill.IsSkillActive) val = 999999; //val = (int)(val * skill.SkillDamageMult);
+            if (skill.IsSkillActive) val = int.MaxValue; //val = (int)(val * skill.SkillDamageMult);
 
             return val;
         }
     }
+    
+    // 마지막으로 사격한 탄환의 피해량
+    public int LastShotDamage
+    {
+        private set { lastShotDamage = value; }
+        get { return lastShotDamage; }
+    }
+    int lastShotDamage;
 
     [Header("리볼버")]
     [SerializeField]
@@ -194,7 +202,7 @@ public class Player : MonoBehaviour
 
         Vector3 point = target.GetComponent<Collider>().ClosestPoint(trailSkill.transform.position);
 
-        // 사격 시각 효과
+        // 사격 파티클 생성
         if (skill.IsSkillActive)
         {
             trailSkill.Play();
@@ -204,9 +212,9 @@ public class Player : MonoBehaviour
         {            
             trailNomal.Play();
             trailNomal.transform.LookAt(point);
-        }        
-        
-        target.OnHit(Damage);
+        }
+
+        LastShotDamage = Damage;
     }
 
     #endregion
