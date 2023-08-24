@@ -30,6 +30,10 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     TMP_Text bestScoreText;
 
+    [Header("시작 스코어")]
+    [SerializeField]
+    int startScore = 100;
+
     [Header("숫자 카운팅 효과")]
     [SerializeField]
     float countDuration = 0.5f;
@@ -45,7 +49,7 @@ public class ScoreManager : MonoBehaviour
         bestScoreText.enabled = false;
         bestScore = PlayerPrefs.GetInt(bestScoreName);
                 
-        SetScore(100, false);
+        SetScore(startScore, false);
         SetOptimalScore(currentScore);
     }
 

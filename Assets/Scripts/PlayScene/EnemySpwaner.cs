@@ -38,17 +38,24 @@ public class EnemySpwaner : MonoBehaviour
     // 디버그용
     int enemyNumber = 0;
 
+    // 현재 하나 이상의 보스가 존재하는가?
+    bool isBossExist
+    {
+        get{
+            foreach (Enemy enemy in enemies)
+            {
+                if (enemy.isBoss) return true;
+            }
+
+            return false;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(SpwanEnemy());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    }    
 
     IEnumerator SpwanEnemy()
     {
@@ -56,11 +63,13 @@ public class EnemySpwaner : MonoBehaviour
 
         while (true)
         {
-            // 선택지 오브젝트 생성
-            //GameObject go = Instantiate(selectionPrefab, transform);
-            //go.transform.position = creatingPoint.position;
-            Spwan(enemyPrefab);
-
+            if (isBossExist == false)
+            {
+                // 선택지 오브젝트 생성
+                //GameObject go = Instantiate(selectionPrefab, transform);
+                //go.transform.position = creatingPoint.position;
+                Spwan(enemyPrefab);
+            }            
             yield return new WaitForSeconds(spwanInterval);
         }
     }
@@ -86,9 +95,10 @@ public class EnemySpwaner : MonoBehaviour
         go.transform.rotation = enemyPrefab.transform.rotation;
 
         // 체력 설정
+        // 체력 = 최적해 점수 * 전체 보정 계수 * 개별 보정 계수
         Enemy enemy = go.GetComponent<Enemy>();
-        int health = (int)(ScoreManager.Instance.OptimalScore * compensator);
-        enemy.Init(health);
+        int maxHealth = (int)(ScoreManager.Instance.OptimalScore * compensator * enemy.HealthMult);
+        enemy.Init(maxHealth);
     }
 
     public void DebugFunc()

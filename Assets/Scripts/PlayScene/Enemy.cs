@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 //using TMPro;
 
@@ -13,20 +12,36 @@ public class Enemy : MonoBehaviour
 
     // 체력
     [Header("체력")]
-    [SerializeField]
-    int maxHp;
-    [SerializeField]
-    int currentHp;    
+    //int maxHp;
+    [SerializeField]    
+    int currentHp;
     [SerializeField]
     TMPro.TextMeshPro hpText;
+
+    [Header("체력 배수")]    
+    [SerializeField]
+    float healthMult = 1; // 체력 계수
+    public float HealthMult => healthMult;
 
     [Header("이동속도")]
     [SerializeField]
     float moveSpeed = 0.1f;
 
+    [Header("플레이어에 대한 상대 속도로 이동하는가?")]
+    [SerializeField]
+    bool isMoveRelative;
+
+    [Header("하트 손실")]
+    [SerializeField]
+    int heartLost = 1;
+
     [Header("사망")]
     [SerializeField]
-    GameObject dieVfx;
+    GameObject dieVfx;    
+
+    [Header("보스인가?")]
+    [SerializeField]
+    public bool isBoss = false;
 
     // (z축) player를 지나치지 않았는가?
     bool IsFrontToPlayer => transform.position.z > Player.Instance.transform.position.z;
@@ -34,10 +49,16 @@ public class Enemy : MonoBehaviour
     // 현재 공격 가능한가?
     public bool CanBeAttacked => IsFrontToPlayer && visibleCheck.Visible;
 
+    // 플레이어와 z 간격
+    float zInterval;
+
     // Start is called before the first frame update
     void Start()
     {
-        AddSelfOnList();        
+        AddSelfOnList();
+
+        // 플레이어와 z 간격 구하기
+        zInterval = Player.Instance.transform.position.z - transform.position.z;
     }
 
     // Update is called once per frame
@@ -47,24 +68,29 @@ public class Enemy : MonoBehaviour
         if (!visibleCheck.Visible && !IsFrontToPlayer)
         {
             Debug.Log("적 지나침 : " + gameObject.name);
-            HeartsManager.Instance.HeartLost();
+            HeartsManager.Instance.HeartLost(heartLost);
             DeleteEnemy();
-        } 
+        }
 
-        transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-    }
+        // 이동 처리
+        if (isMoveRelative)
+        {                        
+            Vector3 pos = transform.position;
+            pos.z = Player.Instance.transform.position.z - zInterval;
+            transform.position = pos;
 
-    private void OnParticleCollision(GameObject other)
-    {
-        //Debug.Log("OnParticleCollision : other = " + other.name);
-
-        int damage = Player.Instance.LastShotDamage;
-        OnHit(damage);
+            zInterval += moveSpeed * Time.deltaTime;
+        }
+        else
+        {
+            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+        }        
     }
 
     public void Init(int _maxHp)
     {
-        currentHp = maxHp = _maxHp;
+        //maxHp = _maxHp;
+        currentHp = _maxHp;
         hpText.text = currentHp.ToString();
     }
 

@@ -46,34 +46,23 @@ public class Player : MonoBehaviour
     } 
 
     [Header("공격")]    
-    [SerializeField]
-    float attackInterval = 1;
+    //[SerializeField]
+    float attackInterval = 1; // upgade 레벨에 따라 제어됨
     //float lastAttackTime = 0;
     bool canAttack = true;
     [SerializeField]
     float attackRange = 5f;
-    //[SerializeField]
-    //int damage = 10;
-    public int Damage
-    {
-        get
-        {
-            int val;
-            val = ScoreManager.Instance.GetCurrentScore();
-            // 스킬 발동중 피해증폭
-            if (skill.IsSkillActive) val = int.MaxValue; //val = (int)(val * skill.SkillDamageMult);
 
-            return val;
-        }
-    }
-    
-    // 마지막으로 사격한 탄환의 피해량
-    public int LastShotDamage
-    {
-        private set { lastShotDamage = value; }
-        get { return lastShotDamage; }
-    }
-    int lastShotDamage;
+    [Header("스킬 시전 중 보스에 대한 피해 증폭")]
+    [SerializeField]
+    float skillDamageToBossMult = 3f;
+
+    // 일반 피해값
+    public int damageOnNomal => ScoreManager.Instance.GetCurrentScore();
+    // 스킬 발동 중, 일반 적에 대한 피해
+    public int damageOnSkillToEnemy => int.MaxValue;
+    // 스킬 발동 중, 적 보스에 대한 피해
+    public int damageOnSkillToBoss => (int)(damageOnNomal * skillDamageToBossMult);
 
     [Header("리볼버")]
     [SerializeField]
@@ -83,9 +72,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     ParticleSystem nozzle;
     [SerializeField]
-    ParticleSystem trailNomal;
+    BulletParticle nomalParticle;
     [SerializeField]
-    ParticleSystem trailSkill;
+    BulletParticle skillParticle;
 
     [Header("스킬")]
     [SerializeField]
@@ -205,21 +194,17 @@ public class Player : MonoBehaviour
     {
         nozzle.Play();
 
-        Vector3 point = target.GetComponent<Collider>().ClosestPoint(trailSkill.transform.position);
+        Vector3 point = target.GetComponent<Collider>().ClosestPoint(nomalParticle.transform.position);
 
         // 사격 파티클 생성
         if (skill.IsSkillActive)
         {
-            trailSkill.Play();
-            trailSkill.transform.LookAt(point);
+            skillParticle.Shoot(point);
         }
         else
-        {            
-            trailNomal.Play();
-            trailNomal.transform.LookAt(point);
+        {
+            nomalParticle.Shoot(point);
         }
-
-        LastShotDamage = Damage;
     }
 
     #endregion

@@ -222,11 +222,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visibleCheck: {fileID: 3039771536176061273}
   anim: {fileID: 9000961504087033150}
-  maxHp: 100
   currentHp: 0
   hpText: {fileID: 1301070469613841320}
-  moveSpeed: 0.1
+  healthMult: 10000
+  moveSpeed: 1
+  isMoveRelative: 1
+  heartLost: 3
   dieVfx: {fileID: 1334071670866236, guid: 896b7470dc9f3fa47bb52170d2569601, type: 3}
+  isBoss: 1
 --- !u!136 &4203822413878867576
 CapsuleCollider:
   m_ObjectHideFlags: 0

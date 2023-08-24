@@ -75,9 +75,9 @@ public class HeartsManager : MonoBehaviour
         }
     }
 
-    public void HeartLost()
+    public void HeartLost(int lost)
     {
-        leftHeart--;
+        leftHeart -= lost;
         if (leftHeart < 0) leftHeart = 0;
         UpdateHeartUI();
 

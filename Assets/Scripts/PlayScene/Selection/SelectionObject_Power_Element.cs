@@ -66,10 +66,15 @@ public class SelectionObject_Power_Element : MonoBehaviour
 
     public void SetSize(float X, float Z = float.NaN)
     {
+        // 플레인 사이즈 조정
         Vector3 scale = mesh.transform.localScale;
         scale.x = X / 10f;
         if (!float.IsNaN(Z)) scale.y = Z / 10f;
         mesh.transform.localScale = scale;
+
+        // 텍스트 사이즈 조정
+        float margin = 0.5f;
+        text.rectTransform.sizeDelta = Vector2.one * (X - margin);
     }
 
     // 완전 무작위 연산
