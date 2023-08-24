@@ -3,8 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillControl : MonoBehaviour
+public class SkillManager : MonoBehaviour
 {
+    #region 싱글톤
+    public static SkillManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<SkillManager>();
+            }
+            return instance;
+        }
+    }
+    private static SkillManager instance;
+    #endregion
+
     [SerializeField]
     Image fill;
 
@@ -39,6 +54,11 @@ public class SkillControl : MonoBehaviour
         // 이미지 fillAmount => 남은 쿨타임 / 전체 쿨타임
         float ratio = 1 - coolTimeLeft / coolTime;
         fill.fillAmount = ratio;
+    }
+
+    public void SetSkillActiveTime(float time)
+    {
+        skillActiveTime = time;
     }
 
     public void UseSkill()

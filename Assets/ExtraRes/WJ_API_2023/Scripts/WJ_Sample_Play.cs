@@ -229,6 +229,11 @@ public class WJ_Sample_Play : MonoBehaviour
     [SerializeField]
     //public UnityEvent onTimeEnd;
 
+    public void SetTimeLimit(float time)
+    {
+        timeLimit = time;
+    }
+
     public void StartTimeBar()
     {
         StopAllCoroutines();

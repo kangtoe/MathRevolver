@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
 
     [Header("스킬")]
     [SerializeField]
-    SkillControl skill;
+    SkillManager skill;
 
     [Header("텍스트 출력")]
     [SerializeField]
@@ -162,6 +162,11 @@ public class Player : MonoBehaviour
     #endregion
 
     #region 공격
+
+    public void SetAttackInterval(float time)
+    {
+        attackInterval = time;
+    }
 
     // 공격 검사
     IEnumerator AttackCheckCr(float interval)

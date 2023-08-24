@@ -70,9 +70,9 @@ public class UpgradeControl : MonoBehaviour
         InitButtons();
     }
 
-    #region 텍스트 갱신
+    #region 정보 갱신
 
-    void UpdateAttackSpeedText()
+    void UpdateAttackSpeed()
     {
         string str;
 
@@ -85,9 +85,12 @@ public class UpgradeControl : MonoBehaviour
         // desc 텍스트 갱신
         str = "공격 간격 : " +  CurrentAttackSpeed + "초";
         attackSpeedBtn.SetDescText(str);
+
+        // 실제 수치 적용
+        Player.Instance.SetAttackInterval(CurrentAttackSpeed);
     }
 
-    void UpdateSkillTimeText()
+    void UpdateSkillTime()
     {
         string str;
 
@@ -100,9 +103,12 @@ public class UpgradeControl : MonoBehaviour
         // desc 텍스트 갱신
         str = "스킬 지속 : " + CurrentSkillTime + "초";
         skillTimeBtn.SetDescText(str);
+
+        // 실제 수치 적용
+        SkillManager.Instance.SetSkillActiveTime(CurrentSkillTime);
     }
 
-    void UpdateSlovingTimeText()
+    void UpdateSlovingTime()
     {
         string str;
 
@@ -115,6 +121,9 @@ public class UpgradeControl : MonoBehaviour
         // desc 텍스트 갱신
         str = "풀이 시간 : " + CurrentSlovingTime + "초";
         solvingTimeBtn.SetDescText(str);
+
+        // 실제 수치 적용
+        WJ_Sample_Play.Instance.SetTimeLimit(CurrentSlovingTime);
     }
 
     #endregion
@@ -122,9 +131,9 @@ public class UpgradeControl : MonoBehaviour
 
     void InitButtons()
     {
-        UpdateAttackSpeedText();
-        UpdateSkillTimeText();
-        UpdateSlovingTimeText();
+        UpdateAttackSpeed();
+        UpdateSkillTime();
+        UpdateSlovingTime();
 
         // attackSpeedBtn 버튼 초기화
         attackSpeedBtn.SetLevelText(levelText + attackSpeedLv);
@@ -134,11 +143,11 @@ public class UpgradeControl : MonoBehaviour
             attackSpeedLv++;
             attackSpeedLv = Mathf.Clamp(attackSpeedLv, 0, maxLv);
 
-            // 텍스트 갱신            
-            UpdateAttackSpeedText();            
+            // 정보 갱신            
+            UpdateAttackSpeed();            
 
             // UI 비활성화
-            //UIManager.Instance.ActiveUpgradeUI(false);
+            UIManager.Instance.ActiveUpgradeUI(false);
         });
 
         // skillTimeBtn 버튼 초기화
@@ -149,11 +158,11 @@ public class UpgradeControl : MonoBehaviour
             skillTimeLv++;
             skillTimeLv = Mathf.Clamp(skillTimeLv, 0, maxLv);
 
-            // 텍스트 갱신
-            UpdateSkillTimeText();
+            // 정보 갱신
+            UpdateSkillTime();            
 
             // UI 비활성화
-            //UIManager.Instance.ActiveUpgradeUI(false);
+            UIManager.Instance.ActiveUpgradeUI(false);
         });
 
         // solvingTimeBtn 버튼 초기화
@@ -164,11 +173,11 @@ public class UpgradeControl : MonoBehaviour
             solvingTimeLv++;
             solvingTimeLv = Mathf.Clamp(solvingTimeLv, 0, maxLv);
 
-            // 텍스트 갱신
-            UpdateSlovingTimeText();
+            // 정보 갱신
+            UpdateSlovingTime();            
 
             // UI 비활성화
-            //UIManager.Instance.ActiveUpgradeUI(false);
+            UIManager.Instance.ActiveUpgradeUI(false);
         });
 
         // recoverHeartBtn 버튼 초기화
@@ -178,7 +187,7 @@ public class UpgradeControl : MonoBehaviour
             // 회복 처리 및 시각 효과
 
             // UI 비활성화
-            //UIManager.Instance.ActiveUpgradeUI(false);
+            UIManager.Instance.ActiveUpgradeUI(false);
         });
     }
 }
