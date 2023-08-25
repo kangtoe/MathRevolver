@@ -16,10 +16,7 @@ public class EnemySpwaner : MonoBehaviour
         }
     }
     private static EnemySpwaner instance;
-
-    [SerializeField]
-    GameObject enemyPrefab;
-
+    
     [SerializeField]
     Transform spwanPoint;
 
@@ -29,10 +26,25 @@ public class EnemySpwaner : MonoBehaviour
     [SerializeField]
     float spwanDelay = 3f;
 
+    [Header("적 프리팹")]
+    [SerializeField]
+    GameObject enemyPrefab;
+    [SerializeField]
+    GameObject enemyBossPrefab;
+    
     [Header("보정 계수 : 최적해 * 보정계수 = 스폰 적 체력")]
     [SerializeField]
     float compensator = 0.5f;
 
+    [Header("보스 출현 간격")]
+    [SerializeField]
+    int bossAdventCount = 10;
+
+    [Header("디버깅 :보스 출현까지 남은 카운트 수")]
+    [SerializeField]
+    int currentBossAdventCount;
+
+    [Header("현존하는 적 리스트")]
     public List<Enemy> enemies = new List<Enemy>();
 
     // 디버그용
@@ -54,6 +66,7 @@ public class EnemySpwaner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentBossAdventCount = bossAdventCount;
         StartCoroutine(SpwanEnemy());
     }    
 
@@ -63,12 +76,19 @@ public class EnemySpwaner : MonoBehaviour
 
         while (true)
         {
+            // 보스가 필드에 존재하는 중 다른 적 스폰 중지 
             if (isBossExist == false)
-            {
-                // 선택지 오브젝트 생성
-                //GameObject go = Instantiate(selectionPrefab, transform);
-                //go.transform.position = creatingPoint.position;
-                Spwan(enemyPrefab);
+            {                
+                if (currentBossAdventCount <= 0)
+                {                    
+                    Spwan(enemyBossPrefab);
+                    currentBossAdventCount = bossAdventCount;
+                }
+                else
+                {                 
+                    Spwan(enemyPrefab);
+                    currentBossAdventCount--;
+                }                                
             }            
             yield return new WaitForSeconds(spwanInterval);
         }

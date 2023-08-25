@@ -224,7 +224,7 @@ MonoBehaviour:
   anim: {fileID: 9000961504087033150}
   currentHp: 0
   hpText: {fileID: 1301070469613841320}
-  healthMult: 10000
+  healthMult: 1
   moveSpeed: 1
   isMoveRelative: 1
   heartLost: 3
