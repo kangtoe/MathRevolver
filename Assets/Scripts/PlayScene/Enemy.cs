@@ -87,6 +87,18 @@ public class Enemy : MonoBehaviour
         }        
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        //Debug.Log("OnCollisionEnter : " + collision);
+
+        if (collision.gameObject.tag == "Player")
+        {
+            // 플레이어와 충돌 시, 지나쳐 간 것과 동일한 처리
+            HeartsManager.Instance.HeartLost(heartLost);
+            OnDie();
+        }
+    }
+
     public void Init(int _maxHp)
     {
         //maxHp = _maxHp;
