@@ -24030,11 +24030,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spwanPoint: {fileID: 1793055995}
-  spwanInterval: 3
+  spwanInterval: 1
   spwanDelay: 0
+  skillCooltimeReduce: 1
   enemyPrefab: {fileID: 7502607062306655998, guid: 0cff8eab6dfe90b4ea06e8aff996fc6d, type: 3}
   enemyBossPrefab: {fileID: 4203822413878867571, guid: 7ccb2a8edf19b3e46966310d98f7a793, type: 3}
-  compensator: 0.01
+  compensator: 1
   bossAdventCount: 3
   currentBossAdventCount: 0
   enemies: []
@@ -43638,7 +43639,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3
+  m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}

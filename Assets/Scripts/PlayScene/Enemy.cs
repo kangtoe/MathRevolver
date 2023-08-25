@@ -31,6 +31,10 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     bool isMoveRelative;
 
+    [Header("격파 시 스킬 쿨타임 감소")]
+    [SerializeField]
+    float skillCooltimeReduce = 1f;
+
     [Header("하트 손실")]
     [SerializeField]
     int heartLost = 1;
@@ -120,7 +124,13 @@ public class Enemy : MonoBehaviour
         // UI 반영
         hpText.text = currentHp.ToString();
 
-        if (currentHp == 0) OnDie();
+        // 적 처치 성공
+        if (currentHp == 0)
+        {
+            // 스킬 쿨타임 감소
+            SkillManager.Instance.AdjustCoolTimeLeft(-skillCooltimeReduce);            
+            OnDie();
+        } 
     }
 
     void OnDie()

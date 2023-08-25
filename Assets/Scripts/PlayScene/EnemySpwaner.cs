@@ -26,6 +26,9 @@ public class EnemySpwaner : MonoBehaviour
     [SerializeField]
     float spwanDelay = 3f;
 
+    [SerializeField]
+    float skillCooltimeReduce = 1f;
+
     [Header("적 프리팹")]
     [SerializeField]
     GameObject enemyPrefab;

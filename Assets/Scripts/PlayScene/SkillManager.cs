@@ -48,10 +48,18 @@ public class SkillManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (coolTimeLeft > 0) coolTimeLeft -= Time.deltaTime;        
-        else if (coolTimeLeft < 0) coolTimeLeft = 0;
+        AdjustCoolTimeLeft(-Time.deltaTime);
+    }
 
-        // 이미지 fillAmount => 남은 쿨타임 / 전체 쿨타임
+    // time 변수만큼 남은 쿨타임 조절
+    public void AdjustCoolTimeLeft(float time)
+    {
+        coolTimeLeft += time;
+
+        // 유효값으로 제한
+        coolTimeLeft = Mathf.Clamp(coolTimeLeft, 0, coolTime);
+
+        // UI 반영
         float ratio = 1 - coolTimeLeft / coolTime;
         fill.fillAmount = ratio;
     }
