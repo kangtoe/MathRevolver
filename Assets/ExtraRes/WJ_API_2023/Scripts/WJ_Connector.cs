@@ -96,7 +96,7 @@ public class WJ_Connector : MonoBehaviour
         request.deviceNm = strDeviceNm;
         request.gameVer = strGameVer;
         request.osScnCd = strOsScnCd;
-        request.langCd = "KO";
+        request.langCd = LanguageSetting.GetCurrentLanguageString();
         request.timeZone = TimeZoneInfo.Local.BaseUtcOffset.Hours;
 
         switch (level)
@@ -151,7 +151,7 @@ public class WJ_Connector : MonoBehaviour
         request.gameVer = strGameVer;
         request.osScnCd = strOsScnCd;
         request.deviceNm = strDeviceNm;
-        request.langCd = "KO";
+        request.langCd = LanguageSetting.GetCurrentLanguageString();
         request.timeZone = TimeZoneInfo.Local.BaseUtcOffset.Hours;
 
         request.mathpidId = "";

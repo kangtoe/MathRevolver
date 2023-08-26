@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public enum Language
 { 
@@ -20,5 +21,18 @@ public static class LanguageSetting
         language = _language;        
     }
 
-
+    // mathpid 언어 설정을 위한 문자열 반환
+    public static string GetCurrentLanguageString()
+    {
+        switch (language)
+        {
+            case Language.Korea:
+                return "KO";                
+            case Language.English:
+                return "EN";                
+            default:
+                Debug.Log("대응되는 언어 설정 없음");
+                return "EN";
+        }
+    }
 }
