@@ -39,6 +39,10 @@ public class WJ_Sample_Play : MonoBehaviour
     [SerializeField] bool dataSetting = false; // 데이터 갱신 중?
     [SerializeField] WJ_DisplayText wj_displayText;         //텍스트 표시용(필수X)    
 
+    [Header("TEXDraw 폰트 설정 문자열")]
+    [SerializeField]
+    string texDrawfontText = @"\galmuri ";
+
     #region 유니티 콜백
 
     private void Awake()
@@ -107,7 +111,7 @@ public class WJ_Sample_Play : MonoBehaviour
         string[] wrongAnswers;
 
         textDescription.text = textCn;
-        textEquation.text = qstCn;
+        textEquation.text = texDrawfontText + qstCn;
 
         correctAnswer = qstCransr;
         wrongAnswers = qstWransr.Split(',');
@@ -128,18 +132,18 @@ public class WJ_Sample_Play : MonoBehaviour
         {
             if (i == ansrIndex)
             {
-                textAnsr[i].text = correctAnswer;
+                textAnsr[i].text = texDrawfontText + correctAnswer;
                 --q;
             }
             else
             {
-                if (textAnsr == null) Debug.Log("null 1");
-                if (textAnsr[i] == null) Debug.Log("null 2");
-                if (textAnsr[i].text == null) Debug.Log("null 3");
-                if (wrongAnswers == null) Debug.Log("null 4");
-                if (wrongAnswers[q] == null) Debug.Log("null 5");
+                //if (textAnsr == null) Debug.Log("null 1");
+                //if (textAnsr[i] == null) Debug.Log("null 2");
+                //if (textAnsr[i].text == null) Debug.Log("null 3");
+                //if (wrongAnswers == null) Debug.Log("null 4");
+                //if (wrongAnswers[q] == null) Debug.Log("null 5");
 
-                textAnsr[i].text = wrongAnswers[q]; 
+                textAnsr[i].text = texDrawfontText + wrongAnswers[q]; 
             }            
         }
         isSolvingQuestion = true;
