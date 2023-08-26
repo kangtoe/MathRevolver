@@ -250,8 +250,8 @@ MonoBehaviour:
   selectionPrefab_Math: {fileID: 7888360049068581542, guid: 19f2da9af8af41443a45bd2f5adc9cc5, type: 3}
   creatingPoint: {fileID: 7888360048686185028}
   creatingInterval: 5
-  SelectionObject_PowerList: []
   adventCount: 100
+  SelectionObject_PowerList: []
 --- !u!1 &21687907
 GameObject:
   m_ObjectHideFlags: 0
@@ -12916,8 +12916,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1501845974}
-        m_TargetAssemblyTypeName: Skill, Assembly-CSharp
-        m_MethodName: UseSkill
+        m_TargetAssemblyTypeName: SkillManager, Assembly-CSharp
+        m_MethodName: SkillActive
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -24030,13 +24030,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spwanPoint: {fileID: 1793055995}
-  spwanInterval: 1
+  spwanInterval: 3
   spwanDelay: 0
-  skillCooltimeReduce: 1
   enemyPrefab: {fileID: 7502607062306655998, guid: 0cff8eab6dfe90b4ea06e8aff996fc6d, type: 3}
   enemyBossPrefab: {fileID: 4203822413878867571, guid: 7ccb2a8edf19b3e46966310d98f7a793, type: 3}
   compensator: 1
-  bossAdventCount: 3
+  bossAdventCount: 10000
   currentBossAdventCount: 0
   enemies: []
 --- !u!1 &717273030
@@ -41870,12 +41869,12 @@ GameObject:
   - component: {fileID: 1457941859}
   - component: {fileID: 1457941858}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: "ActiveText - \uB514\uBC84\uADF8"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1457941857
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42279,12 +42278,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf7afbd0296c2344941be1ed3e245c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fill: {fileID: 1582161822}
-  coolTime: 5
+  coolTime: 100
   coolTimeLeft: 0
   skillActiveTime: 5
-  isSkillActive: 0
-  activeCheck: {fileID: 1457941858}
+  skillActiveTimeLeft: 3
+  state: 0
+  empty: {fileID: 21300000, guid: 1b893c14922bf9e4bb409d1368e6ebd3, type: 3}
+  loaded: {fileID: 21300000, guid: 727bac65de840e544998a1c7a6d7d060, type: 3}
+  flash: {fileID: 21300000, guid: 04f9958f6ea987643b4b85e3827484fa, type: 3}
+  fill: {fileID: 1582161822}
 --- !u!4 &1501845975
 Transform:
   m_ObjectHideFlags: 0
@@ -43108,7 +43110,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0

@@ -1421,9 +1421,10 @@ MonoBehaviour:
   anim: {fileID: 7587113305703243640}
   currentHp: 0
   hpText: {fileID: 4631446286399591205}
-  healthMult: 10000
+  healthMult: 1
   moveSpeed: 1
   isMoveRelative: 0
+  skillCooltimeReduce: 200
   heartLost: 1
   dieVfx: {fileID: 1334071670866236, guid: 896b7470dc9f3fa47bb52170d2569601, type: 3}
   isBoss: 0

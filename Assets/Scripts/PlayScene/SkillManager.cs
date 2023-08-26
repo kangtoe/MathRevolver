@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+public enum SkillState
+{
+    Undefined,
+    OnCooltime,
+    Flash,
+    Ready,
+    OnActive
+}
+
 public class SkillManager : MonoBehaviour
 {
     #region 싱글톤
@@ -18,50 +28,46 @@ public class SkillManager : MonoBehaviour
         }
     }
     private static SkillManager instance;
-    #endregion
-
-    [SerializeField]
-    Image fill;
-
+    #endregion    
+    
     [SerializeField]
     float coolTime = 10;
 
     [SerializeField]
     float coolTimeLeft;
 
+    [Header("디버그 : 스킬 지속 시간")]
     [SerializeField]
     float skillActiveTime = 3f;
+    [SerializeField]
+    float skillActiveTimeLeft;
 
-    public bool IsSkillActive => isSkillActive;
-    [SerializeField] // 디버그용
-    bool isSkillActive;
+    [Header("디버그 : 스킬 상태")]
+    [SerializeField]
+    SkillState state;
 
-    // 디버그용
-    [SerializeField] 
-    Text activeCheck;
+    //[Header("디버그 : 스킬 사용 중 표시")]
+    //[SerializeField]
+    //Text activeCheck;
+
+    [Header("스킬 스프라이트")]
+    [SerializeField]
+    Sprite empty;
+    [SerializeField]
+    Sprite loaded;
+    [SerializeField]
+    Sprite flash;
+
+    [Header("스킬 fill 이미지")]
+    [SerializeField]
+    Image fill;
+
+    public bool IsSkillOnActive => state == SkillState.OnActive;
+    public bool IsOnCoolTime => state == SkillState.OnCooltime;
 
     private void Start()
     {
-        activeCheck.enabled = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        AdjustCoolTimeLeft(-Time.deltaTime);
-    }
-
-    // time 변수만큼 남은 쿨타임 조절
-    public void AdjustCoolTimeLeft(float time)
-    {
-        coolTimeLeft += time;
-
-        // 유효값으로 제한
-        coolTimeLeft = Mathf.Clamp(coolTimeLeft, 0, coolTime);
-
-        // UI 반영
-        float ratio = 1 - coolTimeLeft / coolTime;
-        fill.fillAmount = ratio;
+        StartCoolDown();
     }
 
     public void SetSkillActiveTime(float time)
@@ -69,32 +75,121 @@ public class SkillManager : MonoBehaviour
         skillActiveTime = time;
     }
 
-    public void UseSkill()
+    //time 변수만큼 남은 쿨타임 조절
+    public void AdjustCoolTimeLeft(float time)
     {
-        if (coolTimeLeft > 0)
+        Debug.Log("AdjustCoolTimeLeft : " + time);        
+
+        coolTimeLeft += time;
+
+        // 유효값으로 제한
+        coolTimeLeft = Mathf.Clamp(coolTimeLeft, 0, coolTime);
+
+        if (state == SkillState.OnCooltime)
         {
-            return;
-        }
-        // 이전 스킬 코루틴 중지
-        StopAllCoroutines();
-        Debug.Log("스킬 사용");
-        StartCoroutine(SkillCr());
-        coolTimeLeft = coolTime;
+            // UI 반영
+            float ratio = 1 - coolTimeLeft / coolTime;
+            fill.fillAmount = ratio;
+        }        
     }
 
+    // 스킬 쿨다운 시작 : 스킬 사용 종료 시
+    void StartCoolDown()
+    {        
+        // 스킬 쿨다운 중 실행
+        IEnumerator CoolDownCr()
+        {
+            // 스킬 준비 : 스킬 쿨다운 완료 시 1번
+            IEnumerator SkillReadyCr()
+            {
+                Debug.Log("SkillReadyCr");
 
-    IEnumerator SkillCr()
+                state = SkillState.Flash;
+                fill.sprite = flash;
+                yield return new WaitForSeconds(0.1f);
+
+                state = SkillState.Ready;
+                fill.sprite = loaded;
+                // 사운드 : 철컥
+            }
+
+            Debug.Log("CoolDownCr");
+
+            state = SkillState.OnCooltime;
+
+            while (true)
+            {
+                yield return new WaitForFixedUpdate();
+
+                // 변수 값 감소
+                coolTimeLeft -= Time.fixedDeltaTime;
+                if (coolTimeLeft < 0) coolTimeLeft = 0;
+
+                // ui 반영
+                float ratio = 1 - coolTimeLeft / coolTime;
+                fill.fillAmount = ratio;
+
+                // 쿨타임 종료 : 스킬 사용 가능
+                if (coolTimeLeft == 0)
+                {
+                    coolTimeLeft = coolTime;
+                    StartCoroutine(SkillReadyCr());
+                    break;
+                }
+            }
+        }
+
+        StopAllCoroutines();
+        StartCoroutine(CoolDownCr());
+    }
+
+    // 스킬 사용 : 스킬 사용 버튼에서 호출?
+    public void SkillActive()
     {
-        // 스킬효과 활성화
-        isSkillActive = true;
-        SelectionCreator.Instance.ActiveAllOptimalVFX(true);
-        activeCheck.enabled = true;
+        // 스킬 사용 중 실행
+        IEnumerator SkillActivatingCr()
+        {
+            Debug.Log("SkillActivatingCr");
 
-        yield return new WaitForSeconds(skillActiveTime);
+            state = SkillState.OnActive;
 
-        // 스킬효과 비활성화
-        isSkillActive = false;
-        SelectionCreator.Instance.ActiveAllOptimalVFX(false);
-        activeCheck.enabled = false;
+            while (true)
+            {
+                yield return new WaitForFixedUpdate();
+
+                // 선택지 가이드 효과 활성화
+                SelectionCreator.Instance.ActiveAllOptimalVFX(true);
+
+                // 변수 값 감소
+                skillActiveTimeLeft -= Time.fixedDeltaTime;
+                if (skillActiveTimeLeft < 0) skillActiveTimeLeft = 0;
+
+                // ui 반영
+                float ratio = skillActiveTimeLeft / skillActiveTime;
+                fill.fillAmount = ratio;
+
+                // 스킬 사용 시간 종료 : 쿨다운 시작
+                if (skillActiveTimeLeft == 0)
+                {
+                    // 선택지 가이드 효과 비활성화
+                    SelectionCreator.Instance.ActiveAllOptimalVFX(false);
+                    
+                    fill.sprite = empty;
+
+                    skillActiveTimeLeft = skillActiveTime;
+                    StartCoolDown();
+                    break;
+                }
+            }
+        }
+
+        if (state != SkillState.Ready)
+        {
+            Debug.Log("스킬 사용 상태가 아님 : " + state);
+            return;
+        }
+
+        StopAllCoroutines();
+        StartCoroutine(SkillActivatingCr());
     }
 }

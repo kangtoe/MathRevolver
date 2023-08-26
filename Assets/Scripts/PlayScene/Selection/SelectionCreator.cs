@@ -25,18 +25,20 @@ public class SelectionCreator : MonoBehaviour
     GameObject selectionPrefab_Math;
 
     [SerializeField]
-    Transform creatingPoint;    
+    Transform creatingPoint;
 
+    [Header("선택지/문제풀이 발판 출현 간격")]
     [SerializeField]
     float creatingInterval = 5f;
 
-    // 인스턴스화된 전투력 선택지 섹션
-    [SerializeField]
-    List<SelectionObject_Power> SelectionObject_PowerList;
-
+    [Header("Mathpid 출현 카운트")]
     [SerializeField]
     int adventCount = 1; // '전투력 선택지: 매스피드 선택지' 출현비에서 에서 전투력 선택지의 비율
     int spwanCount = 0;
+
+    [Header("인스턴스화된 전투력 선택지 섹션")]
+    [SerializeField]
+    List<SelectionObject_Power> SelectionObject_PowerList;    
 
     bool OnActiveAllOptimalVFX;
 

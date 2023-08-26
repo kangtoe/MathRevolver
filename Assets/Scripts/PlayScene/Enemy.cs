@@ -47,14 +47,16 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     public bool isBoss = false;
 
-    // (z축) player를 지나치지 않았는가?
-    bool IsFrontToPlayer => transform.position.z > Player.Instance.transform.position.z;
-
     // 현재 공격 가능한가?
     public bool CanBeAttacked => IsFrontToPlayer && visibleCheck.Visible;
 
+    // (z축) player를 지나치지 않았는가?
+    bool IsFrontToPlayer => transform.position.z > Player.Instance.transform.position.z;
+
     // 플레이어와 z 간격
     float zInterval;
+
+    SkillManager skill => SkillManager.Instance;
 
     // Start is called before the first frame update
     void Start()
@@ -111,7 +113,9 @@ public class Enemy : MonoBehaviour
     }
 
     public void OnHit(int damage)
-    {        
+    {
+        //Debug.Log(gameObject.name + " || OnHit : " + damage);
+
         DoHitEffect();
 
         // 피해량 텍스트로 표기
@@ -127,8 +131,13 @@ public class Enemy : MonoBehaviour
         // 적 처치 성공
         if (currentHp == 0)
         {
-            // 스킬 쿨타임 감소
-            SkillManager.Instance.AdjustCoolTimeLeft(-skillCooltimeReduce);            
+            // 스킬 쿨타임 중에만
+            if (skill.IsOnCoolTime)
+            {
+                // 남은 쿨타임 감소
+                skill.AdjustCoolTimeLeft(-skillCooltimeReduce);
+            }
+            
             OnDie();
         } 
     }

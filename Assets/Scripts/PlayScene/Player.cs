@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
         get
         {
             float mult = 1;
-            if (skill.IsSkillActive) mult = 1.5f;
+            if (skill.IsSkillOnActive) mult = 1.5f;
 
             return forwardSpeed * mult;
         }
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     {
         get {
             float mult = 1;
-            if (skill.IsSkillActive) mult = 1.5f;
+            if (skill.IsSkillOnActive) mult = 1.5f;
 
             return sideSpeed * mult;
         }        
@@ -197,7 +197,7 @@ public class Player : MonoBehaviour
         Vector3 point = target.GetComponent<Collider>().ClosestPoint(nomalParticle.transform.position);
 
         // 사격 파티클 생성
-        if (skill.IsSkillActive)
+        if (skill.IsSkillOnActive)
         {
             skillParticle.Shoot(point);
         }
