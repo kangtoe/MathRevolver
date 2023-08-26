@@ -30,12 +30,17 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
     [SerializeField] WJ_DisplayText     wj_displayText;         //텍스트 표시용(필수X)
     [SerializeField] Button             getLearningButton;      //문제 받아오기 버튼
 
+    [Header("TEXDraw 폰트 설정 문자열")]
+    [SerializeField]
+    string texDrawfontText = @"\galmuri ";
+
     private void Awake()
     {
         textAnsr = new TEXDraw[btAnsr.Length];
         for (int i = 0; i < btAnsr.Length; ++i)
-
+        {
             textAnsr[i] = btAnsr[i].GetComponentInChildren<TEXDraw>();
+        }        
 
         wj_displayText.SetState("대기중", "", "", "");
     }
@@ -109,7 +114,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         string[]    wrongAnswers;
 
         textDescription.text = textCn;
-        textEquation.text = qstCn;
+        textEquation.text = texDrawfontText + qstCn;
 
         correctAnswer = qstCransr;
         wrongAnswers    = qstWransr.Split(',');
@@ -130,11 +135,11 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         {
             if (i == ansrIndex)
             {
-                textAnsr[i].text = correctAnswer;
+                textAnsr[i].text = texDrawfontText + correctAnswer;
                 --q;
             }
             else
-                textAnsr[i].text = wrongAnswers[q];
+                textAnsr[i].text = texDrawfontText + wrongAnswers[q];
         }
         isSolvingQuestion = true;
     }

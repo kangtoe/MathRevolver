@@ -3919,6 +3919,7 @@ MonoBehaviour:
   - {fileID: 1368829485}
   wj_displayText: {fileID: 1330096157}
   getLearningButton: {fileID: 1654815526}
+  texDrawfontText: \galmuri
 --- !u!4 &1443323693
 Transform:
   m_ObjectHideFlags: 0
