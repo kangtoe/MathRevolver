@@ -43,14 +43,7 @@ public class ClickManager : MonoBehaviour
             Vector3 center = new Vector3(0,0, ClickAreaXAnchor.transform.position.z) + clickAreaOffset;
             return new Bounds(center, vec);
         }
-    }
-    
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    }    
 
     // Update is called once per frame
     void Update()

@@ -19,7 +19,49 @@ public class Player : MonoBehaviour
     private static Player instance;
     #endregion
 
-    [Header("이동")]    
+    [Header("리볼버")]
+    [SerializeField]
+    GameObject revolver;
+    
+    [Header("텍스트 출력")]
+    [SerializeField]
+    Transform textPoint;
+
+    [Header("애니메이터")]
+    [SerializeField]
+    Animator anim;
+
+    [Header("스킬 시전 중 보스에 대한 피해 증폭")]
+    [SerializeField]
+    float skillDamageToBossMult = 3f;
+
+    [Header("공격")]
+    [SerializeField]
+    Vector2 attackAreaSize;    
+    [SerializeField]
+    Vector3 attackAreaOffset = new Vector3(0, 0, 5);
+    Bounds attackArea
+    {
+        get
+        {
+            Vector3 vec = new Vector3(attackAreaSize.x, 2, attackAreaSize.y);
+            Vector3 center = new Vector3(0, 0, transform.position.z) + attackAreaOffset;
+            return new Bounds(center, vec);
+        }
+    }    
+    float attackInterval = 1; // upgade 레벨에 따라 제어됨    
+    bool canAttack = true;
+    //float attackRange = 5f;
+
+    [Header("공격 이펙트")]
+    [SerializeField]
+    ParticleSystem nozzle;
+    [SerializeField]
+    BulletParticle nomalParticle;
+    [SerializeField]
+    BulletParticle skillParticle;
+
+    [Header("이동")]
     [SerializeField]
     float forwardSpeed = 1f;
     float ForwardSpeed
@@ -32,30 +74,20 @@ public class Player : MonoBehaviour
             return forwardSpeed * mult;
         }
     }
-
     [SerializeField]
     float sideSpeed = 1f;
     float SideSpeed
     {
-        get {
+        get
+        {
             float mult = 1;
             if (skill.IsSkillOnActive) mult = 1.5f;
 
             return sideSpeed * mult;
-        }        
-    } 
+        }
+    }
 
-    [Header("공격")]    
-    //[SerializeField]
-    float attackInterval = 1; // upgade 레벨에 따라 제어됨
-    //float lastAttackTime = 0;
-    bool canAttack = true;
-    [SerializeField]
-    float attackRange = 5f;
-
-    [Header("스킬 시전 중 보스에 대한 피해 증폭")]
-    [SerializeField]
-    float skillDamageToBossMult = 3f;
+    SkillManager skill => SkillManager.Instance;
 
     // 일반 피해값
     public int damageOnNomal => ScoreManager.Instance.GetCurrentScore();
@@ -63,30 +95,6 @@ public class Player : MonoBehaviour
     public int damageOnSkillToEnemy => int.MaxValue;
     // 스킬 발동 중, 적 보스에 대한 피해
     public int damageOnSkillToBoss => (int)(damageOnNomal * skillDamageToBossMult);
-
-    [Header("리볼버")]
-    [SerializeField]
-    GameObject revolver;
-
-    [Header("공격 이펙트")]
-    [SerializeField]
-    ParticleSystem nozzle;
-    [SerializeField]
-    BulletParticle nomalParticle;
-    [SerializeField]
-    BulletParticle skillParticle;
-
-    [Header("스킬")]
-    [SerializeField]
-    SkillManager skill;
-
-    [Header("텍스트 출력")]
-    [SerializeField]
-    Transform textPoint;
-
-    [Header("애니메이터")]
-    [SerializeField]
-    Animator anim;
 
     // 사망
     bool isDead = false;
@@ -114,7 +122,8 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        //Gizmos.DrawWireSphere(transform.position, attackRange);        
+        Gizmos.DrawWireCube(attackArea.center, attackArea.size);
     }
 
     #region X축 이동 제어
@@ -174,7 +183,7 @@ public class Player : MonoBehaviour
     void TryAtack()
     {
         //Enemy target = EnemySpwaner.Instance.GetClosestEnemy_Z();
-        Enemy target = EnemySpwaner.Instance.GetClosestEnemy_Transform(transform, attackRange);
+        Enemy target = EnemySpwaner.Instance.GetClosestEnemy_Transform(transform, attackArea);
 
         //bug.Log("TryAtack");
 

@@ -178,7 +178,7 @@ public class EnemySpwaner : MonoBehaviour
         return enemies[closestIndex];
     }
 
-    public Enemy GetClosestEnemy_Transform(Transform tf, float range = -1) // range = -1 : 사거리 제한 없음
+    public Enemy GetClosestEnemy_Transform(Transform tf, Bounds bounds, float? range = null) // range = -1 : 사거리 제한 없음
     {
         // list 요소 개수 검사
         if (enemies.Count == 0)
@@ -196,9 +196,13 @@ public class EnemySpwaner : MonoBehaviour
             // 공격 가능한 적인가?
             if (!enemies[i].CanBeAttacked) continue;
 
+            // 공격 영역 내에 있는가?
+            bool isContaion = bounds.Contains(enemies[i].transform.position);
+            if (!isContaion) continue;            
+
             // 공격 가능 거리 검사
             float dist = Vector3.Distance(tf.position, enemies[i].transform.position);            
-            if(!(range == -1) && dist > range) continue;
+            if(range != null && dist > range) continue;
 
             // 초기화
             if (closestIndex == -1)
