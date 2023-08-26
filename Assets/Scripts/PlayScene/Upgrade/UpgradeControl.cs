@@ -184,7 +184,8 @@ public class UpgradeControl : MonoBehaviour
         recoverHeartBtn.SetLevelText(levelText + "--");
         recoverHeartBtn.Button.onClick.AddListener(delegate // 클릭 시 처리
         {
-            // 회복 처리 및 시각 효과
+            // 하트 완전 회복 처리
+            HeartsManager.Instance.HeartRecovery();
 
             // UI 비활성화
             UIManager.Instance.ActiveUpgradeUI(false);

@@ -75,6 +75,20 @@ public class HeartsManager : MonoBehaviour
         }
     }
 
+    public void HeartRecovery(int? recovery = null)
+    {
+        // 인수를 명시하지 않은 경우, 전체 회복
+        if (recovery == null) recovery = maxHeart;
+
+        // recovery만큼 회복
+        leftHeart += recovery.Value;
+        if (leftHeart > maxHeart) leftHeart = maxHeart;
+        UpdateHeartUI();
+
+        // TODO : 회복 시각 효과 추가
+        UIManager.Instance.Flash(Color.green);
+    }
+
     public void HeartLost(int lost)
     {
         leftHeart -= lost;
@@ -82,7 +96,7 @@ public class HeartsManager : MonoBehaviour
         UpdateHeartUI();
 
         CameraManager.Instance.ShakeDebug();
-        UIManager.Instance.Flash();
+        UIManager.Instance.Flash(Color.red);
 
         if (leftHeart == 0)
         {

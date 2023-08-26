@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
     float flashDuration = 0.5f;
     [SerializeField]
     float flashMaxAlpha = 0.5f;
+
     Coroutine m_FlashCr;
 
     // Start is called before the first frame update
@@ -82,16 +83,16 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void Flash()
+    public void Flash(Color _color)
     {
-        if (m_FlashCr != null) StopCoroutine(FlashCr());
-        m_FlashCr = StartCoroutine(FlashCr());
+        if (m_FlashCr != null) StopCoroutine(m_FlashCr);
+        m_FlashCr = StartCoroutine(FlashCr(_color));
     }
 
-    IEnumerator FlashCr()
+    IEnumerator FlashCr(Color _color)
     {
         float t = 0;
-        Color color = flashPanel.color;
+        Color color = flashPanel.color = _color;
 
         while (true)
         {
