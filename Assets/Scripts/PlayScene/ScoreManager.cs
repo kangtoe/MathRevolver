@@ -36,7 +36,7 @@ public class ScoreManager : MonoBehaviour
 
     [Header("숫자 카운팅 효과")]
     [SerializeField]
-    float countDuration = 0.5f;
+    float countDuration = 0.33f;
     
     [Header("디버깅 : 최적해 점수 (가장 높은 결과값의 선택지를 택했을 때의 값)")]
     [SerializeField]
@@ -47,7 +47,7 @@ public class ScoreManager : MonoBehaviour
     {
         // 최고 점수 설정
         bestScoreText.enabled = false;
-        bestScore = PlayerPrefs.GetInt(bestScoreName);
+        bestScore = SaveManager.BestScore;
                 
         SetScore(startScore, false);
         SetOptimalScore(currentScore);
@@ -75,7 +75,7 @@ public class ScoreManager : MonoBehaviour
         {
             bestScoreText.enabled = true;
             bestScore = currentScore;
-            PlayerPrefs.SetInt(bestScoreName, bestScore);
+            SaveManager.BestScore = bestScore;
         }
     }
 

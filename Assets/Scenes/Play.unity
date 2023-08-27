@@ -33905,7 +33905,7 @@ MonoBehaviour:
   currentScoreText: {fileID: 2062233457}
   bestScoreText: {fileID: 652165064}
   startScore: 1
-  countDuration: 0.5
+  countDuration: 0.33
   optimalScore: 0
 --- !u!1 &915192943
 GameObject:
