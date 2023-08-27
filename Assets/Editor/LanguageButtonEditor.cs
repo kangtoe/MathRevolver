@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(LanguageChanger))]
-public class CubeGenerateButton : Editor
+public class LanguageButtonEditor : Editor
 {
     public override void OnInspectorGUI()
     {

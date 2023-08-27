@@ -6,7 +6,7 @@ public class TitleManager : MonoBehaviour
 {
     public void OnClickPlayButton()
     {
-        if (!GameManager.Instance.DiagonosticCompleted)
+        if (!SaveManager.DiagonosticCompleted)
         {
             Debug.Log("한번 이상의 진단평가 풀이 필요");
             return;

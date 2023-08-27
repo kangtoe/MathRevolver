@@ -19,9 +19,6 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     #endregion
 
-    public bool DiagonosticCompleted => diagonosticCompleted;
-    bool diagonosticCompleted = false;
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -47,10 +44,5 @@ public class GameManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
-    }
-
-    public void OnDiagonosticComplete()
-    {
-        diagonosticCompleted = true;
     }
 }
