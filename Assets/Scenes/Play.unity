@@ -857,7 +857,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1791568515250578048, guid: eaf139eeed01ba945b4429117a861754, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1791568515250578048, guid: eaf139eeed01ba945b4429117a861754, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18549,7 +18549,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2062233456}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18978,7 +18978,7 @@ Transform:
   - {fileID: 1271003507}
   - {fileID: 1607884445}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &704944225
 GameObject:
@@ -35107,7 +35107,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 120, y: 180, z: 0}
 --- !u!1 &1105314646
 GameObject:
@@ -35139,7 +35139,7 @@ Transform:
   m_Children:
   - {fileID: 1478653628}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1105489786
 GameObject:
@@ -35987,7 +35987,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1242694120
 GameObject:
@@ -41399,7 +41399,7 @@ Transform:
   - {fileID: 1833301143}
   - {fileID: 1480745302}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1372360450
 GameObject:
@@ -43659,7 +43659,7 @@ Transform:
   - {fileID: 1194072712}
   - {fileID: 216382016}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1659889824
 MonoBehaviour:
@@ -50250,6 +50250,7 @@ MonoBehaviour:
   - {fileID: 6267151147718834194}
   dataSetting: 0
   wj_displayText: {fileID: 6267151147420057122}
+  texDrawfontText: '\galmuri '
   timeLimit: 10
   timeGage: {fileID: 8412890947344209579}
 --- !u!1 &1906482045
@@ -50282,7 +50283,7 @@ Transform:
   m_Children:
   - {fileID: 963194228}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 30, y: -45, z: 0}
 --- !u!1 &1931488411 stripped
 GameObject:
@@ -51274,7 +51275,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2081597348
 GameObject:
