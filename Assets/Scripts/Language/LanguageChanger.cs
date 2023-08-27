@@ -21,12 +21,12 @@ public class LanguageChanger : MonoBehaviour
         //LanguageSetting.onChangeLanguage += ChangeLanguage;
     }
 
-    public void DebugKr()
+    public void SetKr()
     {
         ChangeLanguage(Language.Korea);
     }
 
-    public void DebugEn()
+    public void SetEn()
     {
         ChangeLanguage(Language.English);
     }

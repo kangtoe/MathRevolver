@@ -8,28 +8,31 @@ public class LanguageUi_text
 {
     [SerializeField]
     Text text;
-
-    [Header("한글 설정")]
+    
+    [Header("한글 설정")]    
     [SerializeField]
-    Font fontKr;
-    [SerializeField]
+    [TextArea]
     string textKr;
 
-    [Header("영문 설정")]
+    [Header("영문 설정")]    
     [SerializeField]
-    Font fontEn;    
-    [SerializeField]
+    [TextArea]
     string textEn;
+
+    //[SerializeField]
+    //Font fontKr;
+    //[SerializeField]
+    //Font fontEn;    
 
     public void SetKr()
     {
-        text.font = fontKr;
+        //text.font = fontKr;
         text.text = textKr;
     }
 
     public void SetEn()
     {
-        text.font = fontEn;
+        //text.font = fontEn;
         text.text = textEn;
     }
 }
@@ -42,25 +45,28 @@ public class LanguageUi_tmp
 
     [Header("한글 설정")]
     [SerializeField]
-    TMP_FontAsset fontKr;
-    [SerializeField]
+    [TextArea]
     string textKr;
 
     [Header("영문 설정")]
     [SerializeField]
-    TMP_FontAsset fontEn;
-    [SerializeField]
+    [TextArea]
     string textEn;
+
+    //[SerializeField]
+    //TMP_FontAsset fontKr;
+    //[SerializeField]
+    //TMP_FontAsset fontEn;
 
     public void SetKr()
     {
-        text.font = fontKr;
+        //text.font = fontKr;
         text.text = textKr;
     }
 
     public void SetEn()
     {
-        text.font = fontEn;
+        //text.font = fontEn;
         text.text = textEn;
     }
 }

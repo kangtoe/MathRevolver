@@ -67,6 +67,7 @@ public class SkillManager : MonoBehaviour
 
     private void Start()
     {
+        coolTimeLeft = coolTime;
         StartCoolDown();
     }
 

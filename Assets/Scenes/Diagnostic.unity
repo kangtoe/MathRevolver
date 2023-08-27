@@ -4192,6 +4192,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16980d62b999bf54baf64a95f4047bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1380699647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1380699648}
+  - component: {fileID: 1380699649}
+  m_Layer: 0
+  m_Name: LanguageChanger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1380699648
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380699647}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1773279017}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1380699649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380699647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d70f173006aea1347a7f337b6585fd7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textList: []
+  tmpList:
+  - text: {fileID: 1109116459}
+    textKr: "\uB2F9\uC2E0\uC758 \uC218\uD559 \uC804\uD22C \uB2A5\uB825\uC744 \uCE21\uC815\uD569\uB2C8\uB2E4.
+      \n\uB2A5\uB825\uCE58\uAC00 \uB192\uC744 \uC218\uB85D \uCD08\uAE30 \uC804\uD22C\uB825\uC774
+      \uAC15\uD574\uC9D1\uB2C8\uB2E4.\n  \n\uD604\uC7AC \uB2F9\uC2E0\uC5D0\uAC8C
+      \uC801\uD569\uD55C \uB09C\uC774\uB3C4\uB294 \uBB34\uC5C7\uC785\uB2C8\uAE4C?"
+    textEn: TYPE ENGLISH TEXT
+  imageList: []
 --- !u!1 &1436395129
 GameObject:
   m_ObjectHideFlags: 0
@@ -8341,6 +8394,7 @@ Transform:
   - {fileID: 120085493529918277}
   - {fileID: 1302780844}
   - {fileID: 454040877}
+  - {fileID: 1380699648}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -173,7 +173,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         wj_displayText.SetState("진단평가 중", ansr, ansrCwYn, questionSolveTime + " 초");
 
         panel_question.SetActive(false);
-        //GameManager.Instance.OnDiagonosticComplete();
+        GameManager.Instance.OnDiagonosticComplete();
 
         questionSolveTime = 0;
     }
