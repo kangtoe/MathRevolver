@@ -29,14 +29,8 @@ public class RepeatGround : MonoBehaviour
     [SerializeField]
     List<GameObject> spwanedGrounds;
 
-    //[SerializeField]
-    Player currentPlayer;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        currentPlayer = FindObjectOfType<Player>();
-    }
+    [SerializeField]
+    Transform checkTarget; // player?
 
     // Update is called once per frame
     void Update()
@@ -44,9 +38,9 @@ public class RepeatGround : MonoBehaviour
         int preSpwaned = 2;
 
         // player의 위치 검사
-        Vector3 playerPos = currentPlayer.transform.position;
+        Vector3 target = checkTarget.position;
         Vector3 spwanCheckPos = spwanedGrounds[spwanedGrounds.Count - preSpwaned].transform.position;
-        if (playerPos.z >= spwanCheckPos.z)
+        if (target.z >= spwanCheckPos.z)
         {
             Vector3 spwanPoint = spwanCheckPos + new Vector3(0, 0, groundSize * preSpwaned);
 
