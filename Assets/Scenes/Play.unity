@@ -252,6 +252,8 @@ MonoBehaviour:
   creatingInterval: 5
   adventCount: 100
   SelectionObject_PowerList: []
+  planeMargin: 0.025
+  textMargin: 0.5
 --- !u!1 &21687907
 GameObject:
   m_ObjectHideFlags: 0

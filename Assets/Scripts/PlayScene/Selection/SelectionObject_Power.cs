@@ -71,7 +71,7 @@ public class SelectionObject_Power : MonoBehaviour
     }
 
     // 실제 선택지 생성    
-    public void CreateElement(int count)
+    public void CreateElement(int count, float planeMargin, float textMargin, Color color)
     {        
         float floorWidth = 10;
         float size = floorWidth / count;
@@ -97,7 +97,7 @@ public class SelectionObject_Power : MonoBehaviour
             else element.SetCalc();
                 
             // 사이즈 설정            
-            element.SetSize(size);
+            element.SetSize(size, null, planeMargin, textMargin);
 
             // 위치 설정
             Vector3 pos = transform.position;
@@ -105,10 +105,10 @@ public class SelectionObject_Power : MonoBehaviour
             go.transform.position = new Vector3(pointX, pos.y, pos.z);
 
             // 색 설정. 하드 코딩됨
-            Color color;
-            if (i % 3 == 0) color = Color.red;
-            else if (i % 2 == 0) color = Color.green;
-            else color = Color.blue;
+            //Color color;
+            //if (i % 3 == 0) color = Color.red;
+            //else if (i % 2 == 0) color = Color.green;
+            //else color = Color.blue;
             element.SetMeshColor(color);
 
             // 최적해 구하기

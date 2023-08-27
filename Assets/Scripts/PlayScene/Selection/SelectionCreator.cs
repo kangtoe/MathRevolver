@@ -38,7 +38,17 @@ public class SelectionCreator : MonoBehaviour
 
     [Header("인스턴스화된 전투력 선택지 섹션")]
     [SerializeField]
-    List<SelectionObject_Power> SelectionObject_PowerList;    
+    List<SelectionObject_Power> SelectionObject_PowerList;
+
+    [Header("전투력 선택지 마진")]
+    [SerializeField]
+    float planeMargin = 0.05f;
+    [SerializeField]
+    float textMargin = 0.5f;
+
+    [Header("전투력 선택지 색")]
+    [SerializeField]
+    Color selectionColor;
 
     bool OnActiveAllOptimalVFX;
 
@@ -117,7 +127,7 @@ public class SelectionCreator : MonoBehaviour
         go.transform.position = creatingPoint.position;
 
         SelectionObject_Power selection = go.GetComponent<SelectionObject_Power>();
-        selection.CreateElement(3);
+        selection.CreateElement(3, planeMargin, textMargin, selectionColor);
 
         UpdateOptimalSelectVFX();
     }

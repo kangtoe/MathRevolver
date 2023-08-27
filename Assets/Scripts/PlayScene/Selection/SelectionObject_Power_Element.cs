@@ -64,16 +64,16 @@ public class SelectionObject_Power_Element : MonoBehaviour
         transform.position = pos;
     }
 
-    public void SetSize(float X, float Z = float.NaN)
+    public void SetSize(float X, float? Z = null, float planeMargin = 0, float textMargin = 0)
     {
         // 플레인 사이즈 조정
         Vector3 scale = mesh.transform.localScale;
-        scale.x = X / 10f;
-        if (!float.IsNaN(Z)) scale.y = Z / 10f;
+        scale.x = (X - planeMargin) / 10f;
+        if (Z != null) scale.y = Z.Value / 10f;
         mesh.transform.localScale = scale;
 
-        // 텍스트 사이즈 조정
-        float margin = 0.5f;
+        // 텍스트 사이즈 조정       
+        float margin = planeMargin + textMargin; // textMargin -> 기존 플레인 마진 적용 값에서 텍스트 마진을 추가로 적용
         text.rectTransform.sizeDelta = Vector2.one * (X - margin);
     }
 
@@ -133,10 +133,10 @@ public class SelectionObject_Power_Element : MonoBehaviour
                 text.text = "-" + plusVal;
                 break;
             case CalcType.Multiply:
-                text.text = "*" + multVal;
+                text.text = "x" + multVal;
                 break;
             case CalcType.Divide:
-                text.text = "/" + multVal;
+                text.text = "%" + multVal;
                 break;
             default:
                 Debug.Log("calc type undefind : " + _type);
