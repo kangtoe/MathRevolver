@@ -34,7 +34,7 @@ public class CameraManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        chaseTarget = Player.Instance.transform;
+        //chaseTarget = Player.Instance.transform;
 
         originPos = Camera.main.transform.localPosition;
     }
