@@ -14,17 +14,12 @@ public static class LanguageSetting
     public delegate void m_Delegate();
     public static event m_Delegate onChangeLanguage;
 
-    public static Language language;
-
-    public static void SetLanguage(Language _language)
-    {
-        language = _language;        
-    }
+    public static Language currentLanguage;
 
     // mathpid 언어 설정을 위한 문자열 반환
     public static string GetCurrentLanguageString()
     {
-        switch (language)
+        switch (currentLanguage)
         {
             case Language.Korea:
                 return "KO";                

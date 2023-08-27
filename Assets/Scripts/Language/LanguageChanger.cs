@@ -17,8 +17,8 @@ public class LanguageChanger : MonoBehaviour
     List<LanguageUi_image> imageList;
     
     void Start()
-    {
-        //LanguageSetting.onChangeLanguage += ChangeLanguage;
+    {        
+        ChangeLanguage(LanguageSetting.currentLanguage);
     }
 
     public void SetKr()
@@ -35,8 +35,7 @@ public class LanguageChanger : MonoBehaviour
     public void ChangeLanguage(Language _language)
     {
         // 이미 기존 언어 설정과 같음
-        if (LanguageSetting.language == _language) return;
-
+        //if (LanguageSetting.currentLanguage == _language) return;
                 
         switch (_language)
         {
@@ -58,6 +57,6 @@ public class LanguageChanger : MonoBehaviour
         }
         
 
-        LanguageSetting.language = _language;
+        LanguageSetting.currentLanguage = _language;
     }
 }
