@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Collect : MonoBehaviour
 {
-    public void OnCollectEnable()
+    void OnCollectEnable()
     {
         gameObject.SetActive(true);
     }
 
-    public void OnCollectDisable()
+    void OnCollectDisable()
     {
         gameObject.SetActive(false);
     }

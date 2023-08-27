@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class BulletAnimController : MonoBehaviour
 {
+    [SerializeField] Animator anim;
     [SerializeField] Animator cylinder;
+    [SerializeField] BulletMag bulletMag;
 
-    public void CylinderFlash()
+    void CylinderFlash()
     {
         cylinder.SetTrigger("flash");
+        bulletMag.UseBullet();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void NextProblem()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        anim.SetTrigger("appear");
     }
 }

@@ -4687,7 +4687,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103a47c86de852040b77c3a5d738ddd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 1502817462}
   cylinder: {fileID: 1626170165}
+  bulletMag: {fileID: 454040878}
 --- !u!114 &1517060879
 MonoBehaviour:
   m_ObjectHideFlags: 0
