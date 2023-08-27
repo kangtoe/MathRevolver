@@ -71,11 +71,16 @@ public class ScoreManager : MonoBehaviour
         currentScore = i;
 
         // 최고 점수 갱신
-        if (currentScore > bestScore)
+        if (currentScore >= bestScore)
         {
             bestScoreText.enabled = true;
             bestScore = currentScore;
             SaveManager.BestScore = bestScore;
+        }
+        else
+        {
+            // 이전 최고 기록 텍스트가 활성화 중이었다면 비활성화
+            bestScoreText.enabled = false;
         }
     }
 
