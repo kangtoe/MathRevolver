@@ -13,5 +13,5 @@ EditorBuildSettings:
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/Diagnostic.unity
-    guid: ca0e3b606a8a42b4aba8032718d9581d
+    guid: 85e0db423b4b2b7498f5321e28516d22
   m_configObjects: {}
