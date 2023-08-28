@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &23547526 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6606929382501294154, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
+  m_PrefabInstance: {fileID: 1810463116}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &30537301
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,6 +530,11 @@ MonoBehaviour:
   - text: {fileID: 1084407672}
     textKr: "\uC885\uB8CC"
     textEn: Quit
+  - text: {fileID: 23547526}
+    textKr: "\uAE30\uD68D / \uB514\uC790\uC778\n\uBC15\uC900\uD615 (Suldangoo)\n\n\uD504\uB85C\uADF8\uB798\uBC0D\n\uD55C
+      \uAC15 (kangtoe)"
+    textEn: "Directing / Design\n\uBC15\uC900\uD615 (Suldangoo)\n\nProgramming\n\uD55C
+      \uAC15 (kangtoe)"
   imageList:
   - image: {fileID: 1135412406}
     spriteKr: {fileID: 21300000, guid: 141648218823bee4c96042f8509e9283, type: 3}
@@ -1639,6 +1655,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OptionControl
       objectReference: {fileID: 0}
+    - target: {fileID: 6606929382073014790, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6606929382237980008, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1741,7 +1761,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6606929382489536111, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606929382501294152, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6606929382992369826, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
       propertyPath: m_AnchorMax.x
