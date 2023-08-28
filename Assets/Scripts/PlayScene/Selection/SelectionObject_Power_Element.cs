@@ -136,7 +136,7 @@ public class SelectionObject_Power_Element : MonoBehaviour
                 text.text = "x" + multVal;
                 break;
             case CalcType.Divide:
-                text.text = "%" + multVal;
+                text.text = "÷" + multVal;
                 break;
             default:
                 Debug.Log("calc type undefind : " + _type);
