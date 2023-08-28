@@ -22,7 +22,7 @@ public class PlaySceneManager : MonoBehaviour
     public void GameOver()
     {
         Player.Instance.OnDead();
-        UIManager.Instance.ActiveOverUI(true);
+        UIManager_Play.Instance.ActiveOverUI(true);
         SelectionCreator.Instance.StopAllCoroutines();
         EnemySpwaner.Instance.StopAllCoroutines();
     }

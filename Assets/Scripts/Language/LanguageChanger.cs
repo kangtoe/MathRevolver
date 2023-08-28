@@ -17,7 +17,8 @@ public class LanguageChanger : MonoBehaviour
     List<LanguageUi_image> imageList;
     
     void Start()
-    {        
+    {
+        LanguageSetting.currentLanguage = SaveManager.UsingLanguage;
         ChangeLanguage(LanguageSetting.currentLanguage);
     }
 

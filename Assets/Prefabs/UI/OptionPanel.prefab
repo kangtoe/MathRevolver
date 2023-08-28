@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmVolume: 0
-  vfxVolume: 0
+  sfxVolume: 0
 --- !u!1 &2569035142322377771
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,6 +138,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ef280aff20a05c4297b8ad2686181cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button_kr: {fileID: 6606929382715876223}
+  button_en: {fileID: 6606929383316766963}
+  buttonSelect: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  buttonDeselect: {r: 1, g: 1, b: 1, a: 1}
+  slider_sfx: {fileID: 6606929382481874002}
+  slider_bgm: {fileID: 6606929381979449123}
+  language: {fileID: 0}
+  volume: {fileID: 5087551326457579701}
 --- !u!1 &6606929381737474374
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager_Play : MonoBehaviour
 {
-    public static UIManager Instance
+    public static UIManager_Play Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = FindObjectOfType<UIManager>();
+                instance = FindObjectOfType<UIManager_Play>();
             }
             return instance;
         }
     }
-    private static UIManager instance;
+    private static UIManager_Play instance;
 
     [Header("업그레이드")]
     [SerializeField]

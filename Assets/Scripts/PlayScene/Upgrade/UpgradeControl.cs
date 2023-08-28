@@ -147,7 +147,7 @@ public class UpgradeControl : MonoBehaviour
             UpdateAttackSpeed();            
 
             // UI 비활성화
-            UIManager.Instance.ActiveUpgradeUI(false);
+            UIManager_Play.Instance.ActiveUpgradeUI(false);
         });
 
         // skillTimeBtn 버튼 초기화
@@ -162,7 +162,7 @@ public class UpgradeControl : MonoBehaviour
             UpdateSkillTime();            
 
             // UI 비활성화
-            UIManager.Instance.ActiveUpgradeUI(false);
+            UIManager_Play.Instance.ActiveUpgradeUI(false);
         });
 
         // solvingTimeBtn 버튼 초기화
@@ -177,7 +177,7 @@ public class UpgradeControl : MonoBehaviour
             UpdateSlovingTime();            
 
             // UI 비활성화
-            UIManager.Instance.ActiveUpgradeUI(false);
+            UIManager_Play.Instance.ActiveUpgradeUI(false);
         });
 
         // recoverHeartBtn 버튼 초기화
@@ -188,7 +188,7 @@ public class UpgradeControl : MonoBehaviour
             HeartsManager.Instance.HeartRecovery();
 
             // UI 비활성화
-            UIManager.Instance.ActiveUpgradeUI(false);
+            UIManager_Play.Instance.ActiveUpgradeUI(false);
         });
     }
 }

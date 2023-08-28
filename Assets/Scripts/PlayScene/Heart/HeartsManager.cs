@@ -86,7 +86,7 @@ public class HeartsManager : MonoBehaviour
         UpdateHeartUI();
 
         // TODO : 회복 시각 효과 추가
-        UIManager.Instance.Flash(Color.green);
+        UIManager_Play.Instance.Flash(Color.green);
     }
 
     public void HeartLost(int lost)
@@ -96,7 +96,7 @@ public class HeartsManager : MonoBehaviour
         UpdateHeartUI();
 
         CameraManager.Instance.ShakeDebug();
-        UIManager.Instance.Flash(Color.red);
+        UIManager_Play.Instance.Flash(Color.red);
 
         if (leftHeart == 0)
         {
