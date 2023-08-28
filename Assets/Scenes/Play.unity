@@ -48424,14 +48424,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1478653628}
     m_Modifications:
-    - target: {fileID: 2383473763200048635, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
-      propertyPath: volume
-      value: 
-      objectReference: {fileID: 1269361108}
-    - target: {fileID: 2383473763200048635, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
-      propertyPath: language
-      value: 
-      objectReference: {fileID: 1607884446}
     - target: {fileID: 6606929382237980008, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -48534,7 +48526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6606929382489536111, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6606929382992369826, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
       propertyPath: m_AnchorMax.x

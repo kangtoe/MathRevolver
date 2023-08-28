@@ -32,8 +32,22 @@ public class OptionControl : MonoBehaviour
     [SerializeField]
     VolumeControl volume;
 
+    private void Awake()
+    {
+        language = FindObjectOfType<LanguageChanger>();
+        volume = FindObjectOfType<VolumeControl>();
+        if (language == null) Debug.Log("null check");
+        if (volume == null) Debug.Log("null check");
+    }
+
+    private void OnEnable()
+    {
+        UpdateUI();
+    }
+
     private void Start()
     {
+
         // 버튼 상호작용 설정 : 클릭 버튼에 따라 언어 설정
         {
             button_kr.onClick.AddListener(delegate
@@ -66,11 +80,6 @@ public class OptionControl : MonoBehaviour
             });
         }
 
-        UpdateUI();
-    }
-
-    private void OnEnable()
-    {
         UpdateUI();
     }
 
