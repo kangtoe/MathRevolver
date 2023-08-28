@@ -754,6 +754,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 58346618}
   m_CullTransparentMesh: 1
+--- !u!1 &97089630 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6606929382237980009, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
+  m_PrefabInstance: {fileID: 1781960875}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &111396690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18669,6 +18674,7 @@ Transform:
   - {fileID: 1105489787}
   - {fileID: 1271003507}
   - {fileID: 1607884445}
+  - {fileID: 1269361109}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -40506,6 +40512,57 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1269361107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1269361109}
+  - component: {fileID: 1269361108}
+  m_Layer: 0
+  m_Name: VolumeControl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1269361108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269361107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07db3f6ea71f34a4eb0172ff4df0d414, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: afdf1822f9c904545b25867869f8b6c1, type: 2}
+  min_dB: -40
+  max_dB: 0
+  currentVolume_dB_bgm: -80
+  currentVolume_dB_sfx: -80
+  bgmVolume: 0
+  sfxVolume: 0
+--- !u!4 &1269361109
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269361107}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 687333386}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1271003506
 GameObject:
   m_ObjectHideFlags: 0
@@ -41476,7 +41533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeUI: {fileID: 1357491911}
-  optionUI: {fileID: 0}
+  optionUI: {fileID: 97089630}
   timeScaleOnMenu: 1
   overUI: {fileID: 544399201}
   flashPanel: {fileID: 631432284}
@@ -43228,9 +43285,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad278522f3ee91f449211d829e9be841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BestScore: 0
   DiagonosticCompleted: 1
+  BestScore: 0
   UsingLanguage: 1
+  bgmVolume: 0
+  sfxVolume: 0
 --- !u!4 &1675790877
 Transform:
   m_ObjectHideFlags: 0
@@ -48365,6 +48424,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1478653628}
     m_Modifications:
+    - target: {fileID: 2383473763200048635, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
+      propertyPath: volume
+      value: 
+      objectReference: {fileID: 1269361108}
+    - target: {fileID: 2383473763200048635, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
+      propertyPath: language
+      value: 
+      objectReference: {fileID: 1607884446}
     - target: {fileID: 6606929382237980008, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -48492,6 +48559,18 @@ PrefabInstance:
     - target: {fileID: 6606929383103257193, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606929383163824360, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1477721962}
+    - target: {fileID: 6606929383163824360, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ActiveOptionUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606929383163824360, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIManager_Play, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6606929383529419488, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
       propertyPath: m_AnchorMax.x
