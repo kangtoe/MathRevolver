@@ -56,7 +56,7 @@ public class EnemySpwaner : MonoBehaviour
         get{
             foreach (Enemy enemy in enemies)
             {
-                if (enemy.isBoss) return true;
+                if (enemy.isBoss && enemy.CanBeAttacked) return true;
             }
 
             return false;
