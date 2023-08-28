@@ -33949,7 +33949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentScoreText: {fileID: 2062233457}
   bestScoreText: {fileID: 652165064}
-  startScore: 1
+  startScore: 10
   countDuration: 0.33
   optimalScore: 0
 --- !u!1 &915192943
@@ -48900,6 +48900,10 @@ PrefabInstance:
     - target: {fileID: 6606929382489536111, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606929382501294155, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6606929382992369826, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
       propertyPath: m_AnchorMax.x
