@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17757872, g: 0.2223221, b: 0.30451828, a: 1}
+  m_IndirectSpecularColor: {r: 0.177579, g: 0.22232252, b: 0.3045191, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -508,10 +508,10 @@ MonoBehaviour:
   textList: []
   tmpList:
   - text: {fileID: 666192395}
-    textKr: "\uC9C4\uB2E8\uD3C9\uAC00"
-    textEn: Diagnostic
+    textKr: "\uC804\uD22C\uB825 \uCE21\uC815"
+    textEn: Measure
   - text: {fileID: 1670770404}
-    textKr: "\uD50C\uB808\uC774!"
+    textKr: "\uAC8C\uC784 \uC2DC\uC791"
     textEn: Play
   - text: {fileID: 2002331934}
     textKr: "\uC635\uC158"
@@ -586,7 +586,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Diagnostic
+  m_text: Measure
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa36963f05b182d429b94e5e1134b9fb, type: 2}
   m_sharedMaterial: {fileID: -7118859338823495060, guid: aa36963f05b182d429b94e5e1134b9fb, type: 2}
@@ -1097,7 +1097,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 141648218823bee4c96042f8509e9283, type: 3}
+  m_Sprite: {fileID: 21300000, guid: deed0b92bc1381c4e9df168a3c2f5fc8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
