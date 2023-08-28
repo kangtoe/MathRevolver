@@ -73,10 +73,11 @@ public class SceneChanger : MonoBehaviour
 
         while (true)
         {
-            f += Time.deltaTime * fadeSpeed;
+            f += Time.fixedDeltaTime * fadeSpeed;
+            if (f > 1) f = 1;
             f = SetFadeAlpha(f);
             
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
             if (f == 1) break;
         }        
 

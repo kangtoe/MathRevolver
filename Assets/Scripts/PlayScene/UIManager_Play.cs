@@ -96,12 +96,13 @@ public class UIManager_Play : MonoBehaviour
 
         while (true)
         {
-            color.a = Mathf.Lerp(flashMaxAlpha, 0, t);
-            flashPanel.color = color;
-
             t += Time.deltaTime / flashDuration;
+            if (t > 1) t = 1;
 
-            if (t >= 1) break;
+            color.a = Mathf.Lerp(flashMaxAlpha, 0, t);
+            flashPanel.color = color;            
+
+            if (t == 1) break;
 
             yield return null;
         }
