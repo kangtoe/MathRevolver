@@ -20,6 +20,9 @@ public class ScoreManager : MonoBehaviour
     private static ScoreManager instance;
     #endregion
 
+    static int MinScore = 1;
+    static int MaxScore = 999999999;
+
     int currentScore = 0;
 
     int bestScore; // 최고 득점 점수
@@ -56,10 +59,7 @@ public class ScoreManager : MonoBehaviour
     public void SetScore(int i, bool countEffect = true)
     {
         // 점수 제한 -> 1 이하로 떨어지지 않음
-        if (i < 1)
-        {
-            i = 1;
-        }    
+        i = Mathf.Clamp(i, MinScore, MaxScore);    
 
         // 카운트 효과
         float duration = 0;
@@ -91,6 +91,7 @@ public class ScoreManager : MonoBehaviour
 
     public void SetOptimalScore(int i)
     {
+        optimalScore = Mathf.Clamp(optimalScore, MinScore, MaxScore);
         optimalScore = i;
     }
 

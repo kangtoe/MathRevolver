@@ -133,7 +133,7 @@ public class SelectionObject_Power_Element : MonoBehaviour
                 text.text = "-" + plusVal;
                 break;
             case CalcType.Multiply:
-                text.text = "x" + multVal;
+                text.text = "×" + multVal;
                 break;
             case CalcType.Divide:
                 text.text = "÷" + multVal;
