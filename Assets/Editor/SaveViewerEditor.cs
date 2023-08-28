@@ -18,6 +18,12 @@ public class SaveViewerEditor : Editor
         if (GUILayout.Button("Set Save"))
         {
             viewer.SetSave();
-        }       
+        }
+
+        if (GUILayout.Button("Clear Save"))
+        {
+            viewer.ClearSave();
+            viewer.GetSave();
+        }
     }
 }

@@ -4,6 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum Language
+{
+    Undefind,
+    Korea,
+    English
+}
 
 public class LanguageChanger : MonoBehaviour
 {
@@ -18,8 +24,8 @@ public class LanguageChanger : MonoBehaviour
     
     void Start()
     {
-        LanguageSetting.currentLanguage = SaveManager.UsingLanguage;
-        ChangeLanguage(LanguageSetting.currentLanguage);
+        //LanguageSetting.currentLanguage = SaveManager.UsingLanguage;
+        ChangeLanguage(SaveManager.UsingLanguage);
     }
 
     public void SetKr()
@@ -55,9 +61,8 @@ public class LanguageChanger : MonoBehaviour
             default:
                 Debug.Log("");
                 return;
-        }
-        
+        }        
 
-        LanguageSetting.currentLanguage = _language;
+        SaveManager.UsingLanguage = _language;
     }
 }

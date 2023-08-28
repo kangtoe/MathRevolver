@@ -32,10 +32,53 @@ public class OptionControl : MonoBehaviour
     [SerializeField]
     VolumeControl volume;
 
+    private void Start()
+    {
+        // 버튼 상호작용 설정 : 클릭 버튼에 따라 언어 설정
+        {
+            button_kr.onClick.AddListener(delegate
+            {
+                OnClickButton_Kr();
+            });
+            button_en.onClick.AddListener(delegate
+            {
+                OnClickButton_En();
+            });
+        }
+
+        // 슬라이더 상호작용 설정 : 변경한 슬라이더 값 적용 및 저장
+        {
+            slider_sfx.onValueChanged.AddListener(delegate
+            {
+                float val = slider_sfx.value;
+                // 저장 값 수정
+                SaveManager.SfxVolume = val;
+                // 실제 볼륨 조절
+                volume.SfxVolume = val;
+            });
+            slider_bgm.onValueChanged.AddListener(delegate
+            {
+                float val = slider_bgm.value;
+                // 저장 값 수정
+                SaveManager.BgmVolume = val;
+                // 실제 볼륨 조절
+                volume.BgmVolume = val;
+            });
+        }
+
+        UpdateUI();
+    }
+
     private void OnEnable()
     {
-        // 버튼 사운드 게이지 설정값대로 UI에 표시
-        switch (LanguageSetting.currentLanguage)
+        UpdateUI();
+    }
+
+    // UI를 세이브 데이터 대로 갱신
+    void UpdateUI()
+    {
+        // 버튼 : 언어 설정에 따라 버튼 눌러진 상태로 설정
+        switch (SaveManager.UsingLanguage)
         {
             case Language.Korea:
                 OnClickButton_Kr();
@@ -48,23 +91,9 @@ public class OptionControl : MonoBehaviour
                 break;
         }
 
-        // 언어 버튼 설정
-        // 현재 언어 설정에 따라 버튼 누른 효과 반영
-
-        // 현재 볼륨에 따라 슬라이더 값 할당
-    }
-
-    private void Start()
-    {
-        button_kr.onClick.AddListener(delegate
-        {
-            OnClickButton_Kr();
-        });
-
-        button_en.onClick.AddListener(delegate
-        {
-            OnClickButton_En();
-        });
+        // 슬라이더 : 현재 볼륨에 따라 슬라이더 값 할당
+        slider_sfx.value = SaveManager.SfxVolume;
+        slider_bgm.value = SaveManager.BgmVolume;
     }
 
     // 언어 버튼 클릭 시 언어 설정, 사운드 바 조절 시 사운드 반영
@@ -79,10 +108,8 @@ public class OptionControl : MonoBehaviour
 
             button_en.targetGraphic.color = buttonDeselect;
             button_en.GetComponentInChildren<TextMeshProUGUI>().color = buttonDeselect;
-        }
-        
+        }        
     }
-
     void OnClickButton_En()
     {
         language.SetEn();

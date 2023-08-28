@@ -96,7 +96,7 @@ public class WJ_Connector : MonoBehaviour
         request.deviceNm = strDeviceNm;
         request.gameVer = strGameVer;
         request.osScnCd = strOsScnCd;
-        request.langCd = LanguageSetting.GetCurrentLanguageString();
+        request.langCd = GetCurrentLanguageString(SaveManager.UsingLanguage);
         request.timeZone = TimeZoneInfo.Local.BaseUtcOffset.Hours;
 
         switch (level)
@@ -151,7 +151,7 @@ public class WJ_Connector : MonoBehaviour
         request.gameVer = strGameVer;
         request.osScnCd = strOsScnCd;
         request.deviceNm = strDeviceNm;
-        request.langCd = LanguageSetting.GetCurrentLanguageString();
+        request.langCd = GetCurrentLanguageString(SaveManager.UsingLanguage);
         request.timeZone = TimeZoneInfo.Local.BaseUtcOffset.Hours;
 
         request.mathpidId = "";
@@ -330,5 +330,18 @@ public class WJ_Connector : MonoBehaviour
     }
     #endregion
 
-
+    // mathpid 언어 설정을 위한 문자열 반환
+    public static string GetCurrentLanguageString(Language currentLanguage)
+    {
+        switch (currentLanguage)
+        {
+            case Language.Korea:
+                return "KO";
+            case Language.English:
+                return "EN";
+            default:
+                Debug.Log("대응되는 언어 설정 없음");
+                return "EN";
+        }
+    }
 }
