@@ -83,7 +83,8 @@ public class UpgradeControl : MonoBehaviour
         attackSpeedBtn.SetLevelText(str);
 
         // desc 텍스트 갱신
-        str = "공격 간격 : " +  CurrentAttackSpeed + "초";
+        //str = "공격 간격 : " +  CurrentAttackSpeed + "초";
+        str = CurrentAttackSpeed.ToString();
         attackSpeedBtn.SetDescText(str);
 
         // 실제 수치 적용
@@ -101,7 +102,8 @@ public class UpgradeControl : MonoBehaviour
         skillTimeBtn.SetLevelText(str);
 
         // desc 텍스트 갱신
-        str = "스킬 지속 : " + CurrentSkillTime + "초";
+        //str = "스킬 지속 : " + CurrentSkillTime + "초";
+        str = CurrentSkillTime.ToString();
         skillTimeBtn.SetDescText(str);
 
         // 실제 수치 적용
@@ -119,7 +121,8 @@ public class UpgradeControl : MonoBehaviour
         solvingTimeBtn.SetLevelText(str);
 
         // desc 텍스트 갱신
-        str = "풀이 시간 : " + CurrentSlovingTime + "초";
+        //str = "풀이 시간 : " + CurrentSlovingTime + "초";
+        str = CurrentSlovingTime.ToString();
         solvingTimeBtn.SetDescText(str);
 
         // 실제 수치 적용

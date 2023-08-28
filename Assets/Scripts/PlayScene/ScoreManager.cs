@@ -59,14 +59,15 @@ public class ScoreManager : MonoBehaviour
     public void SetScore(int i, bool countEffect = true)
     {
         // 점수 제한 -> 1 이하로 떨어지지 않음
-        i = Mathf.Clamp(i, MinScore, MaxScore);    
+        i = Mathf.Clamp(i, MinScore, MaxScore);
+        //Debug.Log("i :" + i);
 
-        // 카운트 효과
-        float duration = 0;
-        if (countEffect) duration = countDuration;
+        // 카운트 효과            
+        float duration = countDuration;        
+        if (!countEffect) duration = 0;        
         StopAllCoroutines();
         StartCoroutine(CountTextCr(currentScoreText, currentScore, i, duration));
-        
+
         // 현재 점수 갱신
         currentScore = i;
 
@@ -91,7 +92,7 @@ public class ScoreManager : MonoBehaviour
 
     public void SetOptimalScore(int i)
     {
-        optimalScore = Mathf.Clamp(optimalScore, MinScore, MaxScore);
+        i = Mathf.Clamp(i, MinScore, MaxScore);
         optimalScore = i;
     }
 
@@ -102,20 +103,34 @@ public class ScoreManager : MonoBehaviour
 
     IEnumerator CountTextCr(TMP_Text text, int start, int end, float duration = 1)
     {
-        float current = start;
+        //Debug.Log(text.name + ": start = " + start);
+        //Debug.Log(text.name + ": end = " + end);        
 
+        float current;
         float t = 0;
         while (true)
         {
             t += Time.deltaTime / duration;
             if (t > 1) t = 1;
 
+            // 카운트 중간의 값 구하기
             current = Mathf.Lerp(start, end, t);
-            text.text = ((int)current).ToString();
+            // 아주 큰 수에서는 lerp 과정에서 오차가 발생함. 이를 보정            
+            int i = start;
+            if (start < end) i = Mathf.Clamp((int)current, start, end); // 증가 카운트
+            if (start > end) i = Mathf.Clamp((int)current, end, start); // 감소 카운트
+            //Debug.Log(text.name + ": i = " + i);
+            UpdataText(text, i);
 
             yield return null;
 
-            if (t == 1) break;
+            if (t == 1) break;            
         }        
+    }
+
+    void UpdataText(TMP_Text text, int i)
+    {
+        //Debug.Log(text.name + ": set = " + i);
+        text.text = i.ToString();
     }
 }
