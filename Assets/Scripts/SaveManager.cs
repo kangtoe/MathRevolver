@@ -6,11 +6,25 @@ using UnityEngine;
 // PlayerPrefs를 통한 정보 저장 & 불러오기
 public static class SaveManager
 {
-    static string bestScoreKey = "bestScore";
     static string diagonosticCompletedKey = "diagonosticCompleted";
+    static string bestScoreKey = "bestScore";    
     static string usingLanguageKey = "usingLanguage";
     static string sfxVolumeKey = "sfxVolume";
     static string bgmVolumeKey = "bgmVolume";
+
+    // 진단 평가 풀었나?
+    public static bool DiagonosticCompleted
+    {
+        get
+        {
+            int i = PlayerPrefs.GetInt(diagonosticCompletedKey);
+            return i == 1 ? true : false;
+        }
+        set
+        {
+            PlayerPrefs.SetInt(diagonosticCompletedKey, value ? 1 : 0);
+        }
+    }
 
     // play Scene에서 최고 점수
     public static int BestScore
@@ -23,21 +37,7 @@ public static class SaveManager
         {
             PlayerPrefs.SetInt(bestScoreKey, value);
         }
-    }
-
-    // 진단 평가 풀었나?
-    public static bool DiagonosticCompleted
-    {
-        get
-        {
-            int i = PlayerPrefs.GetInt(diagonosticCompletedKey);
-            return i == 1 ? true : false;            
-        }
-        set
-        {
-            PlayerPrefs.SetInt(diagonosticCompletedKey, value ? 1 : 0);
-        }
-    }
+    }    
 
     // 사용 언어
     static Language UsingLanguage_default = Language.Korea;
