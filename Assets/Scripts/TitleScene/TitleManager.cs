@@ -9,11 +9,15 @@ public class TitleManager : MonoBehaviour
 
     public void OnClickButton_Diagnostic()
     {
+        SoundManager.Instance.PlaySound("SampleSFX");
+
         SceneChanger.Instance.SceneChange("Diagnostic");
     }
 
     public void OnClickButton_Play()
     {
+        SoundManager.Instance.PlaySound("SampleSFX");
+
         if (!SaveManager.DiagonosticCompleted)
         {
             Debug.Log("한번 이상의 진단평가 풀이 필요");
@@ -25,6 +29,8 @@ public class TitleManager : MonoBehaviour
 
     public void OnClickButton_Quit()
     {
+        SoundManager.Instance.PlaySound("SampleSFX");
+
         Application.Quit();
     }
 }

@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgm: {fileID: 8300000, guid: 13c93c2cd0af1834cace1947a19faae0, type: 3}
-  soundList: []
+  soundList:
+  - name: SampleSFX
+    clip: {fileID: 8300000, guid: 2bdf90afb3b821d4ab1865e46d0b779f, type: 3}
   playerList: []
   sfxOutput: {fileID: 3474489624104542020, guid: afdf1822f9c904545b25867869f8b6c1, type: 2}
   bgmOutput: {fileID: 2948268655846785522, guid: afdf1822f9c904545b25867869f8b6c1, type: 2}

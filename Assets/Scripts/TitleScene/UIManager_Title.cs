@@ -23,11 +23,13 @@ public class UIManager_Title : MonoBehaviour
 
     void Start()
     {
-        ActiveOptionUI(false);
+        //ActiveOptionUI(false);
     }
 
     public void ActiveOptionUI(bool active)
     {
+        SoundManager.Instance.PlaySound("SampleSFX");
+
         optionUI.SetActive(active);
     }
 }
