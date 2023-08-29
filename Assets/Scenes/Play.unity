@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.177579, g: 0.22232252, b: 0.3045191, a: 1}
+  m_IndirectSpecularColor: {r: 0.17757872, g: 0.2223221, b: 0.30451828, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -41771,7 +41771,7 @@ GameObject:
   - component: {fileID: 1271003507}
   - component: {fileID: 1271003508}
   m_Layer: 0
-  m_Name: PlaySceneManager
+  m_Name: GameOver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41804,6 +41804,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b3efa14c2cbf24409ea45ae9654ef62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentscoreTxt: {fileID: 356075263}
+  bestscoreTxt: {fileID: 1374439627}
 --- !u!1 &1309897187
 GameObject:
   m_ObjectHideFlags: 0
@@ -44731,7 +44733,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Title
+          m_StringArgument: Play
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1603992476
@@ -45188,12 +45190,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad278522f3ee91f449211d829e9be841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DiagonosticCompleted: 1
+  DiagonosticCompleted: 0
   DiagonosticScore: 0
   BestScore: 0
   UsingLanguage: 1
-  bgmVolume: 0
-  sfxVolume: 0
+  bgmVolume: 0.5
+  sfxVolume: 0.5
 --- !u!4 &1675790877
 Transform:
   m_ObjectHideFlags: 0

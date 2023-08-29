@@ -21,14 +21,6 @@ public class ScoreManager : MonoBehaviour
     private static ScoreManager instance;
     #endregion
 
-    static double MinScore = 1;
-    static double MaxScore = 999999999;
-
-    double currentScore = 0;
-
-    double bestScore; // 최고 득점 점수
-    string bestScoreName = "BestScore";
-
     [SerializeField]
     TMP_Text currentScoreText;
     [SerializeField]
@@ -43,9 +35,20 @@ public class ScoreManager : MonoBehaviour
     double optimalScore = 0;
     public double OptimalScore => optimalScore;
 
+    // 제한 점수
+    static double MinScore = 1;
+    static double MaxScore = 999999999;
+
+    // 최고 득점 점수
+    double bestScore; 
+    string bestScoreName = "BestScore";
+   
+    // 현재 점수
+    double currentScore = 0;
+    public double CurrentScore => currentScore;
+
     // 시작 점수
     double startScore => SaveManager.DiagonosticScore;
-
 
     private void Awake()
     {
