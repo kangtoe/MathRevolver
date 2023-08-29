@@ -63,12 +63,12 @@ public class ScoreManager : MonoBehaviour
     {
         if (val < min)
         {
-            Debug.Log("val < MinScore");
+            //Debug.Log("val < MinScore");
             return min;
         }
         if (max < val)
         {
-            Debug.Log("MaxScore < val");
+            //Debug.Log("MaxScore < val");
             return max;
         }
         return val;
@@ -96,7 +96,7 @@ public class ScoreManager : MonoBehaviour
         // 점수 제한 -> 1 이하로 떨어지지 않음
         //f = Mathf.Clamp(f, MinScore, MaxScore);
         _score = ClampDouble(_score, MinScore, MaxScore);
-        Debug.Log("_score :" + _score);
+        //Debug.Log("_score :" + _score);
 
         // 카운트 효과            
         float duration = countDuration;        
@@ -149,7 +149,7 @@ public class ScoreManager : MonoBehaviour
         {
             t += Time.deltaTime / duration;
             if (t > 1) t = 1;
-            Debug.Log(text.name + ": t = " + t);
+            //Debug.Log(text.name + ": t = " + t);
 
             // 카운트 중간의 값 구하기
             current = Interpolate(start, end, t);
