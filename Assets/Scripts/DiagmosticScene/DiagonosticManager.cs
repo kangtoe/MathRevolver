@@ -50,10 +50,10 @@ public class DiagonosticManager : MonoBehaviour
         StartCoroutine(TimeBarCr());
     }
 
-    public void InitTimeBar()
+    public void StopTimeBar()
     {
         StopAllCoroutines();
-        timeGage.fillAmount = 1;
+        //timeGage.fillAmount = 1;
     }
 
     IEnumerator TimeBarCr()

@@ -22,6 +22,7 @@ public class ColorByLifeTime : MonoBehaviour
     void Start()
     {
         OnLife = 0;
+        SetColor();
     }
 
     // Update is called once per frame

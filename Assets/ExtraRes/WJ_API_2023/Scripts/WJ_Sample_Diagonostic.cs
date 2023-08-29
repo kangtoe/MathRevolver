@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using WjChallenge;
 
 //public enum CurrentStatus 
 //{ 
@@ -15,13 +16,29 @@ public enum DiagonosticStatus
 {
     Undefined = 0,
     ChoosingDiff,
+    OnChoosingDiffAnimation,
     OnSolving, // 문제 풀이 중
-    WaitNextQuestion, // 연출 중 :다음 문제 대기
+    OnSolveAnimation, // 연출 중 : 다음 문제 대기
     DiagonosticFinished
 }
 
 public class WJ_Sample_Diagonostic : MonoBehaviour
 {
+    #region 싱글톤
+    public static WJ_Sample_Diagonostic Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<WJ_Sample_Diagonostic>();
+            }
+            return instance;
+        }
+    }
+    private static WJ_Sample_Diagonostic instance;
+    #endregion
+
     [SerializeField]
     DiagonosticStatus status;
     
@@ -36,7 +53,8 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
     TEXDraw[]                   textAnsr;                  //정답 버튼들 텍스트(※TextDraw로 변경 필요)
 
     [Header("Status")]
-    int     currentQuestionIndex;
+    //int     currentQuestionIndex;
+    int     QuestionCount = 8;    
     bool    isSolvingQuestion;
     float   questionSolveTime;    
 
@@ -50,11 +68,16 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
     [SerializeField]
     int scorePreCurrect = 5; // 문제 정답 시 점수
 
-    [Header("처음으로 문제 정보를 알아왔을 때 한번만 실행")]
+    [Header("난이도 선택 후 연출 : 처음으로 문제 정보를 알아왔을 때 한번만 실행")]
     public UnityEvent onGetQuestionFirst;
     bool eventInvoked = false;
 
+    [Header("진단 평가 점수")]
+    [SerializeField]
+    Animator anim;
+
     WJ_Connector wj_conn => WJ_Connector.Instance;
+    Diagnotics_Data data;
 
     //[Header("For Debug")]
     //[SerializeField] WJ_DisplayText wj_displayText;         //텍스트 표시용(필수X)
@@ -83,13 +106,14 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         if (isSolvingQuestion) questionSolveTime += Time.deltaTime;
     }
 
-    void InvokeOnGetQuestion()
+    void OnGetQuestionFirst()
     {
         if (eventInvoked) return;
         eventInvoked = true;
 
         //Debug.Log("InvokeOnGetQuestion");
         onGetQuestionFirst.Invoke();
+        UpdateQuestionUI(data.textCn, data.qstCn, data.qstCransr, data.qstWransr);
     }
 
     // 진단 평가 시작 시
@@ -98,58 +122,43 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         if (wj_conn is null) Debug.LogError("Cannot find Connector");
         wj_conn.onGetDiagnosis.AddListener(delegate {
             GetDiagnosis();
-            InvokeOnGetQuestion();              
-        });        
-
+            OnGetQuestionFirst();              
+        });
         //wj_conn.onGetDiagnosis.RemoveListener()
 
-        panel_diag_chooseDiff.SetActive(true);
         status = DiagonosticStatus.ChoosingDiff;
+        panel_diag_chooseDiff.SetActive(true);        
     }
 
     // 진단 평가 완료 시
     void OnEndDiagonostic()
     {
+        status = DiagonosticStatus.DiagonosticFinished;
+
         panel_question.SetActive(false);
         panel_finish.SetActive(true);
 
         SaveManager.DiagonosticCompleted = true;
-        SaveManager.DiagonosticScore = score;
-
-        status = DiagonosticStatus.DiagonosticFinished;
+        SaveManager.DiagonosticScore = score;        
     }
 
     // 난이도 버튼 선택 시 : 버튼 이벤트로 호출
     public void OnChooseDifficulty(int a)
     {        
-        wj_conn.FirstRun_Diagnosis(a);
-        status = DiagonosticStatus.OnSolving;
-    }
-
-    // 정답 제출 시
-    void OnCurrectAnswer()
-    {
-        UIManager_Diagonostic.Instance.CreateCurrectUI();
-
-        // 정답 시 점수 추가
-        score += scorePreCurrect;
-    }
-
-    // 오답 제출 시
-    void OnWrongAnswer()
-    {
-        UIManager_Diagonostic.Instance.CreateIncurrectUI();
-    }
+        wj_conn.FirstRun_Diagnosis(a);        
+        //status = DiagonosticStatus.OnChoosingDiffAnimation;
+    }    
 
     // 진단평가 문제 받아오기
     void GetDiagnosis()
     {
-        WjChallenge.Diagnotics_Data data = wj_conn.cDiagnotics.data;
+        //Debug.Log("GetDiagnosis");
+
+        data = wj_conn.cDiagnotics.data;
         switch (data.prgsCd)
         {
-            case "W":                
-                UpdateQuestionUI(data.textCn, data.qstCn, data.qstCransr, data.qstWransr);
-                Debug.Log("진단평가 중");
+            case "W":                                
+                Debug.Log("진단평가 데이터 받아옴");
                 
                 break;
             case "E":
@@ -159,12 +168,20 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         }
     }
 
-    // 받아온 데이터를 가지고 문제를 표시
-    private void UpdateQuestionUI(string textCn, string qstCn, string qstCransr, string qstWransr)
+    public void UpdateQuestionUI()
     {
-        Debug.Log("MakeQuestion");
-        DiagonosticManager.Instance.StartTimeBar();
+        if (status != DiagonosticStatus.OnSolveAnimation) return;
 
+        UpdateQuestionUI(data.textCn, data.qstCn, data.qstCransr, data.qstWransr);
+    }
+
+    // 받아온 데이터를 가지고 문제를 표시
+    public void UpdateQuestionUI(string textCn, string qstCn, string qstCransr, string qstWransr)
+    {
+        Debug.Log("UpdateQuestionUI");
+
+        status = DiagonosticStatus.OnSolving;
+                
         panel_diag_chooseDiff.SetActive(false);
         panel_question.SetActive(true);
 
@@ -201,13 +218,19 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         }
 
         isSolvingQuestion = true;
-        questionSolveTime = 0;
+        questionSolveTime = 0;        
+        DiagonosticManager.Instance.StartTimeBar();
     }
 
     // 답을 고르고 맞았는 지 체크
     public void SelectAnswer(int _idx = -1)
-    {        
-        DiagonosticManager.Instance.InitTimeBar();
+    {
+        isSolvingQuestion = false;
+        QuestionCount--;
+
+        UIManager_Diagonostic.Instance.DoBulletUsingEffect();
+        UIManager_Diagonostic.Instance.SetLeftQuestionCount(QuestionCount);
+        DiagonosticManager.Instance.StopTimeBar();
 
         bool isCorrect;
         string ansrCwYn;
@@ -223,24 +246,57 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
 
         // 답안 평가
         isCorrect = myAnsr.CompareTo(currectAnsr) == 0 ? true : false;
-        ansrCwYn = isCorrect ? "Y" : "N";
-
-        // 디버깅
-        Debug.Log("isCorrect : " + isCorrect);
-        Debug.Log("SelectAnswer idx : " + _idx);
-        Debug.Log("myAnsr : " + myAnsr);
-        Debug.Log("currectAnsr : " + currectAnsr);
-        //wj_displayText.SetState("진단평가 중", myAnsr, ansrCwYn, questionSolveTime + " 초");
+        ansrCwYn = isCorrect ? "Y" : "N";  
         
         // 커넥터 통해 문제 답안 결과 보내기
         wj_conn.Diagnosis_SelectAnswer(myAnsr, ansrCwYn, (int)(questionSolveTime * 1000));
 
-        isSolvingQuestion = false;
-        //panel_question.SetActive(false);        
+        // 현재 상태 : 애니메이션 연출 상태
+        status = DiagonosticStatus.OnSolveAnimation;
 
         // 정답/오답 시 처리        
-        if (isCorrect) OnCurrectAnswer();
-        else OnWrongAnswer();
+        if (isCorrect)
+        {
+            // 정답 처리
+            UIManager_Diagonostic.Instance.CreateCurrectUI();
+            score += scorePreCurrect;
+
+            // 연출
+            switch (_idx)
+            {
+                case 0:
+                    anim.SetTrigger("click0");
+                    break;
+                case 1:
+                    anim.SetTrigger("click1");
+                    break;
+                case 2:
+                    anim.SetTrigger("click2");
+                    break;
+                case 3:
+                    anim.SetTrigger("click3");
+                    break;
+                default:
+                    Debug.Log("_idx error");
+                    break;
+            }            
+        }
+        else
+        {
+            // 오답 처리
+            UIManager_Diagonostic.Instance.CreateIncurrectUI();
+
+            anim.SetTrigger("disappear");
+        }        
+
+        // 디버깅
+        {
+            //Debug.Log("isCorrect : " + isCorrect);
+            Debug.Log("SelectAnswer idx : " + _idx);
+            //Debug.Log("myAnsr : " + myAnsr);
+            //Debug.Log("currectAnsr : " + currectAnsr);
+            //wj_displayText.SetState("진단평가 중", myAnsr, ansrCwYn, questionSolveTime + " 초");
+        }
     }
 
     #region 만료됨

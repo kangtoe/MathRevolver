@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UIManager_Diagonostic : MonoBehaviour
 {
@@ -28,17 +29,11 @@ public class UIManager_Diagonostic : MonoBehaviour
     [SerializeField]
     GameObject incurrectUI;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] 
+    BulletMag bulletMag;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    TextMeshProUGUI LeftQuestionCount;
 
     public void CreateCurrectUI()
     {
@@ -48,5 +43,15 @@ public class UIManager_Diagonostic : MonoBehaviour
     public void CreateIncurrectUI()
     {
         Instantiate(incurrectUI, canvas.transform);
+    }
+
+    public void DoBulletUsingEffect()
+    {
+        bulletMag.UseBullet();
+    }
+
+    public void SetLeftQuestionCount(int i)
+    {
+        LeftQuestionCount.text = i.ToString();
     }
 }

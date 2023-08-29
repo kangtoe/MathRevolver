@@ -231,7 +231,7 @@ public class WJ_Connector : MonoBehaviour
                 cLearnSet = null;
                 cLearnProg = null;
 
-                Debug.Log("UWR_Post || output :" + output.ToString());
+                //Debug.Log("UWR_Post || output :" + output.ToString());
 
                 switch (output)
                 {
