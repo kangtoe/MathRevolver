@@ -17,6 +17,6 @@ public class BulletAnimController : MonoBehaviour
     void NextProblem()
     {
         anim.SetTrigger("appear");
-        WJ_Sample_Diagonostic.Instance.UpdateQuestionUI();
+        WJ_Sample_Diagonostic.Instance.ToNextQuestion();
     }
 }

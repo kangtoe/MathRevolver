@@ -138,6 +138,8 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         panel_question.SetActive(false);
         panel_finish.SetActive(true);
 
+        UIManager_Diagonostic.Instance.SetDiagonosisScore(score);
+
         SaveManager.DiagonosticCompleted = true;
         SaveManager.DiagonosticScore = score;        
     }
@@ -149,7 +151,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         //status = DiagonosticStatus.OnChoosingDiffAnimation;
     }    
 
-    // 진단평가 문제 받아오기
+    // 진단평가 문제 받아오기 : 커넥터 이벤트에서 호출 (진단평가 문제를 받아온 직후)
     void GetDiagnosis()
     {
         //Debug.Log("GetDiagnosis");
@@ -158,21 +160,27 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         switch (data.prgsCd)
         {
             case "W":                                
-                Debug.Log("진단평가 데이터 받아옴");
-                
+                Debug.Log("진단평가 데이터 받아옴");                
                 break;
             case "E":
-                Debug.Log("진단평가 완료");                
-                OnEndDiagonostic();
+                Debug.Log("진단평가 완료");                                
                 break;
         }
     }
 
-    public void UpdateQuestionUI()
+    // 다음 문제 불러오기 : 애니메이션 이벤트 호출 (BulletAnimController의 NextProblem 메소드)
+    public void ToNextQuestion()
     {
         if (status != DiagonosticStatus.OnSolveAnimation) return;
 
-        UpdateQuestionUI(data.textCn, data.qstCn, data.qstCransr, data.qstWransr);
+        if (QuestionCount > 0)
+        {
+            UpdateQuestionUI(data.textCn, data.qstCn, data.qstCransr, data.qstWransr);
+        }
+        else
+        {
+            OnEndDiagonostic();
+        }        
     }
 
     // 받아온 데이터를 가지고 문제를 표시

@@ -401,11 +401,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DiagonosticCompleted: 1
-  DiagonosticScore: 0
+  DiagonosticScore: 25
   BestScore: 0
   UsingLanguage: 1
-  bgmVolume: 0
-  sfxVolume: 0
+  bgmVolume: 0.6268626
+  sfxVolume: 0.6399982
 --- !u!4 &24337734
 Transform:
   m_ObjectHideFlags: 0
@@ -5512,6 +5512,7 @@ MonoBehaviour:
   incurrectUI: {fileID: 2874918401581513852, guid: c1769577277ece54db49a56cdf3c263c, type: 3}
   bulletMag: {fileID: 898477106}
   LeftQuestionCount: {fileID: 131936701}
+  DiagonosisScore: {fileID: 494689043}
 --- !u!1 &1678679887
 GameObject:
   m_ObjectHideFlags: 0

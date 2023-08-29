@@ -35,6 +35,9 @@ public class UIManager_Diagonostic : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI LeftQuestionCount;
 
+    [SerializeField]
+    TextMeshProUGUI DiagonosisScore;
+
     public void CreateCurrectUI()
     {
         Instantiate(currectUI, canvas.transform);
@@ -53,5 +56,10 @@ public class UIManager_Diagonostic : MonoBehaviour
     public void SetLeftQuestionCount(int i)
     {
         LeftQuestionCount.text = i.ToString();
+    }
+
+    public void SetDiagonosisScore(int i)
+    {
+        DiagonosisScore.text = i.ToString();
     }
 }
