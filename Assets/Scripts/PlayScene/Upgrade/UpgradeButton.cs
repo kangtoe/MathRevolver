@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UpgradeButton : MonoBehaviour
 {
@@ -10,18 +11,24 @@ public class UpgradeButton : MonoBehaviour
     public Button Button => button;
 
     [SerializeField]
-    Text levelText;
+    TextMeshProUGUI levelText;
 
     [SerializeField]
-    Text descText;
+    TextMeshProUGUI descText;
 
     public void SetLevelText(string str)
     {
-        levelText.text = str;
+        if(levelText)
+        {
+            levelText.text = str;
+        }
     }
 
     public void SetDescText(string str)
     {
-        descText.text = str;
+        if (descText)
+        {
+            descText.text = str;
+        }
     }
 }
