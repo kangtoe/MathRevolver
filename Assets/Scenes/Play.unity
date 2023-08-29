@@ -35967,9 +35967,9 @@ MonoBehaviour:
   primaryBufferSizeMode: 0
   primaryRendererScale: 0.75
   primarySizeReference: 800
-  blurShift: 1
+  blurShift: 0
   dilateShift: 1
-  dilateIterations: 1
+  dilateIterations: 2
   dilateQuality: 0
   blurIterations: 1
   blurType: 1
@@ -45964,7 +45964,7 @@ MonoBehaviour:
   renderStyle: 1
   outlineParameters:
     enabled: 1
-    color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+    color: {r: 1, g: 1, b: 1, a: 1}
     dilateShift: 1
     blurShift: 1
     fillPass:

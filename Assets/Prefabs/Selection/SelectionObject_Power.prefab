@@ -46,8 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876784bde82cdd14cbf5a414cfe4a70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outlineInterval: 10
   elements: []
   elementPrefab: {fileID: 3552567874509430564, guid: 937748f422bf5cf4ca624b2cc305e5b2, type: 3}
+  optimalSelect: {fileID: 0}
+  selectionPredicted: {fileID: 0}
 --- !u!54 &1912754302918552275
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using EPOOutline;
 public enum CalcType
 {
     Undefind = 0,
@@ -26,6 +26,9 @@ public class SelectionObject_Power_Element : MonoBehaviour
     [SerializeField]
     GameObject vfx;
 
+    [SerializeField]
+    Outlinable outline;
+
     [Header("연산 종류")]
     [SerializeField]
     CalcType type;
@@ -45,11 +48,11 @@ public class SelectionObject_Power_Element : MonoBehaviour
         mesh.material.color = color;
     }
 
-    public void SetTextColor(Color new_color, bool changeAlpha = false)
+    public void SetMashAlpha(float a)
     {
-        Color color = new_color;
-        if (!changeAlpha) color.a = text.color.a;
-        text.color = color;
+        Color color = mesh.material.color;
+        color.a = a;
+        mesh.material.color = color;
     }
 
     public void SetTextAlpha(float a)
@@ -57,6 +60,32 @@ public class SelectionObject_Power_Element : MonoBehaviour
         Color color = text.color;
         color.a = a;
         text.color = color;
+    }
+
+    public void SetOutlineAlpha(float a)
+    {
+        if (outline.RenderStyle == RenderStyle.Single)
+        {
+            Color color = outline.OutlineParameters.Color;
+            color.a = a;
+            outline.OutlineParameters.Color = color;
+        }
+        else if (outline.RenderStyle == RenderStyle.FrontBack)
+        {
+            if (outline.FrontParameters.Enabled)
+            {
+                Color color = outline.FrontParameters.Color;
+                color.a = a;
+                outline.FrontParameters.Color = color;
+            }
+            if (outline.BackParameters.Enabled)
+            {
+                Color color = outline.BackParameters.Color;
+                color.a = a;
+                outline.BackParameters.Color = color;
+            }
+        }
+        else Debug.Log("undefinded");
     }
 
     public void SetPos(Vector3 pos)
@@ -185,23 +214,31 @@ public class SelectionObject_Power_Element : MonoBehaviour
         return val;
     }
 
+    public void EnableOutline(bool enable)
+    {
+        outline.enabled = enable;
+    }
+
     public void EnableVFX(bool enable)
     {
         vfx.SetActive(enable);
     }
 
-    public void FadeColor(float duration, float targetAlpha, float meshStartAlpha = -1, float textStartAlpha = -1, bool inactiveMeshOnEnd = false)
+    #region 페이드
+
+    public void FadeColor(bool inactiveMeshOnEnd, float duration, float targetAlpha, float? meshStartAlpha = null, float? textStartAlpha = null, float? outlineStartAlpha = null)
     {
         // 시작 알파 값 지정 없는 경우, 기존 알파값 사용
-        if (meshStartAlpha == -1) meshStartAlpha = mesh.material.color.a;
-        if (textStartAlpha == -1) textStartAlpha = text.color.a;
+        if (meshStartAlpha == null) meshStartAlpha = mesh.material.color.a;
+        if (textStartAlpha == null) textStartAlpha = text.color.a;
+        if (outlineStartAlpha == null) outlineStartAlpha = outline.OutlineParameters.Color.a;
 
-        StopAllCoroutines();        
-        StartCoroutine(FadeColorCr(duration, targetAlpha, meshStartAlpha, textStartAlpha, inactiveMeshOnEnd));
+        StopAllCoroutines();
+        StartCoroutine(FadeColorCr(inactiveMeshOnEnd, duration, targetAlpha, meshStartAlpha.Value, textStartAlpha.Value, outlineStartAlpha.Value));
     }
 
-    IEnumerator FadeColorCr(float duration, float targetAlpha, float meshStartAlpha, float textStartAlpha, bool inactiveMeshOnEnd)
-    {        
+    IEnumerator FadeColorCr(bool inactiveMeshOnEnd, float duration, float targetAlpha, float meshStartAlpha, float textStartAlpha, float outlineStartAlpha)
+    {
         float interval = 0.05f;
 
         float t = 0;
@@ -212,16 +249,12 @@ public class SelectionObject_Power_Element : MonoBehaviour
             if (t > 1) t = 1;
             float meshAlpha = Mathf.Lerp(meshStartAlpha, targetAlpha, t);
             float textAlpha = Mathf.Lerp(textStartAlpha, targetAlpha, t);
+            float outlineAlpha = Mathf.Lerp(outlineStartAlpha, targetAlpha, t);            
 
-            Color color;
-
-            // mesh 색 변경            
-            color = mesh.material.color;
-            color.a = meshAlpha;
-            SetMeshColor(color, true);
-            
-            // text 색 변경
-            SetTextAlpha(textAlpha);            
+            // 색 변경   
+            SetMashAlpha(meshAlpha);            
+            SetTextAlpha(textAlpha);
+            SetOutlineAlpha(outlineAlpha);
 
             yield return new WaitForSeconds(interval);
 
@@ -230,4 +263,8 @@ public class SelectionObject_Power_Element : MonoBehaviour
 
         if (inactiveMeshOnEnd) mesh.enabled = false;
     }
+
+    #endregion
+
+
 }
