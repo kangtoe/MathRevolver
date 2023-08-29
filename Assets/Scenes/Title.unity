@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DiagonosticCompleted: 1
+  DiagonosticScore: 0
   BestScore: 0
   UsingLanguage: 1
   bgmVolume: 0.5
@@ -674,11 +675,25 @@ MonoBehaviour:
   - image: {fileID: 1135412406}
     spriteKr: {fileID: 21300000, guid: 141648218823bee4c96042f8509e9283, type: 3}
     spriteEn: {fileID: 21300000, guid: deed0b92bc1381c4e9df168a3c2f5fc8, type: 3}
+  - image: {fileID: 576415183}
+    spriteKr: {fileID: -560873628, guid: f580c2c0daa8a8246ae3755536cb7f57, type: 3}
+    spriteEn: {fileID: -149556017, guid: f580c2c0daa8a8246ae3755536cb7f57, type: 3}
 --- !u!1 &546252775 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6606929382237980009, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
   m_PrefabInstance: {fileID: 1810463116}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &576415183 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6606929382231609587, guid: cf340adcead8e4c4892915373d1b7292, type: 3}
+  m_PrefabInstance: {fileID: 1810463116}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &666192393
 GameObject:
   m_ObjectHideFlags: 0

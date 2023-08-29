@@ -401,6 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DiagonosticCompleted: 1
+  DiagonosticScore: 0
   BestScore: 0
   UsingLanguage: 1
   bgmVolume: 0
@@ -987,6 +988,7 @@ MonoBehaviour:
   wj_displayText: {fileID: 2069472654}
   getLearningButton: {fileID: 1533383647}
   texDrawfontText: \galmuri
+  score: 0
 --- !u!4 &169635643
 Transform:
   m_ObjectHideFlags: 0
@@ -3742,7 +3744,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1150038010
 RectTransform:
   m_ObjectHideFlags: 0
