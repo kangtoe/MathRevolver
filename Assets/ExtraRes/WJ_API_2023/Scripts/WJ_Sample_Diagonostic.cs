@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 //public enum CurrentStatus 
 //{ 
@@ -49,6 +50,10 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
     [SerializeField]
     int scorePreCurrect = 5; // 문제 정답 시 점수
 
+    [Header("처음으로 문제 정보를 알아왔을 때 한번만 실행")]
+    public UnityEvent onGetQuestionFirst;
+    bool eventInvoked = false;
+
     WJ_Connector wj_conn => WJ_Connector.Instance;
 
     //[Header("For Debug")]
@@ -66,8 +71,6 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         {
             textAnsr[i] = btAnsr[i].GetComponentInChildren<TEXDraw>();
         }        
-
-        //wj_displayText.SetState("대기중", "", "", "");
     }
 
     private void OnEnable()
@@ -80,11 +83,25 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         if (isSolvingQuestion) questionSolveTime += Time.deltaTime;
     }
 
+    void InvokeOnGetQuestion()
+    {
+        if (eventInvoked) return;
+        eventInvoked = true;
+
+        //Debug.Log("InvokeOnGetQuestion");
+        onGetQuestionFirst.Invoke();
+    }
+
     // 진단 평가 시작 시
     void OnStartDiagonostic()
     {        
         if (wj_conn is null) Debug.LogError("Cannot find Connector");
-        wj_conn.onGetDiagnosis.AddListener(() => GetDiagnosis());
+        wj_conn.onGetDiagnosis.AddListener(delegate {
+            GetDiagnosis();
+            InvokeOnGetQuestion();              
+        });        
+
+        //wj_conn.onGetDiagnosis.RemoveListener()
 
         panel_diag_chooseDiff.SetActive(true);
         status = DiagonosticStatus.ChoosingDiff;
@@ -112,6 +129,8 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
     // 정답 제출 시
     void OnCurrectAnswer()
     {
+        UIManager_Diagonostic.Instance.CreateCurrectUI();
+
         // 정답 시 점수 추가
         score += scorePreCurrect;
     }
@@ -119,11 +138,11 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
     // 오답 제출 시
     void OnWrongAnswer()
     {
-
+        UIManager_Diagonostic.Instance.CreateIncurrectUI();
     }
 
     // 진단평가 문제 받아오기
-    private void GetDiagnosis()
+    void GetDiagnosis()
     {
         WjChallenge.Diagnotics_Data data = wj_conn.cDiagnotics.data;
         switch (data.prgsCd)
@@ -180,6 +199,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
             else
                 textAnsr[i].text = texDrawfontText + wrongAnswers[q];
         }
+
         isSolvingQuestion = true;
         questionSolveTime = 0;
     }
