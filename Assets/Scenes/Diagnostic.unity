@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.177579, g: 0.22232252, b: 0.3045191, a: 1}
+  m_IndirectSpecularColor: {r: 0.17757872, g: 0.2223221, b: 0.30451828, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -614,7 +614,7 @@ RectTransform:
   - {fileID: 1887732108}
   - {fileID: 2069472653}
   m_Father: {fileID: 538508052}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -957,7 +957,7 @@ GameObject:
   - component: {fileID: 169635643}
   - component: {fileID: 169635642}
   m_Layer: 0
-  m_Name: API_sample
+  m_Name: WJ_Sample_Diagonostic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -975,9 +975,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f393a731d448748aa0005d28aea83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentStatus: 0
+  status: 0
   panel_diag_chooseDiff: {fileID: 1905344263}
   panel_question: {fileID: 1150038009}
+  panel_finish: {fileID: 1948481133}
   textDescription: {fileID: 1933631457}
   textEquation: {fileID: 898235757}
   btAnsr:
@@ -985,10 +986,9 @@ MonoBehaviour:
   - {fileID: 398578841}
   - {fileID: 1496596982}
   - {fileID: 1172276204}
-  wj_displayText: {fileID: 2069472654}
-  getLearningButton: {fileID: 1533383647}
   texDrawfontText: \openi
   score: 0
+  scorePreCurrect: 5
 --- !u!4 &169635643
 Transform:
   m_ObjectHideFlags: 0
@@ -1135,7 +1135,7 @@ RectTransform:
   - {fileID: 499672575}
   - {fileID: 1226059151}
   m_Father: {fileID: 538508052}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -2045,6 +2045,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 494689041}
   m_CullTransparentMesh: 1
+--- !u!1 &494808526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 494808527}
+  - component: {fileID: 494808528}
+  m_Layer: 0
+  m_Name: Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &494808527
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494808526}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 735191709}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &494808528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494808526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07db3f6ea71f34a4eb0172ff4df0d414, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: afdf1822f9c904545b25867869f8b6c1, type: 2}
+  min_dB: -40
+  max_dB: 0
+  currentVolume_dB_bgm: -80
+  currentVolume_dB_sfx: -80
+  bgmVolume: 0
+  sfxVolume: 0
 --- !u!1 &499672574
 GameObject:
   m_ObjectHideFlags: 0
@@ -2303,7 +2354,7 @@ GameObject:
   m_Component:
   - component: {fileID: 538508052}
   m_Layer: 5
-  m_Name: Sample
+  m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2321,8 +2372,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 243966145}
   - {fileID: 89059237}
+  - {fileID: 243966145}
   - {fileID: 732845306}
   m_Father: {fileID: 2068279950}
   m_RootOrder: 1
@@ -2521,8 +2572,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 169635642}
-        m_TargetAssemblyTypeName: WJ_Sample, Assembly-CSharp
-        m_MethodName: ButtonEvent_ChooseDifficulty
+        m_TargetAssemblyTypeName: WJ_Sample_Diagonostic, Assembly-CSharp
+        m_MethodName: OnChooseDifficulty
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2789,6 +2840,7 @@ Transform:
   - {fileID: 1115851573}
   - {fileID: 898477107}
   - {fileID: 600349007}
+  - {fileID: 494808527}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3051,8 +3103,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a6b402b53119d646b214d435f467a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletForce: {x: -200, y: 500}
+  bulletForce: {x: -200, y: 600}
   bulletTorqueMin: -90
+  bulletTorqueMax: 90
   bulletGravScale: 200
   bulletUiList:
   - {fileID: 1014406293}
@@ -3987,8 +4040,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 169635642}
-        m_TargetAssemblyTypeName: WJ_Sample, Assembly-CSharp
-        m_MethodName: ButtonEvent_ChooseDifficulty
+        m_TargetAssemblyTypeName: WJ_Sample_Diagonostic, Assembly-CSharp
+        m_MethodName: OnChooseDifficulty
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4830,8 +4883,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 169635642}
-        m_TargetAssemblyTypeName: WJ_Sample, Assembly-CSharp
-        m_MethodName: ButtonEvent_ChooseDifficulty
+        m_TargetAssemblyTypeName: WJ_Sample_Diagonostic, Assembly-CSharp
+        m_MethodName: OnChooseDifficulty
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5214,8 +5267,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 169635642}
-        m_TargetAssemblyTypeName: WJ_Sample, Assembly-CSharp
-        m_MethodName: ButtonEvent_ChooseDifficulty
+        m_TargetAssemblyTypeName: WJ_Sample_Diagonostic, Assembly-CSharp
+        m_MethodName: OnChooseDifficulty
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

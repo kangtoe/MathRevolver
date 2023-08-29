@@ -12,7 +12,8 @@ public class BulletMag : MonoBehaviour
     [Header("가하는 토크")]
     [SerializeField]
     float bulletTorqueMin = -90;
-    float bulletTorqueMax = -90;
+    [SerializeField]
+    float bulletTorqueMax = 90;
     float bulletTorque => Random.Range(bulletTorqueMin, bulletTorqueMax);
 
     [Header("가하는 중력 스케일")]
