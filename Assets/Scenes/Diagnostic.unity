@@ -987,7 +987,7 @@ MonoBehaviour:
   - {fileID: 1172276204}
   wj_displayText: {fileID: 2069472654}
   getLearningButton: {fileID: 1533383647}
-  texDrawfontText: \galmuri
+  texDrawfontText: \openi
   score: 0
 --- !u!4 &169635643
 Transform:
