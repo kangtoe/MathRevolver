@@ -7,6 +7,7 @@ using UnityEngine;
 public static class SaveManager
 {
     static string diagonosticCompletedKey = "diagonosticCompleted";
+    static string diagonosticScoreKey = "diagonosticScore";
     static string bestScoreKey = "bestScore";    
     static string usingLanguageKey = "usingLanguage";
     static string sfxVolumeKey = "sfxVolume";
@@ -23,6 +24,20 @@ public static class SaveManager
         set
         {
             PlayerPrefs.SetInt(diagonosticCompletedKey, value ? 1 : 0);
+        }
+    }
+
+
+    // 진단 평가 점수 = 플레이 시작 점수
+    public static int DiagonosticScore
+    {
+        get
+        {            
+            return PlayerPrefs.GetInt(diagonosticScoreKey);
+        }
+        set
+        {
+            PlayerPrefs.SetInt(diagonosticScoreKey, value);
         }
     }
 

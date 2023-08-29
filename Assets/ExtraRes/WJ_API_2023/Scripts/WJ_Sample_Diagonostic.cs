@@ -34,6 +34,11 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
     [SerializeField]
     string texDrawfontText = @"\galmuri ";
 
+    [Header("진단 평가 점수")]
+    [SerializeField]
+    int score;
+    int scorePreCurrect = 5; // 문제 정답 시 점수
+
     private void Awake()
     {
         textAnsr = new TEXDraw[btAnsr.Length];
@@ -68,6 +73,14 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         if (isSolvingQuestion) questionSolveTime += Time.deltaTime;
     }
 
+
+    void OnEndDiagonostic()
+    {
+        SaveManager.DiagonosticCompleted = true;
+
+        SaveManager.DiagonosticScore = score;
+    }
+
     /// <summary>
     /// 진단평가 문제 받아오기
     /// </summary>
@@ -84,6 +97,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
                 Debug.Log("진단평가 끝! 학습 단계로 넘어갑니다.");
                 wj_displayText.SetState("진단평가 완료", "", "", "");                
                 getLearningButton.interactable = true;
+                OnEndDiagonostic();
                 break;
         }
     }
@@ -144,36 +158,41 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         isSolvingQuestion = true;
     }
 
-    int loop = 0;
-
     /// <summary>
     /// 답을 고르고 맞았는 지 체크
     /// </summary>
     public void SelectAnswer(int _idx = -1)
-    {
-        Debug.Log("SelectAnswer idx : " + _idx);
+    {        
         DiagonosticManager.Instance.InitTimeBar();
 
         bool isCorrect;
-        string ansrCwYn = "N";
-        string ansr;
+        string ansrCwYn;
+        string myAnsr = textAnsr[_idx].text;
+        string currectAnsr = wj_conn.cDiagnotics.data.qstCransr;
 
-        if (_idx == -1) ansr = ""; // 답안 제출하지 못함 (공란?)                
-        else ansr = textAnsr[_idx].text;
+        if (_idx == -1) myAnsr = ""; // 답안 제출하지 못함 (공란?)                        
+        else myAnsr = myAnsr.Replace(texDrawfontText, ""); // 폰트 문자열 제거
 
         // 답안 평가
-        isCorrect = ansr.CompareTo(wj_conn.cDiagnotics.data.qstCransr) == 0 ? true : false;
+        isCorrect = myAnsr.CompareTo(currectAnsr) == 0 ? true : false;
         ansrCwYn = isCorrect ? "Y" : "N";
+
+        Debug.Log("isCorrect : " + isCorrect);
+        Debug.Log("SelectAnswer idx : " + _idx);
+        Debug.Log("myAnsr : " + myAnsr);
+        Debug.Log("currectAnsr : " + currectAnsr);
 
         isSolvingQuestion = false;
 
         // 커넥터 통해 문제 답안 결과 보내기
-        wj_conn.Diagnosis_SelectAnswer(ansr, ansrCwYn, (int)(questionSolveTime * 1000));
+        wj_conn.Diagnosis_SelectAnswer(myAnsr, ansrCwYn, (int)(questionSolveTime * 1000));
 
-        wj_displayText.SetState("진단평가 중", ansr, ansrCwYn, questionSolveTime + " 초");
+        wj_displayText.SetState("진단평가 중", myAnsr, ansrCwYn, questionSolveTime + " 초");
 
-        panel_question.SetActive(false);
-        SaveManager.DiagonosticCompleted = true;
+        // 정답 시 점수 추가
+        if (isCorrect) score += scorePreCurrect;
+
+        panel_question.SetActive(false);        
 
         questionSolveTime = 0;
     }

@@ -10,5 +10,6 @@ public class InitOnceOnPlay
     {
         // 이전 세이브 기록을 무시하고 초기화
         SaveManager.DiagonosticCompleted = false;
+        SaveManager.DiagonosticScore = 0;
     }
 }

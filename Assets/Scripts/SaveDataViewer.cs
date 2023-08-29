@@ -22,6 +22,7 @@ public class SaveDataViewer : MonoBehaviour
     #endregion
 
     public bool DiagonosticCompleted;
+    public int DiagonosticScore;
     public int BestScore;    
     public Language UsingLanguage;
     public float bgmVolume;
@@ -40,6 +41,7 @@ public class SaveDataViewer : MonoBehaviour
     public void GetSave()
     {
         DiagonosticCompleted = SaveManager.DiagonosticCompleted;
+        DiagonosticScore = SaveManager.DiagonosticScore;
         BestScore = SaveManager.BestScore;        
         UsingLanguage = SaveManager.UsingLanguage;
         bgmVolume = SaveManager.BgmVolume;
@@ -48,9 +50,10 @@ public class SaveDataViewer : MonoBehaviour
 
     // 현재 표시된 데이터로 저장 데이터 수정
     public void SetSave()
-    {
-        SaveManager.BestScore = BestScore;
+    {        
         SaveManager.DiagonosticCompleted = DiagonosticCompleted;
+        SaveManager.DiagonosticScore = DiagonosticScore;
+        SaveManager.BestScore = BestScore;
         SaveManager.UsingLanguage = UsingLanguage;
         SaveManager.BgmVolume = bgmVolume;
         SaveManager.SfxVolume = sfxVolume;

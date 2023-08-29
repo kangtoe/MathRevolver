@@ -33,11 +33,7 @@ public class ScoreManager : MonoBehaviour
     TMP_Text currentScoreText;
     [SerializeField]
     TMP_Text bestScoreText;
-
-    [Header("시작 스코어")]
-    [SerializeField]
-    double startScore = 100;
-
+            
     [Header("숫자 카운팅 효과")]
     [SerializeField]
     float countDuration = 0.33f;
@@ -47,6 +43,10 @@ public class ScoreManager : MonoBehaviour
     double optimalScore = 0;
     public double OptimalScore => optimalScore;
 
+    // 시작 점수
+    double startScore => SaveManager.DiagonosticScore;
+
+
     private void Awake()
     {
         // 최고 점수 설정
@@ -55,12 +55,6 @@ public class ScoreManager : MonoBehaviour
                 
         SetScore(startScore, false);
         SetOptimalScore(currentScore);
-    }
-
-    private void OnValidate()
-    {       
-        startScore = ClampDouble(startScore, MinScore, MaxScore);
-        //startScore = mathf.clamp(startScore, MinScore, MaxScore);
     }
 
     #region double 연산
