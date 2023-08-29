@@ -29,7 +29,7 @@ public class BulletParticle : MonoBehaviour
         if (enemy)
         {
             // 일반 피해량
-            int damage = Player.Instance.damageOnNomal;
+            int damage = (int)Player.Instance.damageOnNomal;
             if (type == BulletType.skill)
             {
                 // 스킬 발동 중 피해량

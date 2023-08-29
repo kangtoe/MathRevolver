@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,12 +21,12 @@ public class ScoreManager : MonoBehaviour
     private static ScoreManager instance;
     #endregion
 
-    static int MinScore = 1;
-    static int MaxScore = 999999999;
+    static double MinScore = 1;
+    static double MaxScore = 999999999;
 
-    int currentScore = 0;
+    double currentScore = 0;
 
-    int bestScore; // 최고 득점 점수
+    double bestScore; // 최고 득점 점수
     string bestScoreName = "BestScore";
 
     [SerializeField]
@@ -35,7 +36,7 @@ public class ScoreManager : MonoBehaviour
 
     [Header("시작 스코어")]
     [SerializeField]
-    int startScore = 100;
+    double startScore = 100;
 
     [Header("숫자 카운팅 효과")]
     [SerializeField]
@@ -43,8 +44,8 @@ public class ScoreManager : MonoBehaviour
     
     [Header("디버깅 : 최적해 점수 (가장 높은 결과값의 선택지를 택했을 때의 값)")]
     [SerializeField]
-    int optimalScore = 0;
-    public int OptimalScore => optimalScore;
+    double optimalScore = 0;
+    public double OptimalScore => optimalScore;
 
     private void Awake()
     {
@@ -56,27 +57,68 @@ public class ScoreManager : MonoBehaviour
         SetOptimalScore(currentScore);
     }
 
-    public void SetScore(int i, bool countEffect = true)
+    private void OnValidate()
+    {       
+        startScore = ClampDouble(startScore, MinScore, MaxScore);
+        //startScore = mathf.clamp(startScore, MinScore, MaxScore);
+    }
+
+    #region double 연산
+
+    double ClampDouble(double val, double min, double max)
+    {
+        if (val < min)
+        {
+            Debug.Log("val < MinScore");
+            return min;
+        }
+        if (max < val)
+        {
+            Debug.Log("MaxScore < val");
+            return max;
+        }
+        return val;
+    }
+
+    double Interpolate(double a, double b, double t)
+    {
+        t = ClampDouble(t, 0, 1);
+
+        //Debug.Log(" t = " + t);
+        double interval = b - a;
+        //Debug.Log("interval : " + interval);
+        double val1 = (double)(1d - t);
+        //Debug.Log("val1 : " + val1);
+        double val2 = val1 * interval;
+        //Debug.Log("val2 : " + val2);
+
+        return b - val2;
+    }
+
+    #endregion
+
+    public void SetScore(double _score, bool countEffect = true)
     {
         // 점수 제한 -> 1 이하로 떨어지지 않음
-        i = Mathf.Clamp(i, MinScore, MaxScore);
-        //Debug.Log("i :" + i);
+        //f = Mathf.Clamp(f, MinScore, MaxScore);
+        _score = ClampDouble(_score, MinScore, MaxScore);
+        Debug.Log("_score :" + _score);
 
         // 카운트 효과            
         float duration = countDuration;        
         if (!countEffect) duration = 0;        
         StopAllCoroutines();
-        StartCoroutine(CountTextCr(currentScoreText, currentScore, i, duration));
+        StartCoroutine(CountTextCr(currentScoreText, currentScore, _score, duration));
 
         // 현재 점수 갱신
-        currentScore = i;
+        currentScore = Math.Truncate(_score); // 소수점 이하를 버림으로써 오차의 누적을 방지
 
         // 최고 점수 갱신
         if (currentScore >= bestScore)
         {
             bestScoreText.enabled = true;
-            bestScore = currentScore;
-            SaveManager.BestScore = bestScore;
+            bestScore = Math.Round(currentScore);            
+            SaveManager.BestScore = (int)Math.Floor(currentScore);
         }
         else
         {
@@ -85,52 +127,60 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public int GetCurrentScore()
+    public double GetCurrentScore()
     {
         return currentScore;
     }
 
-    public void SetOptimalScore(int i)
+    public void SetOptimalScore(double _score)
     {
-        i = Mathf.Clamp(i, MinScore, MaxScore);
-        optimalScore = i;
+        //f = Mathf.Clamp(f, MinScore, MaxScore);
+        _score = ClampDouble(_score, MinScore, MaxScore);
+        optimalScore = Math.Truncate(_score);  // 소수점 이하를 버림으로써 오차의 누적을 방지
     }
 
-    public int GetOptimalScore()
+    public double GetOptimalScore()
     {
         return optimalScore;
     }
 
-    IEnumerator CountTextCr(TMP_Text text, int start, int end, float duration = 1)
+    IEnumerator CountTextCr(TMP_Text text, double start, double end, float duration = 1)
     {
         //Debug.Log(text.name + ": start = " + start);
         //Debug.Log(text.name + ": end = " + end);        
 
-        float current;
-        float t = 0;
+        double current;
+        double t = 0;
         while (true)
         {
             t += Time.deltaTime / duration;
             if (t > 1) t = 1;
+            Debug.Log(text.name + ": t = " + t);
 
             // 카운트 중간의 값 구하기
-            current = Mathf.Lerp(start, end, t);
+            current = Interpolate(start, end, t);
+
             // 아주 큰 수에서는 lerp 과정에서 오차가 발생함. 이를 보정            
-            int i = start;
-            if (start < end) i = Mathf.Clamp((int)current, start, end); // 증가 카운트
-            if (start > end) i = Mathf.Clamp((int)current, end, start); // 감소 카운트
-            //Debug.Log(text.name + ": i = " + i);
-            UpdataText(text, i);
+            //int i = start;
+            //if (start < end) i = Mathf.Clamp((int)current, start, end); // 증가 카운트
+            //if (start > end) i = Mathf.Clamp((int)current, end, start); // 감소 카운트            
+            //UpdataText(text, i);
+
+            //Debug.Log(text.name + ": current = " + current);
+            UpdataText(text, current);
 
             yield return null;
 
             if (t == 1) break;            
         }        
     }
-
-    void UpdataText(TMP_Text text, int i)
+    
+    void UpdataText(TMP_Text text, double val)
     {
-        //Debug.Log(text.name + ": set = " + i);
-        text.text = i.ToString();
+        // 소수부 버림하여 정수부만 표기
+        //string str = Mathf.FloorToInt(f).ToString();
+        string str = Math.Truncate(val).ToString();
+        //Debug.Log(text.name + ": val rounded = " + str);
+        text.text = str;
     }
 }

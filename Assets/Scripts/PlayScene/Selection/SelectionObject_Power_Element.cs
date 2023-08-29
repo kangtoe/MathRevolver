@@ -91,7 +91,7 @@ public class SelectionObject_Power_Element : MonoBehaviour
         float randomMult = 2;
 
         //int score = ScoreManager.GetScore();
-        int optimalScore = ScoreManager.GetOptimalScore();
+        int optimalScore = (int)ScoreManager.GetOptimalScore();
 
         // 합연산 변수 구하기
         int _pulsVal = 0;
@@ -149,41 +149,40 @@ public class SelectionObject_Power_Element : MonoBehaviour
     // 선택지 결과 반영
     public void OnSelected()
     {
-        int score = ScoreManager.GetCurrentScore();
+        double score = ScoreManager.GetCurrentScore();
 
         // 텍스트에 정보 매핑
-        int result = PreCalc(score);
+        double result = PreCalc(score);
         ScoreManager.SetScore(result);
     }
 
-    // 선택지 연산 결과 계산해보기
-    public int PreCalc(int i)
+    // 선택지 연산 결과 계산해보기 // int 오버플로우 방지
+    public double PreCalc(double val)
     {    
-        // int 오버플로우 방지
-        float f = i;        
-
         // 텍스트에 정보 매핑
         switch (type)
         {
             case CalcType.Add:
-                f += plusVal;
+                val += plusVal;
                 break;
             case CalcType.Substract:
-                f -= plusVal;
+                val -= plusVal;
                 break;                       
             case CalcType.Multiply:
-                f *= multVal;
+                val *= multVal;
                 break;                
             case CalcType.Divide:
-                f /= multVal;
+                val /= multVal;
                 break;
             default:
                 Debug.Log("calc type undefind : " + type);
                 return -1;
         }
 
-        if (f > int.MaxValue) return int.MaxValue;
-        else return (int)f;
+        //if (f > int.MaxValue) return int.MaxValue;
+        //else return f;
+
+        return val;
     }
 
     public void EnableVFX(bool enable)

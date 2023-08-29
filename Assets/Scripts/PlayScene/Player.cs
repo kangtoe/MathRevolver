@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
     SkillManager skill => SkillManager.Instance;
 
     // 일반 피해값
-    public int damageOnNomal => ScoreManager.Instance.GetCurrentScore();
+    public double damageOnNomal => ScoreManager.Instance.GetCurrentScore();
     // 스킬 발동 중, 일반 적에 대한 피해
     public int damageOnSkillToEnemy => int.MaxValue;
     // 스킬 발동 중, 적 보스에 대한 피해

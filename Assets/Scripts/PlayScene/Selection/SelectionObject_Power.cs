@@ -78,8 +78,8 @@ public class SelectionObject_Power : MonoBehaviour
         float minX = transform.position.x - (floorWidth / 2f);
 
         // 최적해
-        int optimalScore = ScoreManager.Instance.GetOptimalScore();
-        int optimalScore_tmp = 0;
+        double optimalScore = ScoreManager.Instance.GetOptimalScore();
+        double optimalScore_tmp = 0;
 
         // 해당 인덱스의 요소는 무조건 Add 연산
         int addIdx = Random.Range(0, count);
@@ -112,7 +112,7 @@ public class SelectionObject_Power : MonoBehaviour
             element.SetMeshColor(color);
 
             // 최적해 구하기
-            int preCalc = element.PreCalc(optimalScore);
+            double preCalc = element.PreCalc(optimalScore);
             if (preCalc > optimalScore_tmp)
             {
                 optimalScore_tmp = preCalc;
