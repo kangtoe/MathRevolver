@@ -2203,9 +2203,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB2F9\uC2E0\uC758 \uC218\uD559 \uC804\uD22C \uB2A5\uB825\uC744 \uCE21\uC815\uD569\uB2C8\uB2E4.\n\uB2A5\uB825\uCE58\uAC00
-    \uB192\uC744 \uC218\uB85D \uCD08\uAE30 \uC804\uD22C\uB825\uC774 \uAC15\uD574\uC9D1\uB2C8\uB2E4.\n\n\uD604\uC7AC
-    \uB2F9\uC2E0\uC5D0\uAC8C \uC801\uD569\uD55C \uB09C\uC774\uB3C4\uB294 \uBB34\uC5C7\uC785\uB2C8\uAE4C?"
+  m_text: "\uB2F9\uC2E0\uC758 \uC218\uD559 \uC804\uD22C \uB2A5\uB825\uC744 \uCE21\uC815\uD569\uB2C8\uB2E4.\n\uB192\uC740
+    \uB09C\uC774\uB3C4\uB97C \uC120\uD0DD\uD558\uAC70\uB098,\n\uBB38\uC81C\uB97C
+    \uB9CE\uC774 \uB9DE\uCD9C \uC218\uB85D \uCD08\uAE30 \uC804\uD22C\uB825\uC774
+    \uAC15\uD574\uC9D1\uB2C8\uB2E4.\n\n\uD604\uC7AC \uB2F9\uC2E0\uC5D0\uAC8C \uC801\uD569\uD55C
+    \uB09C\uC774\uB3C4\uB294 \uBB34\uC5C7\uC785\uB2C8\uAE4C?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aa36963f05b182d429b94e5e1134b9fb, type: 2}
   m_sharedMaterial: {fileID: -7118859338823495060, guid: aa36963f05b182d429b94e5e1134b9fb, type: 2}
@@ -2232,8 +2234,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
-  m_fontSizeBase: 48
+  m_fontSize: 43
+  m_fontSizeBase: 43
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2362,23 +2364,26 @@ MonoBehaviour:
   textList: []
   tmpList:
   - text: {fileID: 510571196}
-    textKr: "\uB2F9\uC2E0\uC758 \uC218\uD559 \uC804\uD22C \uB2A5\uB825\uC744 \uCE21\uC815\uD569\uB2C8\uB2E4.
-      \n\uB2A5\uB825\uCE58\uAC00 \uB192\uC744 \uC218\uB85D \uCD08\uAE30 \uC804\uD22C\uB825\uC774
-      \uAC15\uD574\uC9D1\uB2C8\uB2E4.\n  \n\uD604\uC7AC \uB2F9\uC2E0\uC5D0\uAC8C
-      \uC801\uD569\uD55C \uB09C\uC774\uB3C4\uB294 \uBB34\uC5C7\uC785\uB2C8\uAE4C?"
+    textKr: "\uB2F9\uC2E0\uC758 \uC218\uD559 \uC804\uD22C \uB2A5\uB825\uC744 \uCE21\uC815\uD569\uB2C8\uB2E4.\n\uB192\uC740
+      \uB09C\uC774\uB3C4\uB97C \uC120\uD0DD\uD558\uAC70\uB098,\n\uBB38\uC81C\uB97C
+      \uB9CE\uC774 \uB9DE\uCD9C \uC218\uB85D \uCD08\uAE30 \uC804\uD22C\uB825\uC774
+      \uAC15\uD574\uC9D1\uB2C8\uB2E4.\n\n\uD604\uC7AC \uB2F9\uC2E0\uC5D0\uAC8C \uC801\uD569\uD55C
+      \uB09C\uC774\uB3C4\uB294 \uBB34\uC5C7\uC785\uB2C8\uAE4C?"
     textEn: 'Measure your math combat power.
 
-      The higher the capability,
+      The higher the difficulty level,
 
-      the
-      stronger the starting combat power.
+      or
+      the more questions you answer,
 
+      the stronger the starting combat power.
 
+      
 
-      What is the current level of difficulty
+      What
+      is the current level of difficulty
 
-      suitable
-      for you?'
+      suitable for you?'
   - text: {fileID: 2037220830}
     textKr: "\uC218\uB97C \uC140 \uC218 \uC788\uC5B4\uC694"
     textEn: I can count

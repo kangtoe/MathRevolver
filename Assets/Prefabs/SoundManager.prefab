@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba12d3a52a281742898d44e198e1e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgm: {fileID: 8300000, guid: 55ecc3ce497104a4c8183243e666b4a9, type: 3}
+  bgm: {fileID: 8300000, guid: 6c08583e14be56841be935cd1a77b1cf, type: 3}
   soundList:
   - name: click
     clip: {fileID: 8300000, guid: a43e27dd3b9055e47b067a80c9b61066, type: 3}
