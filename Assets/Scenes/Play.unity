@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.177579, g: 0.22232252, b: 0.3045191, a: 1}
+  m_IndirectSpecularColor: {r: 0.17757872, g: 0.2223221, b: 0.30451828, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &418817
 RectTransform:
   m_ObjectHideFlags: 0
@@ -249,7 +249,7 @@ MonoBehaviour:
   selectionPrefab_Math: {fileID: 7888360049068581542, guid: 19f2da9af8af41443a45bd2f5adc9cc5, type: 3}
   creatingPoint: {fileID: 7888360048686185028}
   creatingInterval: 5
-  adventCount: 100
+  adventCount: 1
   SelectionObject_PowerList: []
   planeMargin: 0.25
   textMargin: 0.5
@@ -6461,7 +6461,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ff7d6d9525b42154e86cccaa36a463fd, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -7924,7 +7924,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 42749cc82307dd0449a6386c2eea4919, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -20438,10 +20438,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1477721962}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ActiveUpgradeUI
-        m_Mode: 6
+      - m_Target: {fileID: 1901632799}
+        m_TargetAssemblyTypeName: WJ_Sample_Play, Assembly-CSharp
+        m_MethodName: SetNewQuestionData
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -32818,7 +32818,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1219998642
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34848,6 +34848,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1469557889}
   m_CullTransparentMesh: 1
+--- !u!1001 &1471949122
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2017514064872800624, guid: 19b1e37bd5b93d646afb32de9c09924c, type: 3}
+      propertyPath: m_Name
+      value: API_conn
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017514064872800625, guid: 19b1e37bd5b93d646afb32de9c09924c, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017514064872800625, guid: 19b1e37bd5b93d646afb32de9c09924c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017514064872800625, guid: 19b1e37bd5b93d646afb32de9c09924c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017514064872800625, guid: 19b1e37bd5b93d646afb32de9c09924c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017514064872800625, guid: 19b1e37bd5b93d646afb32de9c09924c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017514064872800625, guid: 19b1e37bd5b93d646afb32de9c09924c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017514064872800625, guid: 19b1e37bd5b93d646afb32de9c09924c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017514064872800625, guid: 19b1e37bd5b93d646afb32de9c09924c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017514064872800625, guid: 19b1e37bd5b93d646afb32de9c09924c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017514064872800625, guid: 19b1e37bd5b93d646afb32de9c09924c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017514064872800625, guid: 19b1e37bd5b93d646afb32de9c09924c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 19b1e37bd5b93d646afb32de9c09924c, type: 3}
 --- !u!1 &1477721960
 GameObject:
   m_ObjectHideFlags: 0
@@ -34858,6 +34915,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1477721961}
   - component: {fileID: 1477721962}
+  - component: {fileID: 1477721963}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -34899,6 +34957,22 @@ MonoBehaviour:
   flashPanel: {fileID: 631432284}
   flashDuration: 0.5
   flashMaxAlpha: 0.5
+--- !u!114 &1477721963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477721960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9bc1d9d0eef00547a55646f931149d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeGage: {fileID: 0}
+  onTimeEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1478653624
 GameObject:
   m_ObjectHideFlags: 0
@@ -43496,6 +43570,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1901632798}
   - component: {fileID: 1901632799}
+  - component: {fileID: 1901632800}
   m_Layer: 0
   m_Name: MathpidAPI
   m_TagString: Untagged
@@ -43539,6 +43614,9 @@ MonoBehaviour:
   - {fileID: 1940810676}
   - {fileID: 965060926}
   - {fileID: 1784273043}
+  currentQuestionIndex: 0
+  loop: 0
+  solveTime: 10
   texDrawfontText: '\cmb '
   onStart:
     m_PersistentCalls:
@@ -43556,10 +43634,24 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   dataSetting: 0
-  loop: 0
   timeScaleOnActivePanel: 0.1
-  timeLimit: 10
-  timeGage: {fileID: 0}
+  timeBar: {fileID: 1901632800}
+--- !u!114 &1901632800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901632797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9bc1d9d0eef00547a55646f931149d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeGage: {fileID: 1380298331}
+  onTimeEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1906482045
 GameObject:
   m_ObjectHideFlags: 0

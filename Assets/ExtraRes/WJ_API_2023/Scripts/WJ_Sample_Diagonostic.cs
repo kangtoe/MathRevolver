@@ -49,7 +49,11 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
     //int     currentQuestionIndex;
     int     QuestionCount = 8;    
     bool    isSolvingQuestion;
-    float   questionSolveTime;    
+    float   currentSolveTime;
+    
+    [Header("문제 별 풀이 제한시간")]
+    [SerializeField]
+    float solveTime = 10;
 
     [Header("TEXDraw 폰트 설정 문자열")]
     [SerializeField]
@@ -79,6 +83,10 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
     [SerializeField]
     Animator anim;
 
+    [Header("시간 게이지")]
+    [SerializeField]
+    TimeBar timeBar;
+
     WJ_Connector wj_conn => WJ_Connector.Instance;
     Diagnotics_Data data;
 
@@ -96,7 +104,9 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         for (int i = 0; i < btAnsr.Length; ++i)
         {
             textAnsr[i] = btAnsr[i].GetComponentInChildren<TEXDraw>();
-        }        
+        }
+
+        timeBar.onTimeEnd.AddListener(() => SelectAnswer(-1));
     }
 
     private void OnEnable()
@@ -106,7 +116,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
 
     private void Update()
     {
-        if (isSolvingQuestion) questionSolveTime += Time.deltaTime;
+        if (isSolvingQuestion) currentSolveTime += Time.deltaTime;
     }
 
     void OnGetQuestionFirst()
@@ -249,8 +259,8 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         }
 
         isSolvingQuestion = true;
-        questionSolveTime = 0;        
-        DiagonosticManager.Instance.StartTimeBar();
+        currentSolveTime = 0;
+        timeBar.StartTimeBar(solveTime);
     }
 
     // 답을 고르고 맞았는 지 체크
@@ -261,7 +271,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
 
         UIManager_Diagonostic.Instance.DoBulletUsingEffect();
         UIManager_Diagonostic.Instance.SetLeftQuestionCount(QuestionCount);
-        DiagonosticManager.Instance.StopTimeBar();
+        timeBar.StopTimeBar();
 
         bool isCorrect;
         string ansrCwYn;
@@ -280,7 +290,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         ansrCwYn = isCorrect ? "Y" : "N";  
         
         // 커넥터 통해 문제 답안 결과 보내기
-        wj_conn.Diagnosis_SelectAnswer(myAnsr, ansrCwYn, (int)(questionSolveTime * 1000));
+        wj_conn.Diagnosis_SelectAnswer(myAnsr, ansrCwYn, (int)(currentSolveTime * 1000));
 
         // 현재 상태 : 애니메이션 연출 상태
         status = DiagonosticStatus.OnSolveAnimation;
@@ -330,6 +340,22 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         }
     }
 
+    public void AutoSkip()
+    {
+        StartCoroutine(AutoSkipCr());
+    }
+
+    IEnumerator AutoSkipCr()
+    {
+        while (true)
+        {
+            if (status == DiagonosticStatus.ChoosingDiff) OnChooseDifficulty(0);
+            if (status == DiagonosticStatus.OnSolving) SelectAnswer(-1);
+            if (status == DiagonosticStatus.DiagonosticFinished) break;
+            yield return new WaitForSeconds(0.1f);            
+        }        
+    }
+    
     #region 만료됨
 
     /// <summary>
