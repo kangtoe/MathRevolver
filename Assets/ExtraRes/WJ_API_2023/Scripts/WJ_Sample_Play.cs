@@ -81,7 +81,7 @@ public class WJ_Sample_Play : MonoBehaviour
     [SerializeField]
     Animator anim;
     [SerializeField]
-    CorrectCreator correctCreator;
+    FadeUICreator correctCreator;
 
     WJ_Connector wj_conn => WJ_Connector.Instance;
     Learning_Question qst;

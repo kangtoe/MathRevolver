@@ -47,6 +47,9 @@ public class EnemySpwaner : MonoBehaviour
     [Header("현존하는 적 리스트")]
     public List<Enemy> enemies = new List<Enemy>();
 
+    [SerializeField]
+    FadeUICreator ui_Creator;
+
     // 디버그용
     int enemyNumber = 0;
 
@@ -83,6 +86,7 @@ public class EnemySpwaner : MonoBehaviour
                 {                    
                     Spwan(enemyBossPrefab);
                     currentBossAdventCount = bossAdventCount;
+                    ui_Creator.CreateBossWarningUI(Vector2.up * 250);
                 }
                 else
                 {                 

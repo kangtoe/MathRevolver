@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7683507756650551351}
   - component: {fileID: 1637416745306593025}
   m_Layer: 0
-  m_Name: CurrectCreator
+  m_Name: FadeUICreator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,5 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
+  bossWarningUI: {fileID: 1050415047763992567, guid: ccf82b07026b74d42bd8d44be5d9428c, type: 3}
   currectUI: {fileID: 5488273556561411327, guid: b79e966716655de4382e868e448ab8f6, type: 3}
   incurrectUI: {fileID: 2874918401581513852, guid: c1769577277ece54db49a56cdf3c263c, type: 3}

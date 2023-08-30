@@ -121,7 +121,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 4
   OnLife: 1
-  lifeTime: 1
+  lifeTime: 3
 --- !u!114 &1050415047763992563
 MonoBehaviour:
   m_ObjectHideFlags: 0

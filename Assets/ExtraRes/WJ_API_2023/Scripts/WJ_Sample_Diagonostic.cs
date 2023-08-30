@@ -82,7 +82,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
     [SerializeField]
     Animator anim;
     [SerializeField]
-    CorrectCreator correctCreator;
+    FadeUICreator correctCreator;
 
     [Header("시간 게이지")]
     [SerializeField]
