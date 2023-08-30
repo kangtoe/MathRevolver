@@ -75,7 +75,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
     public UnityEvent onGetQuestionFirst;
     bool eventInvoked = false;
 
-    [Header("진단 평가 점수")]
+    [Header("연출 애니메이터")]
     [SerializeField]
     Animator anim;
 
