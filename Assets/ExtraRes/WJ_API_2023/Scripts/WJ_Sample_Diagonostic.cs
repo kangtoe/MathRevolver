@@ -82,7 +82,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
     [SerializeField]
     Animator anim;
     [SerializeField]
-    FadeUICreator correctCreator;
+    CorrectCreator correctCreator;
 
     [Header("시간 게이지")]
     [SerializeField]
@@ -299,7 +299,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         if (isCorrect)
         {
             // 정답 처리
-            correctCreator.CreateCurrectUI();
+            correctCreator.CreateCorrectUI();
             score += scorePreCurrect;
 
             // 연출
@@ -325,7 +325,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         else
         {
             // 오답 처리
-            correctCreator.CreateIncurrectUI();
+            correctCreator.CreateIncorrectUI();
 
             anim.SetTrigger("disappear");
         }        

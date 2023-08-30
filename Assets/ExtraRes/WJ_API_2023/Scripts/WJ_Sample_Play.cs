@@ -81,7 +81,7 @@ public class WJ_Sample_Play : MonoBehaviour
     [SerializeField]
     Animator anim;
     [SerializeField]
-    FadeUICreator correctCreator;
+    CorrectCreator correctCreator;
 
     WJ_Connector wj_conn => WJ_Connector.Instance;
     Learning_Question qst;
@@ -228,7 +228,7 @@ public class WJ_Sample_Play : MonoBehaviour
         if (isCorrect)
         {
             // 정답 처리
-            correctCreator.CreateCurrectUI();            
+            correctCreator.CreateCorrectUI();            
 
             // 연출
             switch (_idx)
@@ -253,7 +253,7 @@ public class WJ_Sample_Play : MonoBehaviour
         else
         {
             // 오답 처리
-            correctCreator.CreateIncurrectUI();
+            correctCreator.CreateIncorrectUI();
 
             anim.SetTrigger("disappear");
         }
