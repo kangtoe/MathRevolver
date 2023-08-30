@@ -83,10 +83,12 @@ public class EnemySpwaner : MonoBehaviour
             if (isBossExist == false)
             {                
                 if (currentBossAdventCount <= 0)
-                {                    
-                    Spwan(enemyBossPrefab);
-                    currentBossAdventCount = bossAdventCount;
+                {
+                    SoundManager.Instance.PlaySound("waring");
                     bossWarning.CreateBossWarningUI(Vector2.up * 250);
+
+                    Spwan(enemyBossPrefab);
+                    currentBossAdventCount = bossAdventCount;                    
                 }
                 else
                 {                 

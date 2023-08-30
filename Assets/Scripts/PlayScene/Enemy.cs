@@ -144,7 +144,7 @@ public class Enemy : MonoBehaviour
 
     void OnDie()
     {
-        // todo : animator 파라메터 조절 또는 die prefab(파티클 시스템 등) 생성
+        SoundManager.Instance.PlaySound("monsterdie");
         Vector3 pos = transform.position + Vector3.up * 0.5f;
         Instantiate(dieVfx, pos, Quaternion.identity);
 

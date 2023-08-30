@@ -113,6 +113,7 @@ public class ScoreManager : MonoBehaviour
         // 최고 점수 갱신
         if (currentScore >= bestScore)
         {
+            SoundManager.Instance.PlaySound("bestscore");
             bestScoreText.enabled = true;
             bestScore = Math.Round(currentScore);            
             SaveManager.BestScore = (int)Math.Floor(currentScore);

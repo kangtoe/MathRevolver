@@ -78,6 +78,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 76675ab6f6828844f997275cf2fcf183, type: 3}
   - name: heal
     clip: {fileID: 8300000, guid: 8f0ef7226f8c8e0418d292aa75698426, type: 3}
+  - name: select
+    clip: {fileID: 8300000, guid: 8f8a33ad9895c054495c046739d0bcae, type: 3}
   playerList: []
   sfxOutput: {fileID: 3474489624104542020, guid: afdf1822f9c904545b25867869f8b6c1, type: 2}
   bgmOutput: {fileID: 2948268655846785522, guid: afdf1822f9c904545b25867869f8b6c1, type: 2}

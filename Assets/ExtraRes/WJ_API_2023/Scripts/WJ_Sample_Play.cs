@@ -228,6 +228,7 @@ public class WJ_Sample_Play : MonoBehaviour
         if (isCorrect)
         {
             // 정답 처리
+            SoundManager.Instance.PlaySound("correct");
             correctCreator.CreateCorrectUI();            
 
             // 연출
@@ -253,6 +254,7 @@ public class WJ_Sample_Play : MonoBehaviour
         else
         {
             // 오답 처리
+            SoundManager.Instance.PlaySound("incorrect");
             correctCreator.CreateIncorrectUI();
 
             anim.SetTrigger("disappear");

@@ -73,6 +73,8 @@ public class SelectionObject_Power : MonoBehaviour
 
         if (other.tag == "Player")
         {
+            SoundManager.Instance.PlaySound("select");
+
             isInteracted = true;
 
             // 어느 선택지에 가장 가까운지 판별하여, 해당 선택지에 해당하는 효과 적용

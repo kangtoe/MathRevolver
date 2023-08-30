@@ -142,6 +142,8 @@ public class UpgradeControl : MonoBehaviour
         attackSpeedBtn.SetLevelText(levelText + attackSpeedLv);
         attackSpeedBtn.Button.onClick.AddListener(delegate // 클릭 시 처리
         {
+            SoundManager.Instance.PlaySound("up");
+
             // 레벨 증가
             attackSpeedLv++;
             attackSpeedLv = Mathf.Clamp(attackSpeedLv, 0, maxLv);
@@ -157,6 +159,8 @@ public class UpgradeControl : MonoBehaviour
         skillTimeBtn.SetLevelText(levelText + skillTimeLv);
         skillTimeBtn.Button.onClick.AddListener(delegate // 클릭 시 처리
         {
+            SoundManager.Instance.PlaySound("up");
+
             // 레벨 증가
             skillTimeLv++;
             skillTimeLv = Mathf.Clamp(skillTimeLv, 0, maxLv);
@@ -172,6 +176,8 @@ public class UpgradeControl : MonoBehaviour
         solvingTimeBtn.SetLevelText(levelText + solvingTimeLv);
         solvingTimeBtn.Button.onClick.AddListener(delegate // 클릭 시 처리
         {
+            SoundManager.Instance.PlaySound("up");
+
             // 레벨 증가
             solvingTimeLv++;
             solvingTimeLv = Mathf.Clamp(solvingTimeLv, 0, maxLv);
@@ -187,6 +193,8 @@ public class UpgradeControl : MonoBehaviour
         recoverHeartBtn.SetLevelText(levelText + "--");
         recoverHeartBtn.Button.onClick.AddListener(delegate // 클릭 시 처리
         {
+            SoundManager.Instance.PlaySound("heal");
+
             // 하트 완전 회복 처리
             HeartsManager.Instance.HeartRecovery();
 

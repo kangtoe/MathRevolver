@@ -208,10 +208,12 @@ public class Player : MonoBehaviour
         // 사격 파티클 생성
         if (skill.IsSkillOnActive)
         {
+            SoundManager.Instance.PlaySound("shoot1");
             skillParticle.Shoot(point);
         }
         else
         {
+            SoundManager.Instance.PlaySound("shoot2");
             nomalParticle.Shoot(point);
         }
     }
@@ -221,6 +223,7 @@ public class Player : MonoBehaviour
     // 사망
     public void OnDead()
     {
+        SoundManager.Instance.PlaySound("gameover");
         anim.SetTrigger("dead");
         revolver.SetActive(false);
         isDead = true;

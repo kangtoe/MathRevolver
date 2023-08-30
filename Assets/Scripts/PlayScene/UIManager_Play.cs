@@ -45,11 +45,12 @@ public class UIManager_Play : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ActiveOptionUI(false);        
+        //ActiveOptionUI(false);        
     }
 
     public void ActiveUpgradeUI(bool active)
     {
+        SoundManager.Instance.PlaySound("upgrade");
         upgradeUI.SetActive(active);
 
         // 시간 스케일 조정
@@ -70,6 +71,7 @@ public class UIManager_Play : MonoBehaviour
 
     public void ActiveOptionUI(bool active)
     {
+        SoundManager.Instance.PlaySound("click");
         optionUI.SetActive(active);
 
         // 시간 스케일 조정

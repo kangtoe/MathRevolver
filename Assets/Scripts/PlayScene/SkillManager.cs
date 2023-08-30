@@ -111,7 +111,8 @@ public class SkillManager : MonoBehaviour
 
                 state = SkillState.Ready;
                 fill.sprite = loaded;
-                // 사운드 : 철컥
+                // 사운드 : 스킬 준비 완료
+                SoundManager.Instance.PlaySound("skillready");
             }
 
             Debug.Log("CoolDownCr");
@@ -190,6 +191,7 @@ public class SkillManager : MonoBehaviour
             return;
         }
 
+        SoundManager.Instance.PlaySound("skill");
         StopAllCoroutines();
         StartCoroutine(SkillActivatingCr());
     }

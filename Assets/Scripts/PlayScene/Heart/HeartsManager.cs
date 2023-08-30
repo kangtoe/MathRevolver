@@ -91,6 +91,8 @@ public class HeartsManager : MonoBehaviour
 
     public void HeartLost(int lost)
     {
+        SoundManager.Instance.PlaySound("hit");
+
         leftHeart -= lost;
         if (leftHeart < 0) leftHeart = 0;
         UpdateHeartUI();
