@@ -153,6 +153,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         wj_conn.FirstRun_Diagnosis(a);
         //status = DiagonosticStatus.OnChoosingDiffAnimation;
 
+        // 선택 난이도별 보너스 점수 부여
         switch (a)
         {
             case 0:

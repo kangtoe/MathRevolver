@@ -987,8 +987,12 @@ MonoBehaviour:
   - {fileID: 1496596982}
   - {fileID: 1172276204}
   texDrawfontText: '\cmb '
-  score: 0
+  score: 10
   scorePreCurrect: 5
+  diff0PlusScore: 0
+  diff1PlusScore: 10
+  diff2PlusScore: 20
+  diff3PlusScore: 30
   onGetQuestionFirst:
     m_PersistentCalls:
       m_Calls:
