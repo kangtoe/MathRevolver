@@ -54,6 +54,7 @@ public class WJ_Sample_Play : MonoBehaviour
     [SerializeField]
     int loop = 0; // 문제 묶음(8개) 받아 온 횟수    
     float questionSolveTime;
+    bool isCorrect;
 
     [Header("문제 별 풀이 제한시간")]
     [SerializeField]
@@ -192,7 +193,7 @@ public class WJ_Sample_Play : MonoBehaviour
     {                        
         timeBar.StopTimeBar();
 
-        bool isCorrect;
+        //bool isCorrect;
         string ansrCwYn;
         string myAnsr;
         string currectAnsr = qst.qstCransr;
@@ -278,7 +279,8 @@ public class WJ_Sample_Play : MonoBehaviour
     // 모든 애니메이션 연출 종료
     public void OnEndAnim()
     {
-        ActivePanel(false);
+        ActivePanel(false);        
+        if (isCorrect) UIManager_Play.Instance.ActiveUpgradeUI(true);
     }
 
     public void ActivePanel(bool active)
@@ -296,11 +298,14 @@ public class WJ_Sample_Play : MonoBehaviour
             // 문제 표기
             SetQst(currentQuestionIndex);
             currentQuestionIndex++;
+
+            // 정답 여부 초기화
+            isCorrect = false;
         }
         else if (active == false)
         {
             TimeManager.Instance.SetScale(1);
-            panel_question.SetActive(false);
+            panel_question.SetActive(false);            
         }
     }
 
