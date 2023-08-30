@@ -5,13 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using WjChallenge;
 
-//public enum CurrentStatus 
-//{ 
-//    WAITING, 
-//    DIAGNOSIS, 
-//    LEARNING 
-//}
-
 public enum DiagonosticStatus
 {
     Undefined = 0,
@@ -64,9 +57,19 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
 
     [Header("진단 평가 점수")]
     [SerializeField]
-    int score;
+    int score = 10; // 시작 점수
     [SerializeField]
-    int scorePreCurrect = 5; // 문제 정답 시 점수
+    int scorePreCurrect = 5; // 문제 별 정답 시 점수
+
+    [Header("난이도별 보너스 점수")]
+    [SerializeField]
+    int diff0PlusScore = 0;
+    [SerializeField]
+    int diff1PlusScore = 10;
+    [SerializeField]
+    int diff2PlusScore = 20;
+    [SerializeField]
+    int diff3PlusScore = 30;
 
     [Header("난이도 선택 후 연출 : 처음으로 문제 정보를 알아왔을 때 한번만 실행")]
     public UnityEvent onGetQuestionFirst;
@@ -147,8 +150,27 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
     // 난이도 버튼 선택 시 : 버튼 이벤트로 호출
     public void OnChooseDifficulty(int a)
     {        
-        wj_conn.FirstRun_Diagnosis(a);        
+        wj_conn.FirstRun_Diagnosis(a);
         //status = DiagonosticStatus.OnChoosingDiffAnimation;
+
+        switch (a)
+        {
+            case 0:
+                score += diff0PlusScore;
+                break;
+            case 1:
+                score += diff1PlusScore;
+                break;
+            case 2:
+                score += diff2PlusScore;
+                break;
+            case 3:
+                score += diff3PlusScore;
+                break;
+            default:
+                Debug.Log("현재 난이도에 대한 동작 정의되지 않음");
+                break;
+        }
     }    
 
     // 진단평가 문제 받아오기 : 커넥터 이벤트에서 호출 (진단평가 문제를 받아온 직후)
