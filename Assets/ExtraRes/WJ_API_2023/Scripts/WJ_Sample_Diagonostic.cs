@@ -47,8 +47,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
 
     [Header("Status")]
     //int     currentQuestionIndex;
-    int     QuestionCount = 8;    
-    bool    isSolvingQuestion;
+    int     QuestionCount = 8;        
     float   currentSolveTime;
     
     [Header("문제 별 풀이 제한시간")]
@@ -82,6 +81,8 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
     [Header("연출 애니메이터")]
     [SerializeField]
     Animator anim;
+    [SerializeField]
+    CorrectCreator correctCreator;
 
     [Header("시간 게이지")]
     [SerializeField]
@@ -116,7 +117,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
 
     private void Update()
     {
-        if (isSolvingQuestion) currentSolveTime += Time.deltaTime;
+        if (status == DiagonosticStatus.OnSolving) currentSolveTime += Time.deltaTime;
     }
 
     void OnGetQuestionFirst()
@@ -258,15 +259,14 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
                 textAnsr[i].text = texDrawfontText + wrongAnswers[q];
         }
 
-        isSolvingQuestion = true;
+        status = DiagonosticStatus.OnSolving;
         currentSolveTime = 0;
         timeBar.StartTimeBar(solveTime);
     }
 
     // 답을 고르고 맞았는 지 체크
     public void SelectAnswer(int _idx = -1)
-    {
-        isSolvingQuestion = false;
+    {        
         QuestionCount--;
 
         UIManager_Diagonostic.Instance.DoBulletUsingEffect();
@@ -299,7 +299,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         if (isCorrect)
         {
             // 정답 처리
-            UIManager_Diagonostic.Instance.CreateCurrectUI();
+            correctCreator.CreateCurrectUI();
             score += scorePreCurrect;
 
             // 연출
@@ -325,7 +325,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         else
         {
             // 오답 처리
-            UIManager_Diagonostic.Instance.CreateIncurrectUI();
+            correctCreator.CreateIncurrectUI();
 
             anim.SetTrigger("disappear");
         }        

@@ -23,21 +23,28 @@ public class ColorByLifeTime : MonoBehaviour
     {
         OnLife = 0;
         SetColor();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        OnLife += Time.deltaTime;
-        if (OnLife > 1) OnLife = 1;
-        SetColor();
-
-        if (OnLife == 1) Destroy(gameObject);
-    }
+        StartCoroutine(Cr());
+    }    
 
     private void OnValidate()
     {
         SetColor();
+    }
+
+    IEnumerator Cr()
+    {
+        float interval = 0.01f;
+
+        while (true)
+        {
+            OnLife += interval / lifeTime;
+            if (OnLife > 1) OnLife = 1;
+            SetColor();
+
+            yield return new WaitForSecondsRealtime(interval);
+            if (OnLife == 1) Destroy(gameObject);
+        }
     }
 
     void SetColor()

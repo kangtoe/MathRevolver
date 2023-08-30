@@ -52,8 +52,7 @@ public class WJ_Sample_Play : MonoBehaviour
     [SerializeField]
     int currentQuestionIndex;
     [SerializeField]
-    int loop = 0; // 문제 묶음(8개) 받아 온 횟수
-    bool isSolvingQuestion;
+    int loop = 0; // 문제 묶음(8개) 받아 온 횟수    
     float questionSolveTime;
 
     [Header("문제 별 풀이 제한시간")]
@@ -76,6 +75,12 @@ public class WJ_Sample_Play : MonoBehaviour
     [Header("시간 게이지")]
     [SerializeField]
     TimeBar timeBar;
+
+    [Header("연출 애니메이터")]
+    [SerializeField]
+    Animator anim;
+    [SerializeField]
+    CorrectCreator correctCreator;
 
     WJ_Connector wj_conn => WJ_Connector.Instance;
     Learning_Question qst;
@@ -164,18 +169,22 @@ public class WJ_Sample_Play : MonoBehaviour
                     textAnsr[i].text = texDrawfontText + wrongAnswers[q];
                 }
             }
-            isSolvingQuestion = true;
+            status = MathpidStatus.OnSolving;
+            questionSolveTime = 0;
         }
 
         if (dataSetting)
         {
             Debug.Log("문제 표기 실패 : 데이터 받아오는 중");
             return;
-        }
+        }       
 
         // index에 해당하는 문제 ui에 표기
-        Learning_Question qst = wj_conn.cLearnSet.data.qsts[_index];        
+        qst = wj_conn.cLearnSet.data.qsts[_index];        
         MakeQuestion(qst.textCn, qst.qstCn, qst.qstCransr, qst.qstWransr);
+
+        // 연출
+        anim.SetTrigger("appear");
     }
     
     // 답을 고르고 맞았는 지 체크 : 버튼 이벤트로 호출
@@ -185,22 +194,26 @@ public class WJ_Sample_Play : MonoBehaviour
 
         bool isCorrect;
         string ansrCwYn;
-        string ansr;
+        string myAnsr;
+        string currectAnsr = qst.qstCransr;
 
-        if (_idx == -1) ansr = ""; // 답안 제출하지 못함 (공란?)                
-        else ansr = textAnsr[_idx].text;        
+        if (_idx == -1) myAnsr = ""; // 답안 제출하지 못함 (공란?)                        
+        else
+        {
+            myAnsr = textAnsr[_idx].text;
+            myAnsr = myAnsr.Replace(texDrawfontText, ""); // 폰트 문자열 제거
+        }
 
-        isCorrect = ansr.CompareTo(wj_conn.cLearnSet.data.qsts[currentQuestionIndex].qstCransr) == 0 ? true : false;
+        // 답안 평가
+        isCorrect = myAnsr.CompareTo(currectAnsr) == 0 ? true : false;
         ansrCwYn = isCorrect ? "Y" : "N";
-        
+
         // 커넥터 통해 문제 답안 결과 보내기
-        wj_conn.Learning_SelectAnswer(currentQuestionIndex, ansr, ansrCwYn, (int)(questionSolveTime * 1000));
+        wj_conn.Learning_SelectAnswer(currentQuestionIndex, myAnsr, ansrCwYn, (int)(questionSolveTime * 1000));
 
-        isSolvingQuestion = false;
-        questionSolveTime = 0;                
-
-        ActivePanel(false);
-
+        // 현재 상태 : 애니메이션 연출 상태
+        status = MathpidStatus.OnSolveAnimation;                            
+        
         currentQuestionIndex++;
         if (currentQuestionIndex >= 8)
         {
@@ -209,11 +222,50 @@ public class WJ_Sample_Play : MonoBehaviour
             currentQuestionIndex = 0;
             loop++;
         }
-        
+
+        // 정답/오답 시 처리        
+        if (isCorrect)
+        {
+            // 정답 처리
+            correctCreator.CreateCurrectUI();            
+
+            // 연출
+            switch (_idx)
+            {
+                case 0:
+                    anim.SetTrigger("click0");
+                    break;
+                case 1:
+                    anim.SetTrigger("click1");
+                    break;
+                case 2:
+                    anim.SetTrigger("click2");
+                    break;
+                case 3:
+                    anim.SetTrigger("click3");
+                    break;
+                default:
+                    Debug.Log("_idx error");
+                    break;
+            }
+        }
+        else
+        {
+            // 오답 처리
+            correctCreator.CreateIncurrectUI();
+
+            anim.SetTrigger("disappear");
+        }
+
         // 디버그
         {
-            Debug.Log("SelectAnswer idx : " + _idx);
-            Debug.Log("loop : " + loop + " || currentQuestionIndex : " + currentQuestionIndex);
+            Debug.Log("loop : " + loop);
+            Debug.Log("currentQuestionIndex : " + currentQuestionIndex);
+            Debug.Log("myAnsr idx : " + _idx);
+            
+            Debug.Log("myAnsr : " + myAnsr);
+            Debug.Log("currectAnsr : " + currectAnsr);
+            
             //if (wj_conn == null) Debug.Log("null 6");
             if (wj_conn.cLearnSet == null) Debug.Log("null 5");
             if (wj_conn.cLearnSet.data == null) Debug.Log("null 4");
@@ -221,11 +273,17 @@ public class WJ_Sample_Play : MonoBehaviour
             //if (wj_conn.cLearnSet.data.qsts[currentQuestionIndex] == null) Debug.Log("null 2");
             //if (wj_conn.cLearnSet.data.qsts[currentQuestionIndex].qstCransr == null) Debug.Log("null 1");             
         }
-    }    
+    }
+
+    // 모든 애니메이션 연출 종료
+    public void OnEndAnim()
+    {
+        ActivePanel(false);
+    }
 
     public void ActivePanel(bool active)
     {
-        Debug.Log("ActivePanel : " + active);
+        //Debug.Log("ActivePanel : " + active);
 
         if (active == true)
         {

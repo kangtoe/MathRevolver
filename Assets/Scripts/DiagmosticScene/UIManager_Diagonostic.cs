@@ -20,15 +20,6 @@ public class UIManager_Diagonostic : MonoBehaviour
     private static UIManager_Diagonostic instance;
     #endregion
 
-    [SerializeField]
-    Canvas canvas;
-
-    [Header("정답/오답 표시 UI")]
-    [SerializeField]
-    GameObject currectUI;
-    [SerializeField]
-    GameObject incurrectUI;
-
     [SerializeField] 
     BulletMag bulletMag;
 
@@ -37,16 +28,6 @@ public class UIManager_Diagonostic : MonoBehaviour
 
     [SerializeField]
     TextMeshProUGUI DiagonosisScore;
-
-    public void CreateCurrectUI()
-    {
-        Instantiate(currectUI, canvas.transform);
-    }
-
-    public void CreateIncurrectUI()
-    {
-        Instantiate(incurrectUI, canvas.transform);
-    }
 
     public void DoBulletUsingEffect()
     {

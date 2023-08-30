@@ -83,6 +83,16 @@ public class UIManager_Play : MonoBehaviour
         }
     }
 
+    void CreateCurrectUI()
+    { 
+    
+    }
+
+    void CreateIncurrectUI()
+    { 
+    
+    }
+
     public void Flash(Color _color)
     {
         if (m_FlashCr != null) StopCoroutine(m_FlashCr);
