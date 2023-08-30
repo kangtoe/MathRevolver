@@ -160,7 +160,8 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
 
     // 난이도 버튼 선택 시 : 버튼 이벤트로 호출
     public void OnChooseDifficulty(int a)
-    {        
+    {
+        SoundManager.Instance.PlaySound("click");
         wj_conn.FirstRun_Diagnosis(a);
         //status = DiagonosticStatus.OnChoosingDiffAnimation;
 
@@ -194,10 +195,10 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         switch (data.prgsCd)
         {
             case "W":                                
-                Debug.Log("진단평가 데이터 받아옴");                
+                //Debug.Log("진단평가 데이터 받아옴");                
                 break;
             case "E":
-                Debug.Log("진단평가 완료");                                
+                //Debug.Log("진단평가 완료");                                
                 break;
         }
     }
@@ -299,6 +300,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         if (isCorrect)
         {
             // 정답 처리
+            SoundManager.Instance.PlaySound("correct");
             correctCreator.CreateCorrectUI();
             score += scorePreCurrect;
 
@@ -325,8 +327,8 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         else
         {
             // 오답 처리
+            SoundManager.Instance.PlaySound("incorrect");
             correctCreator.CreateIncorrectUI();
-
             anim.SetTrigger("disappear");
         }        
 

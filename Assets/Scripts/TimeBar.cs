@@ -12,6 +12,11 @@ public class TimeBar : MonoBehaviour
     [HideInInspector]
     public UnityEvent onTimeEnd;
 
+    private void Start()
+    {
+        onTimeEnd.AddListener(() => { Debug.Log("TimeBar : onTimeEnd"); });
+    }
+
     public void StartTimeBar(float time)
     {
         StopAllCoroutines();

@@ -10,6 +10,7 @@ public class BulletAnimController : MonoBehaviour
 
     void CylinderFlash()
     {
+        SoundManager.Instance.PlaySound("reroad");
         cylinder.SetTrigger("flash");
         //bulletMag.UseBullet();
     }

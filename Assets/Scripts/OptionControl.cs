@@ -52,11 +52,13 @@ public class OptionControl : MonoBehaviour
         {
             button_kr.onClick.AddListener(delegate
             {
-                OnClickButton_Kr();
+                SoundManager.Instance.PlaySound("click");
+                OnClickButton_Kr();                
             });
             button_en.onClick.AddListener(delegate
             {
-                OnClickButton_En();
+                SoundManager.Instance.PlaySound("click");
+                OnClickButton_En();                
             });
         }
 

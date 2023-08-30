@@ -28,7 +28,7 @@ public class UIManager_Title : MonoBehaviour
 
     public void ActiveOptionUI(bool active)
     {
-        SoundManager.Instance.PlaySound("SampleSFX");
+        SoundManager.Instance.PlaySound("click");
 
         optionUI.SetActive(active);
     }

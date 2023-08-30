@@ -9,14 +9,14 @@ public class TitleManager : MonoBehaviour
 
     public void OnClickButton_Diagnostic()
     {
-        SoundManager.Instance.PlaySound("SampleSFX");
+        SoundManager.Instance.PlaySound("click");
 
         SceneChanger.Instance.SceneChange("Diagnostic");
     }
 
     public void OnClickButton_Play()
     {
-        SoundManager.Instance.PlaySound("SampleSFX");
+        SoundManager.Instance.PlaySound("click");
 
         if (!SaveManager.DiagonosticCompleted)
         {
@@ -29,7 +29,7 @@ public class TitleManager : MonoBehaviour
 
     public void OnClickButton_Quit()
     {
-        SoundManager.Instance.PlaySound("SampleSFX");
+        SoundManager.Instance.PlaySound("click");
 
         Application.Quit();
     }
