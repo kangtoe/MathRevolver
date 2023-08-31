@@ -11,10 +11,22 @@ public class Tutorial : MonoBehaviour
     [SerializeField]
     List<GameObject> tutorialPageList;
 
+    [SerializeField]
+    Button skipButton;
+
     private void Start()
     {
         idx = 0;
         ActiveImage(0);
+        skipButton.gameObject.SetActive(true);
+
+        skipButton.onClick.AddListener(() => Skip());
+    }
+
+    public void Skip()
+    {
+        idx = tutorialPageList.Count;
+        OnClickImage();        
     }
 
     // 버튼 이벤트로 호출
@@ -29,6 +41,7 @@ public class Tutorial : MonoBehaviour
         if (idx >= tutorialPageList.Count)
         {
             PlayManager.Instance.PlayGame();
+            skipButton.gameObject.SetActive(false);
         } 
     }
 
