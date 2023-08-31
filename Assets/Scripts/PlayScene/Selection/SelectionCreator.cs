@@ -60,13 +60,13 @@ public class SelectionCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {        
-        StartCoroutine(CreateSelectionCr());
+        
     }
 
     // Update is called once per frame
-    void Update()
+    public void CreateStart()
     {
-        
+        StartCoroutine(CreateSelectionCr());
     }
 
     IEnumerator CreateSelectionCr()

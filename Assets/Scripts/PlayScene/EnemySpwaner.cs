@@ -69,9 +69,13 @@ public class EnemySpwaner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentBossAdventCount = bossAdventCount;
+        currentBossAdventCount = bossAdventCount;        
+    }
+
+    public void SpwanStart()
+    {
         StartCoroutine(SpwanEnemy());
-    }    
+    }
 
     IEnumerator SpwanEnemy()
     {

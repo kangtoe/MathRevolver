@@ -24,6 +24,12 @@ public class Tutorial : MonoBehaviour
         
         idx++;        
         ActiveImage(idx);
+
+        // 튜토리얼 종료
+        if (idx >= tutorialPageList.Count)
+        {
+            PlayManager.Instance.PlayGame();
+        } 
     }
 
     // idx 이미지 활성화, 그 외 모든 이미지 비활성화
