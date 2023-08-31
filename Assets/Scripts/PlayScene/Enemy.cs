@@ -105,11 +105,16 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void UpdataHpText()
+    {
+        hpText.text = currentHp.ToString("N0");
+    }
+
     public void Init(int _maxHp)
     {
         //maxHp = _maxHp;
         currentHp = _maxHp;
-        hpText.text = currentHp.ToString();
+        UpdataHpText();
     }
 
     public void OnHit(int damage)
@@ -126,7 +131,7 @@ public class Enemy : MonoBehaviour
         if (currentHp < 0) currentHp = 0;
 
         // UI 반영
-        hpText.text = currentHp.ToString();
+        UpdataHpText();
 
         // 적 처치 성공
         if (currentHp == 0)

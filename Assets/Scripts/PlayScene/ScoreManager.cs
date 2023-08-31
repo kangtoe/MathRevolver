@@ -35,6 +35,10 @@ public class ScoreManager : MonoBehaviour
     double optimalScore = 0;
     public double OptimalScore => optimalScore;
 
+    [Header("디버깅 : -1이 아닌 경우, 시작 점수 오버라이드 (빌드 시 반드시 -1로 설정할 것)")]
+    [SerializeField]
+    double startScoreOverride = -1;
+
     // 제한 점수
     static double MinScore = 1;
     static double MaxScore = 999999999;
@@ -48,7 +52,7 @@ public class ScoreManager : MonoBehaviour
     public double CurrentScore => currentScore;
 
     // 시작 점수
-    double startScore => SaveManager.DiagonosticScore;
+    double startScore => startScoreOverride == -1 ? SaveManager.DiagonosticScore : startScoreOverride;
 
     private void Awake()
     {

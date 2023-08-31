@@ -154,25 +154,27 @@ public class SelectionObject_Power_Element : MonoBehaviour
         plusVal = _plusVal;
         multVal = _multVal;
 
+        string str = "";
         // 텍스트에 정보 매핑
         switch (_type)
         {
             case CalcType.Add:
-                text.text = "+" + plusVal;
+                str = "+" + plusVal.ToString("N0");
                 break;
             case CalcType.Substract:
-                text.text = "-" + plusVal;
+                str = "-" + plusVal.ToString("N0");
                 break;
             case CalcType.Multiply:
-                text.text = "×" + multVal;
+                str = "×" + multVal.ToString("N0");
                 break;
             case CalcType.Divide:
-                text.text = "÷" + multVal;
+                str = "÷" + multVal.ToString("N0");
                 break;
             default:
                 Debug.Log("calc type undefind : " + _type);
                 break;
         }
+        text.text = str;
     }
 
     // 선택지 결과 반영
