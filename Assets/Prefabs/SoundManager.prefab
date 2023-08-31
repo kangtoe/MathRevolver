@@ -47,7 +47,7 @@ MonoBehaviour:
   bgm: {fileID: 8300000, guid: 6c08583e14be56841be935cd1a77b1cf, type: 3}
   soundList:
   - name: click
-    clip: {fileID: 8300000, guid: a43e27dd3b9055e47b067a80c9b61066, type: 3}
+    clip: {fileID: 8300000, guid: 0751463db24047f4e922ffec8df9d01d, type: 3}
   - name: correct
     clip: {fileID: 8300000, guid: fed40dfe531f8cc42809629b956acdf8, type: 3}
   - name: incorrect
@@ -55,9 +55,9 @@ MonoBehaviour:
   - name: reroad
     clip: {fileID: 8300000, guid: b9246742cef241f46aa0d10f711f1e0f, type: 3}
   - name: shoot1
-    clip: {fileID: 8300000, guid: 2c9da73a85133a24b885e773774b01e7, type: 3}
-  - name: shoot2
     clip: {fileID: 8300000, guid: 0064480715a39e149a20b8dc2d6af34d, type: 3}
+  - name: shoot2
+    clip: {fileID: 8300000, guid: 2c9da73a85133a24b885e773774b01e7, type: 3}
   - name: skillready
     clip: {fileID: 8300000, guid: cb90f8e6fa46e5946aee3379372e655a, type: 3}
   - name: skill
@@ -71,7 +71,7 @@ MonoBehaviour:
   - name: warning
     clip: {fileID: 8300000, guid: d1b08e24f5be9e64d95a010d58aa8c8b, type: 3}
   - name: bestscore
-    clip: {fileID: 8300000, guid: 80956ae5fb70c5547823b6dff1e235ef, type: 3}
+    clip: {fileID: 8300000, guid: 673cfc0bc9a542c49a06490361e26f42, type: 3}
   - name: upgrade
     clip: {fileID: 8300000, guid: dd2482dae80f4ed4186014cad7d31364, type: 3}
   - name: up
@@ -81,7 +81,7 @@ MonoBehaviour:
   - name: select
     clip: {fileID: 8300000, guid: 8f8a33ad9895c054495c046739d0bcae, type: 3}
   - name: problem
-    clip: {fileID: 8300000, guid: d7054009e325ed944a8d419ea3a9ec89, type: 3}
+    clip: {fileID: 8300000, guid: 8a7dd1260e6aee447b334328240b678f, type: 3}
   playerList: []
   sfxOutput: {fileID: 3474489624104542020, guid: afdf1822f9c904545b25867869f8b6c1, type: 2}
   bgmOutput: {fileID: 2948268655846785522, guid: afdf1822f9c904545b25867869f8b6c1, type: 2}
