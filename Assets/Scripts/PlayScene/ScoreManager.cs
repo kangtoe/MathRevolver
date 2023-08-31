@@ -25,7 +25,7 @@ public class ScoreManager : MonoBehaviour
     TMP_Text currentScoreText;
     [SerializeField]
     TMP_Text bestScoreText;
-            
+
     [Header("숫자 카운팅 효과")]
     [SerializeField]
     float countDuration = 0.33f;

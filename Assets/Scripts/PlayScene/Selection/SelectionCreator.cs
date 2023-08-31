@@ -50,6 +50,11 @@ public class SelectionCreator : MonoBehaviour
     [SerializeField]
     Color selectionColor;
 
+    [Header("전투력 합연산 선택지 무작위 출력 배수 (최적화 점수 비례)")]
+    [SerializeField]
+    float randomMult = 2;
+    public float RandimMult => randomMult;
+
     bool OnActiveAllOptimalVFX;
 
     // Start is called before the first frame update

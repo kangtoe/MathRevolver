@@ -37,7 +37,7 @@ public class SelectionObject_Power_Element : MonoBehaviour
     int plusVal;
     [Header("곱연산 계수")]
     [SerializeField]
-    int multVal;    
+    int multVal;
 
     public void SetMeshColor(Color new_color, bool changeAlpha = false)
     {
@@ -117,14 +117,14 @@ public class SelectionObject_Power_Element : MonoBehaviour
     // 연산 타입만 고정
     public void SetCalc(CalcType _type)
     {
-        float randomMult = 2;
+        float randomMult = SelectionCreator.Instance.RandimMult;
 
         //int score = ScoreManager.GetScore();
         int optimalScore = (int)ScoreManager.GetOptimalScore();
 
         // 합연산 변수 구하기
         int _pulsVal = 0;
-        int ran1 = (int)Random.Range(optimalScore / randomMult, optimalScore * randomMult);
+        int ran1 = (int)Random.Range(optimalScore / randomMult / 2, optimalScore * randomMult);
         // 합연산 변수 -> 앞 두자리까지 반올림
         int numLen = optimalScore.ToString().Length;        
         float factor = Mathf.Pow(10, numLen - 2);        

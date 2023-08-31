@@ -7,7 +7,7 @@ public class SelectionObject_Power : MonoBehaviour
     ScoreManager ScoreManager => ScoreManager.Instance;
 
     [SerializeField]
-    GameObject elementPrefab;
+    GameObject elementPrefab;    
 
     [Header("밝게 될 선택지를 표시하기 시작 할 플레이어와의 간격")]
     [SerializeField]
