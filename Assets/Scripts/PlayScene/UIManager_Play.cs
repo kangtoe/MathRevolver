@@ -50,7 +50,7 @@ public class UIManager_Play : MonoBehaviour
 
     public void ActiveUpgradeUI(bool active)
     {
-        SoundManager.Instance.PlaySound("upgrade");
+        if(active) SoundManager.Instance.PlaySound("upgrade");
         upgradeUI.SetActive(active);
 
         // 시간 스케일 조정

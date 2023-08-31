@@ -52,6 +52,8 @@ public class SceneChanger : MonoBehaviour
     {
         //Debug.Log("SceneChange : " + seceneName);
         //StopAllCoroutines();
+
+        SoundManager.Instance.PlaySound("click");
         StartCoroutine( SceneChangeCr(seceneName));
     }
 
