@@ -177,7 +177,7 @@ public class ScoreManager : MonoBehaviour
     {
         // 소수부 버림하여 정수부만 표기
         //string str = Mathf.FloorToInt(f).ToString();
-        string str = Math.Truncate(val).ToString();
+        string str = Math.Truncate(val).ToString("N0");
         //Debug.Log(text.name + ": val rounded = " + str);
         text.text = str;
     }
