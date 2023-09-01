@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17757872, g: 0.2223221, b: 0.30451828, a: 1}
+  m_IndirectSpecularColor: {r: 0.177579, g: 0.22232252, b: 0.3045191, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -249,7 +249,7 @@ MonoBehaviour:
   selectionPrefab_Math: {fileID: 7888360049068581542, guid: 19f2da9af8af41443a45bd2f5adc9cc5, type: 3}
   creatingPoint: {fileID: 7888360048686185028}
   creatingInterval: 5
-  adventCount: 3
+  adventCount: 2
   SelectionObject_PowerList: []
   planeMargin: 0.25
   textMargin: 0.5
@@ -6447,7 +6447,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -699.99994, y: 0}
+  m_AnchoredPosition: {x: -700, y: 0}
   m_SizeDelta: {x: 587.5, y: 437.5}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!95 &193355999
@@ -20687,11 +20687,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spwanPoint: {fileID: 1793055995}
-  spwanInterval: 5
+  spwanInterval: 4
   spwanDelay: 3
   enemyPrefab: {fileID: 7502607062306655998, guid: 0cff8eab6dfe90b4ea06e8aff996fc6d, type: 3}
   enemyBossPrefab: {fileID: 4203822413878867571, guid: 7ccb2a8edf19b3e46966310d98f7a793, type: 3}
-  compensator: 1.2
+  compensator: 1.5
   bossAdventCount: 10
   currentBossAdventCount: 0
   enemies: []
@@ -31413,14 +31413,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3608ce4e3bcb94f4d90e214dadbaa587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAddMult: 3
-  minAddMult: 1
-  plusPer: 0
-  minusPer: 0
-  dividePer: 100
-  multPer: 0
+  maxAddMult: 0.5
+  minAddMult: 0.1
+  plusPer: 35
+  minusPer: 35
+  dividePer: 20
+  multPer: 10
   perLeft: 0
-  avg: 0.43290043
+  avg: 0.9939655
   div: {fileID: 863955629}
   mult: {fileID: 863955628}
 --- !u!4 &863955627
@@ -31450,11 +31450,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 793cacb85d6deb349bb2138e9a9643ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mult2Per: 0
-  Mult3Per: 50
-  Mult4Per: 50
+  Mult2Per: 75
+  Mult3Per: 25
+  Mult4Per: 0
   multPerLeft: 0
-  multAvg: 3.5
+  multAvg: 2.25
 --- !u!114 &863955629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31467,11 +31467,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c50c6ad59c51384981e486abbf55a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mult2Per: 69
-  Mult3Per: 31
-  Mult4Per: 0
+  Mult2Per: 40
+  Mult3Per: 30
+  Mult4Per: 30
   multPerLeft: 0
-  multAvg: 0.43290043
+  multAvg: 0.34482756
 --- !u!1001 &879257524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32690,8 +32690,8 @@ MonoBehaviour:
   skillTimeMin: 3
   skillTimeMax: 6
   solvingTimeLv: 0
-  solvingTimeMin: 5
-  solvingTimeMax: 10
+  solvingTimeMin: 3
+  solvingTimeMax: 6
   attackSpeedBtn: {fileID: 408119100}
   skillTimeBtn: {fileID: 947384640}
   solvingTimeBtn: {fileID: 440352660}
@@ -32794,7 +32794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1054247105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37777,7 +37777,7 @@ MonoBehaviour:
   revolver: {fileID: 1069680143}
   textPoint: {fileID: 216382016}
   anim: {fileID: 983905436}
-  skillDamageToBossMult: 1
+  skillDamageToBossMult: 2
   attackAreaSize: {x: 15, y: 10}
   attackAreaOffset: {x: 0, y: 0, z: 5}
   nozzle: {fileID: 810396935}
