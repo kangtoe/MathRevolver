@@ -16,11 +16,15 @@ public class Tutorial : MonoBehaviour
 
     private void Start()
     {
-        idx = 0;
-        ActiveImage(0);
+        if (SaveManager.ShowTutorial)
+        {
+            idx = 0;
+            ActiveImage(0);
 
-        skipButton.gameObject.SetActive(true);
-        skipButton.onClick.AddListener(() => Skip());
+            skipButton.gameObject.SetActive(true);
+            skipButton.onClick.AddListener(() => Skip());
+        }
+        else Skip();
     }
 
     public void Skip()
@@ -40,6 +44,7 @@ public class Tutorial : MonoBehaviour
         // 튜토리얼 종료
         if (idx >= tutorialPageList.Count)
         {
+            SaveManager.ShowTutorial = false;
             PlayManager.Instance.PlayGame();
             skipButton.gameObject.SetActive(false);
         } 

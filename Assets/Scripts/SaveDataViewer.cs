@@ -21,6 +21,7 @@ public class SaveDataViewer : MonoBehaviour
     private static SaveDataViewer instance;
     #endregion
 
+    public bool ShowTutorial;
     public bool DiagonosticCompleted;
     public int DiagonosticScore;
     public int BestScore;    
@@ -40,6 +41,7 @@ public class SaveDataViewer : MonoBehaviour
     // 저장 데이터 가져와 표시
     public void GetSave()
     {
+        ShowTutorial = SaveManager.ShowTutorial;
         DiagonosticCompleted = SaveManager.DiagonosticCompleted;
         DiagonosticScore = SaveManager.DiagonosticScore;
         BestScore = SaveManager.BestScore;        
@@ -50,7 +52,8 @@ public class SaveDataViewer : MonoBehaviour
 
     // 현재 표시된 데이터로 저장 데이터 수정
     public void SetSave()
-    {        
+    {
+        SaveManager.ShowTutorial = ShowTutorial;
         SaveManager.DiagonosticCompleted = DiagonosticCompleted;
         SaveManager.DiagonosticScore = DiagonosticScore;
         SaveManager.BestScore = BestScore;

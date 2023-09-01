@@ -6,12 +6,27 @@ using UnityEngine;
 // PlayerPrefs를 통한 정보 저장 & 불러오기
 public static class SaveManager
 {
+    static string showTutorialKey = "showTutorial";
     static string diagonosticCompletedKey = "diagonosticCompleted";
     static string diagonosticScoreKey = "diagonosticScore";
     static string bestScoreKey = "bestScore";    
     static string usingLanguageKey = "usingLanguage";
     static string sfxVolumeKey = "sfxVolume";
     static string bgmVolumeKey = "bgmVolume";
+
+    // 튜토리얼 보여줄 예정?
+    public static bool ShowTutorial
+    {
+        get
+        {
+            int i = PlayerPrefs.GetInt(showTutorialKey);
+            return i == 1 ? true : false;
+        }
+        set
+        {
+            PlayerPrefs.SetInt(showTutorialKey, value ? 1 : 0);
+        }
+    }
 
     // 진단 평가 풀었나?
     public static bool DiagonosticCompleted
@@ -26,7 +41,6 @@ public static class SaveManager
             PlayerPrefs.SetInt(diagonosticCompletedKey, value ? 1 : 0);
         }
     }
-
 
     // 진단 평가 점수 = 플레이 시작 점수
     public static int DiagonosticScore
