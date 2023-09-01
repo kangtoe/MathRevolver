@@ -93,4 +93,16 @@ public class MultPercent : MonoBehaviour
         UpdateMultPerLeft();
         UpdateAvg();
     }
+
+    public int GetValue()
+    {
+        int val = 1;
+        int ran = Random.Range(0, 100);
+        if (ran < Mult2Per) val = 2;
+        else if (ran < Mult2Per + Mult3Per) val = 3;
+        else if (ran < Mult2Per + Mult3Per + Mult4Per) val = 4;
+        else Debug.Log("확률 에러");
+
+        return val;
+    }
 }

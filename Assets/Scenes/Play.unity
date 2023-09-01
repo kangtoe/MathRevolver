@@ -31413,14 +31413,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3608ce4e3bcb94f4d90e214dadbaa587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max: 2
-  min: 1
-  plusPer: 100
+  maxAddMult: 3
+  minAddMult: 1
+  plusPer: 0
   minusPer: 0
-  dividePer: 0
+  dividePer: 100
   multPer: 0
   perLeft: 0
-  avg: 2.5
+  avg: 0.43290043
+  div: {fileID: 863955629}
+  mult: {fileID: 863955628}
 --- !u!4 &863955627
 Transform:
   m_ObjectHideFlags: 0
@@ -31448,11 +31450,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 793cacb85d6deb349bb2138e9a9643ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mult2Per: 50
+  Mult2Per: 0
   Mult3Per: 50
-  Mult4Per: 0
+  Mult4Per: 50
   multPerLeft: 0
-  multAvg: 2.5
+  multAvg: 3.5
 --- !u!114 &863955629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31465,11 +31467,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c50c6ad59c51384981e486abbf55a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Mult2Per: 100
-  Mult3Per: 0
+  Mult2Per: 69
+  Mult3Per: 31
   Mult4Per: 0
   multPerLeft: 0
-  multAvg: 0.5
+  multAvg: 0.43290043
 --- !u!1001 &879257524
 PrefabInstance:
   m_ObjectHideFlags: 0

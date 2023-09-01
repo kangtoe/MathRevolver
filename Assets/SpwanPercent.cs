@@ -2,16 +2,40 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
+public class Calc
+{
+    public CalcType type;
+    public int val;
+}
 
 [ExecuteInEditMode]
 public class SpwanPercent : MonoBehaviour
 {
+    #region 싱글톤
+    public static SpwanPercent Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<SpwanPercent>();
+            }
+            return instance;
+        }
+    }
+    private static SpwanPercent instance;
+    #endregion
+
     [Header("최대 합 선택지 배수")]
     [SerializeField]
-    float max;
+    float maxAddMult;
+    public float MaxAddMult => maxAddMult;
     [Header("최소 합 선택지 배수")]
     [SerializeField]
-    float min;
+    float minAddMult;
+    public float MinAddMult => minAddMult;
 
     [Header("연산자 출현 확률")]
     [SerializeField]
@@ -34,6 +58,12 @@ public class SpwanPercent : MonoBehaviour
     [Header("디버그 : 평균 결과 배수")]
     [SerializeField]
     float avg;
+
+    [Space]
+    [SerializeField]
+    DivPercent div;
+    [SerializeField]
+    MultPercent mult;
 
     private void Start()
     {
@@ -79,7 +109,7 @@ public class SpwanPercent : MonoBehaviour
         float ratio3 = (float)dividePer / perSum;
         float ratio4 = (float)multPer / perSum;        
 
-        float addAvg = (max + min) / 2f;
+        float addAvg = (maxAddMult + minAddMult) / 2f;
         avg = (ratio1 * (1 + addAvg)) + (ratio2 * (1 - addAvg)) + (ratio3 * DivPercent.MultAvg) + (ratio4 * MultPercent.MultAvg);
     }
 
@@ -119,5 +149,82 @@ public class SpwanPercent : MonoBehaviour
         plusPer += perLeft;
         UpdateMultPerLeft();
         UpdateAvg();
+    }
+
+    // 확률과 값을 계산하여 구하기
+    public Calc GetCalc(CalcType? calcType = null)
+    {
+        int _val = 0;
+        CalcType _type;
+
+        if (calcType != null)
+        {
+            // 연산 타입을 명시한 경우
+            _type = calcType.Value;
+        }
+        else
+        {
+            // 연산 타입을 명시하지 않은 경우
+            // 확률에 따른 타입 구하기
+            int ran = Random.Range(0, 100);
+            if (ran < plusPer) _type = CalcType.Add;
+            else if (ran < minusPer + plusPer) _type = CalcType.Substract;
+            else if (ran < minusPer + plusPer + dividePer) _type = CalcType.Divide;
+            else if (ran < minusPer + plusPer + dividePer + multPer) _type = CalcType.Multiply;
+            else
+            {
+                Debug.Log("확률오류?");
+                _type = CalcType.Add;
+            }
+        }        
+
+        // 합연산?
+        if (_type == CalcType.Add || _type == CalcType.Substract)
+        {
+            //int score = ScoreManager.GetScore();
+            int optimalScore = (int)ScoreManager.Instance.GetOptimalScore();
+
+            // 합연산 변수 구하기            
+            float plusMin = optimalScore * MinAddMult;
+            float plusMax = optimalScore * MaxAddMult;
+            int ran1 = (int)Random.Range(plusMin, plusMax);
+            // 합연산 변수 -> 앞 두자리까지 반올림
+            int numLen = optimalScore.ToString().Length;
+            float factor = Mathf.Pow(10, numLen - 2);
+            float roundedNumber = Mathf.Round(ran1 / factor) * factor;
+            _val = (int)roundedNumber;
+
+
+            // 합연산 변수 디버깅
+            //Debug.Log("ran1 : " + ran1);
+            //Debug.Log("numLen : " + numLen);
+            //Debug.Log("factor : " + factor);
+            //Debug.Log("roundedNumber : " + roundedNumber);
+        }
+
+
+        //// 곱연산 변수 구하기
+        //int _multVal;
+        //int ran2 = Random.Range(0, 100);
+        //if (ran2 < 10) _multVal = 4;
+        //else if (ran2 < 30) _multVal = 3;
+        //else _multVal = 2;
+
+        // 나누기 연산?
+        if (_type == CalcType.Multiply)
+        {
+            _val = mult.GetValue();
+        }
+
+        // 곱연산?
+        if (_type == CalcType.Divide)
+        {
+            _val = div.GetValue();
+        }
+
+        Calc calc = new Calc();
+        calc.type = _type;
+        calc.val = _val;
+        return calc;
     }
 }

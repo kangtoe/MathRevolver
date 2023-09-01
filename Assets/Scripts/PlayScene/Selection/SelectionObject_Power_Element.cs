@@ -105,46 +105,11 @@ public class SelectionObject_Power_Element : MonoBehaviour
         float margin = planeMargin + textMargin; // textMargin -> 기존 플레인 마진 적용 값에서 텍스트 마진을 추가로 적용
         text.rectTransform.sizeDelta = Vector2.one * (X - margin);
     }
-
-    // 완전 무작위 연산
-    public void SetCalc()
+    
+    public void SetCalc(CalcType? _type = null)
     {
-        // Undefind를 제외한 무작위 연산 타입 구하기
-        CalcType _type = (CalcType)Random.Range(1, System.Enum.GetValues(typeof(CalcType)).Length);
-        SetCalc(_type);        
-    }
-
-    // 연산 타입만 고정
-    public void SetCalc(CalcType _type)
-    {
-        float randomMult = SelectionCreator.Instance.RandimMult;
-
-        //int score = ScoreManager.GetScore();
-        int optimalScore = (int)ScoreManager.GetOptimalScore();
-
-        // 합연산 변수 구하기
-        int _pulsVal = 0;
-        int ran1 = (int)Random.Range(optimalScore / randomMult / 2, optimalScore * randomMult);
-        // 합연산 변수 -> 앞 두자리까지 반올림
-        int numLen = optimalScore.ToString().Length;        
-        float factor = Mathf.Pow(10, numLen - 2);        
-        float roundedNumber = Mathf.Round(ran1 / factor) * factor;        
-        _pulsVal = (int)roundedNumber;
-
-        // 합연산 변수 디버깅
-        //Debug.Log("ran1 : " + ran1);
-        //Debug.Log("numLen : " + numLen);
-        //Debug.Log("factor : " + factor);
-        //Debug.Log("roundedNumber : " + roundedNumber);
-
-        // 곱연산 변수 구하기
-        int _multVal;
-        int ran2 = Random.Range(0, 100);
-        if (ran2 < 10) _multVal = 4;
-        else if (ran2 < 30) _multVal = 3;
-        else _multVal = 2;
-
-        SetCalc(_type, _pulsVal, _multVal);
+        Calc calc = SpwanPercent.Instance.GetCalc(_type);
+        SetCalc(calc.type, calc.val, calc.val);
     }
 
     // 연산 타입, 변수들 모두 고정됨
