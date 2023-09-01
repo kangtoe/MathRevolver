@@ -227,7 +227,7 @@ MonoBehaviour:
   healthMult: 5
   moveSpeed: 1
   isMoveRelative: 1
-  skillCooltimeReduce: 100
+  skillCooltimeReduce: 10
   heartLost: 3
   dieVfx: {fileID: 1334071670866236, guid: 896b7470dc9f3fa47bb52170d2569601, type: 3}
   isBoss: 1
