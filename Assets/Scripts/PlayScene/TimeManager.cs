@@ -36,7 +36,12 @@ public class TimeManager : MonoBehaviour
     void Update()
     {
         currentTimeScale = Time.timeScale;
-    }    
+    }
+
+    private void OnValidate()
+    {
+        Time.timeScale = currentTimeScale;
+    }
 
     public void SetScale(float f)
     {

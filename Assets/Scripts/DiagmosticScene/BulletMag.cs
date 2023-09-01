@@ -38,6 +38,8 @@ public class BulletMag : MonoBehaviour
             return;
         }
 
+        //Debug.Log("UseBullet");
+
         int index = 0;
 
         bulletUiList[index].Use(bulletForce, bulletTorque, bulletGravScale);

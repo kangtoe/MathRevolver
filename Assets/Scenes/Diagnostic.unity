@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1775787, g: 0.22232205, b: 0.30451828, a: 1}
+  m_IndirectSpecularColor: {r: 0.17757872, g: 0.2223221, b: 0.30451828, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -400,6 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad278522f3ee91f449211d829e9be841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTutorial: 0
   DiagonosticCompleted: 1
   DiagonosticScore: 25
   BestScore: 0
@@ -1472,6 +1473,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 290394723}
   m_CullTransparentMesh: 1
+--- !u!1 &309810496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 309810497}
+  - component: {fileID: 309810498}
+  m_Layer: 0
+  m_Name: TimeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &309810497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309810496}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 735191709}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &309810498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309810496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab44e97609f90d40954e591b3d8f865, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTimeScale: 0
 --- !u!1001 &310615556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2657,6 +2703,7 @@ Transform:
   - {fileID: 600349007}
   - {fileID: 494808527}
   - {fileID: 1671059691}
+  - {fileID: 309810497}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2995,10 +3042,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a6b402b53119d646b214d435f467a6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletForce: {x: -200, y: 600}
+  bulletForce: {x: -10, y: 20}
   bulletTorqueMin: -90
   bulletTorqueMax: 90
-  bulletGravScale: 200
+  bulletGravScale: 10
   bulletUiList:
   - {fileID: 1014406293}
   - {fileID: 1362060419}
