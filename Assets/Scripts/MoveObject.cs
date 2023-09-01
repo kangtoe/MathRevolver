@@ -7,6 +7,11 @@ public class MoveObject : MonoBehaviour
     [SerializeField]
     float speed;
 
+    private void Start()
+    {
+        //Debug.Log("Time.timeScale : " + Time.timeScale);
+    }
+
     // Update is called once per frame
     void Update()
     {

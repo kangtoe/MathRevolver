@@ -45,6 +45,7 @@ public class TimeManager : MonoBehaviour
 
     public void SetScale(float f)
     {
+        //Debug.Log("SetScale : " + f);
         Time.timeScale = f;
     }
 }
