@@ -2,10 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// 옵션 버튼 클릭 시 : 판넬 활성화 제어는 UI Manager에서 담당
+// 그 외 나머지 버튼의 동작 구현
 public class TitleManager : MonoBehaviour
 {
-    // 옵션 버튼 클릭 시 : 판넬 활성화 제어는 UI Manager에서 담당
-    // 그 외 나머지 버튼의 동작 구현
+    [SerializeField]
+    Color AvailableColor;
+
+    [SerializeField]
+    Color InavailableColor;
+
+    [SerializeField]
+    UiColorGroup playButtonColor;
+
+    private void Start()
+    {
+        if (!SaveManager.DiagonosticCompleted)
+        {
+            playButtonColor.SetColor(InavailableColor);
+        } 
+        else
+        {
+            playButtonColor.SetColor(AvailableColor);
+        }
+    }
 
     public void OnClickButton_Diagnostic()
     {

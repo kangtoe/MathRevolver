@@ -532,6 +532,7 @@ GameObject:
   - component: {fileID: 429556211}
   - component: {fileID: 429556210}
   - component: {fileID: 429556209}
+  - component: {fileID: 429556212}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -654,6 +655,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 429556207}
   m_CullTransparentMesh: 1
+--- !u!114 &429556212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429556207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28cdca81c48f5b94a9ce520216267123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 1, b: 1, a: 1}
+  tmpList:
+  - {fileID: 1670770404}
+  imageList:
+  - {fileID: 429556210}
 --- !u!1 &505762565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1733,6 +1751,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1fd7fc6f8f0675439c4ab220a36b006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AvailableColor: {r: 1, g: 1, b: 1, a: 1}
+  InavailableColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  playButtonColor: {fileID: 429556212}
 --- !u!4 &1465909316
 Transform:
   m_ObjectHideFlags: 0
