@@ -120,19 +120,37 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         if (status == DiagonosticStatus.OnSolving) currentSolveTime += Time.deltaTime;
     }
 
-    void OnGetQuestionFirst()
-    {
-        if (eventInvoked) return;
-        eventInvoked = true;
-
-        //Debug.Log("InvokeOnGetQuestion");
-        onGetQuestionFirst.Invoke();
-        UpdateQuestionUI(data.textCn, data.qstCn, data.qstCransr, data.qstWransr);
-    }
-
     // 진단 평가 시작 시
     void OnStartDiagonostic()
-    {        
+    {
+        // 커넥터의 진단평가 문제 데이터 받아오기 : 커넥터 이벤트에서 호출 (진단평가 문제를 받아온 직후)
+        void GetDiagnosis()
+        {
+            //Debug.Log("GetDiagnosis");
+
+            data = wj_conn.cDiagnotics.data;
+            switch (data.prgsCd)
+            {
+                case "W":
+                    //Debug.Log("진단평가 데이터 받아옴");                
+                    break;
+                case "E":
+                    //Debug.Log("진단평가 완료");                                
+                    break;
+            }
+        }
+
+        // 처음 문제 표기시 한번만 실행
+        void OnGetQuestionFirst()
+        {
+            if (eventInvoked) return;
+            eventInvoked = true;
+
+            //Debug.Log("InvokeOnGetQuestion");
+            onGetQuestionFirst.Invoke();
+            UpdateQuestionUI(data.textCn, data.qstCn, data.qstCransr, data.qstWransr);
+        }
+
         if (wj_conn is null) Debug.LogError("Cannot find Connector");
         wj_conn.onGetDiagnosis.AddListener(delegate {
             GetDiagnosis();
@@ -144,26 +162,12 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         panel_diag_chooseDiff.SetActive(true);        
     }
 
-    // 진단 평가 완료 시
-    void OnEndDiagonostic()
-    {
-        status = DiagonosticStatus.DiagonosticFinished;
-
-        panel_question.SetActive(false);
-        panel_finish.SetActive(true);
-
-        UIManager_Diagonostic.Instance.SetDiagonosisScore(score);
-
-        SaveManager.DiagonosticCompleted = true;
-        SaveManager.DiagonosticScore = score;        
-    }
-
     // 난이도 버튼 선택 시 : 버튼 이벤트로 호출
     public void OnChooseDifficulty(int a)
     {
         SoundManager.Instance.PlaySound("click");
         wj_conn.FirstRun_Diagnosis(a);
-        //status = DiagonosticStatus.OnChoosingDiffAnimation;
+        status = DiagonosticStatus.OnChoosingDiffAnimation;
 
         // 선택 난이도별 보너스 점수 부여
         switch (a)
@@ -184,23 +188,20 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
                 Debug.Log("현재 난이도에 대한 동작 정의되지 않음");
                 break;
         }
-    }    
+    }
 
-    // 진단평가 문제 받아오기 : 커넥터 이벤트에서 호출 (진단평가 문제를 받아온 직후)
-    void GetDiagnosis()
+    // 진단 평가 완료 시
+    void OnEndDiagonostic()
     {
-        //Debug.Log("GetDiagnosis");
+        status = DiagonosticStatus.DiagonosticFinished;
 
-        data = wj_conn.cDiagnotics.data;
-        switch (data.prgsCd)
-        {
-            case "W":                                
-                //Debug.Log("진단평가 데이터 받아옴");                
-                break;
-            case "E":
-                //Debug.Log("진단평가 완료");                                
-                break;
-        }
+        panel_question.SetActive(false);
+        panel_finish.SetActive(true);
+
+        UIManager_Diagonostic.Instance.SetDiagonosisScore(score);
+
+        SaveManager.DiagonosticCompleted = true;
+        SaveManager.DiagonosticScore = score;        
     }
 
     // 다음 문제 불러오기 : 애니메이션 이벤트 호출 (BulletAnimController의 NextProblem 메소드)
@@ -267,7 +268,13 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
 
     // 답을 고르고 맞았는 지 체크
     public void SelectAnswer(int _idx = -1)
-    {        
+    {
+        if (status != DiagonosticStatus.OnSolving)
+        {
+            Debug.Log("답안 선택 시간이 아님");
+            return;
+        }
+
         QuestionCount--;
 
         UIManager_Diagonostic.Instance.DoBulletUsingEffect();
