@@ -103,11 +103,10 @@ public class Player : MonoBehaviour
     Coroutine moveCr;
     Coroutine attackCr;
 
-
     // Start is called before the first frame update
     void Start()
     {
-        attackCr = StartCoroutine(AttackCheckCr(attackInterval));   
+        attackCr = StartCoroutine(AttackCheckCr());   
     }
 
     // Update is called once per frame
@@ -167,7 +166,7 @@ public class Player : MonoBehaviour
     }
 
     // 공격 검사
-    IEnumerator AttackCheckCr(float interval)
+    IEnumerator AttackCheckCr()
     {
         while (true)
         {
@@ -176,7 +175,7 @@ public class Player : MonoBehaviour
                 TryAtack();
             }
 
-            yield return new WaitForSeconds(interval);
+            yield return new WaitForSeconds(attackInterval);
         }
     }
 

@@ -22,6 +22,8 @@ public class SelectionObject_Math : MonoBehaviour
 
         if (other.tag == "Player")
         {
+            SoundManager.Instance.PlaySound("select");
+
             Debug.Log("매스피드 발판 밟음");
             WJ_Sample_Play.Instance.ActivePanel(true);
         }

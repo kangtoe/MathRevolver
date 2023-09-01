@@ -142,6 +142,8 @@ public class UpgradeControl : MonoBehaviour
         attackSpeedBtn.SetLevelText(levelText + attackSpeedLv);
         attackSpeedBtn.Button.onClick.AddListener(delegate // 클릭 시 처리
         {
+            if (attackSpeedLv == maxLv) return;
+
             SoundManager.Instance.PlaySound("up");
 
             // 레벨 증가
@@ -159,6 +161,8 @@ public class UpgradeControl : MonoBehaviour
         skillTimeBtn.SetLevelText(levelText + skillTimeLv);
         skillTimeBtn.Button.onClick.AddListener(delegate // 클릭 시 처리
         {
+            if (skillTimeLv == maxLv) return;
+
             SoundManager.Instance.PlaySound("up");
 
             // 레벨 증가
@@ -176,6 +180,8 @@ public class UpgradeControl : MonoBehaviour
         solvingTimeBtn.SetLevelText(levelText + solvingTimeLv);
         solvingTimeBtn.Button.onClick.AddListener(delegate // 클릭 시 처리
         {
+            if (solvingTimeLv == maxLv) return;
+
             SoundManager.Instance.PlaySound("up");
 
             // 레벨 증가
