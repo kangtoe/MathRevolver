@@ -18,8 +18,8 @@ public class Tutorial : MonoBehaviour
     {
         idx = 0;
         ActiveImage(0);
-        skipButton.gameObject.SetActive(true);
 
+        skipButton.gameObject.SetActive(true);
         skipButton.onClick.AddListener(() => Skip());
     }
 

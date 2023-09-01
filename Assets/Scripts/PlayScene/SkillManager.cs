@@ -62,6 +62,10 @@ public class SkillManager : MonoBehaviour
     [SerializeField]
     Image fill;
 
+    [Header("플레이어 스킬 잔상 효과")]
+    [SerializeField]
+    SkinnedMeshAfterImage afterImage;
+
     public bool IsSkillOnActive => state == SkillState.OnActive;
     public bool IsOnCoolTime => state == SkillState.OnCooltime;
 
@@ -154,6 +158,7 @@ public class SkillManager : MonoBehaviour
             Debug.Log("SkillActivatingCr");
 
             state = SkillState.OnActive;
+            afterImage.enabled = true;
 
             while (true)
             {
@@ -173,6 +178,8 @@ public class SkillManager : MonoBehaviour
                 // 스킬 사용 시간 종료 : 쿨다운 시작
                 if (skillActiveTimeLeft == 0)
                 {
+                    afterImage.enabled = false;
+
                     // 선택지 가이드 효과 비활성화
                     SelectionCreator.Instance.ActiveAllOptimalVFX(false);
                     
