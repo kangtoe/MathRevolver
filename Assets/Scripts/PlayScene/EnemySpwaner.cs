@@ -91,7 +91,7 @@ public class EnemySpwaner : MonoBehaviour
                     SoundManager.Instance.PlaySound("warning");
                     bossWarning.CreateBossWarningUI(Vector2.up * 250);
 
-                    Spwan(enemyBossPrefab);
+                    Spwan(enemyBossPrefab, true);
                     currentBossAdventCount = bossAdventCount;                    
                 }
                 else
@@ -104,19 +104,23 @@ public class EnemySpwaner : MonoBehaviour
         }
     }
      
-    void Spwan(GameObject enemyPrefab)
+    void Spwan(GameObject enemyPrefab, bool spwanCenter = false)
     {
         Vector3 pos = spwanPoint.position;
+        
+        // 중앙 고정 스폰이 아님
+        if (!spwanCenter)
+        {
+            // 추후 전역에서 사용하는 변수로 수정할 것
+            float floorWidth = 10;
+            float margin = 1;
 
-        // 추후 전역에서 사용하는 변수로 수정할 것
-        float floorWidth = 10;
-        float margin = 1;
-
-        // spwanPoint상의 무작위 x 위치 구하기
-        float spwanWidth = floorWidth - margin;        
-        float minX = spwanPoint.position.x - (spwanWidth / 2f);
-        float maxX = spwanPoint.position.x + (spwanWidth / 2f);
-        pos.x = Random.Range(minX, maxX);
+            // spwanPoint상의 무작위 x 위치 구하기
+            float spwanWidth = floorWidth - margin;
+            float minX = spwanPoint.position.x - (spwanWidth / 2f);
+            float maxX = spwanPoint.position.x + (spwanWidth / 2f);
+            pos.x = Random.Range(minX, maxX);
+        }        
 
         // 적 생성
         GameObject go = Instantiate(enemyPrefab);
