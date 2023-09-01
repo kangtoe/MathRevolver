@@ -6447,7 +6447,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -699.99994, y: 0}
+  m_AnchoredPosition: {x: -700, y: 0}
   m_SizeDelta: {x: 587.5, y: 437.5}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!95 &193355999
@@ -20690,7 +20690,7 @@ MonoBehaviour:
   spwanDelay: 3
   enemyPrefab: {fileID: 7502607062306655998, guid: 0cff8eab6dfe90b4ea06e8aff996fc6d, type: 3}
   enemyBossPrefab: {fileID: 4203822413878867571, guid: 7ccb2a8edf19b3e46966310d98f7a793, type: 3}
-  compensator: 0.8
+  compensator: 1.2
   bossAdventCount: 10
   currentBossAdventCount: 0
   enemies: []
@@ -32593,8 +32593,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLv: 10
   attackSpeedLv: 0
-  attackSpeedMin: 1
-  attackSpeedMax: 0.5
+  attackSpeedMin: 0.8
+  attackSpeedMax: 0.3
   skillTimeLv: 0
   skillTimeMin: 3
   skillTimeMax: 6
@@ -37965,6 +37965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad278522f3ee91f449211d829e9be841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTutorial: 0
   DiagonosticCompleted: 0
   DiagonosticScore: 0
   BestScore: 0
