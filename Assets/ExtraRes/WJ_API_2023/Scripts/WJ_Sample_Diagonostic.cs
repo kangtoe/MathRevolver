@@ -266,7 +266,7 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         timeBar.StartTimeBar(solveTime);
     }
 
-    // 답을 고르고 맞았는 지 체크
+    // 답을 고르고 맞았는 지 체크 // -1 : 무조건 오답 // -2: 무조건 정답
     public void SelectAnswer(int _idx = -1)
     {
         if (status != DiagonosticStatus.OnSolving)
@@ -287,6 +287,23 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         string currectAnsr = wj_conn.cDiagnotics.data.qstCransr;
 
         if (_idx == -1) myAnsr = ""; // 답안 제출하지 못함 (공란?)                        
+        else if (_idx == -2) // 항상 정답
+        {
+            myAnsr = currectAnsr;
+
+            for (int i = 0; i < textAnsr.Length; i++)
+            {
+                string str = textAnsr[i].text;
+                str = str.Replace(texDrawfontText, "");
+                if (str == currectAnsr)
+                {
+                    // 정답 찾기
+                    _idx = i;                    
+                    break;
+                } 
+            }
+             
+        } 
         else
         {
             myAnsr = textAnsr[_idx].text;
@@ -349,9 +366,9 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
         }
     }
 
-    public void AutoSkip()
+    public void AutoSkip(bool correct)
     {
-        IEnumerator AutoSkipCr()
+        IEnumerator AutoSkip1Cr()
         {
             while (true)
             {
@@ -361,8 +378,19 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
             }
         }
+        IEnumerator AutoSkip2Cr()
+        {
+            while (true)
+            {
+                if (status == DiagonosticStatus.ChoosingDiff) OnChooseDifficulty(3);
+                if (status == DiagonosticStatus.OnSolving) SelectAnswer(-2);
+                if (status == DiagonosticStatus.DiagonosticFinished) break;
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
 
-        StartCoroutine(AutoSkipCr());
+        if(correct) StartCoroutine(AutoSkip2Cr());
+        else StartCoroutine(AutoSkip1Cr());
     }   
     
     #region 만료됨
