@@ -22,6 +22,8 @@ public class SelectionObject_Math : MonoBehaviour
 
         if (other.tag == "Player")
         {
+            EnemySpwaner.Instance.AddCompensator();
+
             SoundManager.Instance.PlaySound("problem");
 
             Debug.Log("매스피드 발판 밟음");

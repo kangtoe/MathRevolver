@@ -36,6 +36,11 @@ public class EnemySpwaner : MonoBehaviour
     [SerializeField]
     float compensator = 0.5f;
 
+    [Header("보정 계수 증가량 (매스피드 선택지 )")]
+    [SerializeField]
+    float compensatorAdd = 0.05f;
+    public float CompensatorAdd => compensatorAdd;
+
     [Header("보스 출현 간격")]
     [SerializeField]
     int bossAdventCount = 10;
@@ -70,6 +75,11 @@ public class EnemySpwaner : MonoBehaviour
     void Start()
     {
         currentBossAdventCount = bossAdventCount;        
+    }
+
+    public void AddCompensator()
+    {
+        compensator += compensatorAdd;
     }
 
     public void SpwanStart()
