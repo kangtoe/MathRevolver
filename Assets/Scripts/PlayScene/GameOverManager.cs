@@ -35,5 +35,6 @@ public class GameOverManager : MonoBehaviour
         UIManager_Play.Instance.ActiveOverUI(true);
         SelectionCreator.Instance.StopAllCoroutines();
         EnemySpwaner.Instance.StopAllCoroutines();
+        SkillManager.Instance.StopAllCoroutines();
     }
 }

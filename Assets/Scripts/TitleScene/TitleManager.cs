@@ -41,7 +41,7 @@ public class TitleManager : MonoBehaviour
 
         if (!SaveManager.DiagonosticCompleted)
         {
-            SoundManager.Instance.PlaySound("click");
+            //SoundManager.Instance.PlaySound("click");
 
             Debug.Log("한번 이상의 진단평가 풀이 필요");
             return;
