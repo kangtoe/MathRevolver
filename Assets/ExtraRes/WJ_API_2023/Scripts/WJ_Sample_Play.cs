@@ -96,6 +96,8 @@ public class WJ_Sample_Play : MonoBehaviour
         {
             textAnsr[i] = btAnsr[i].GetComponentInChildren<TEXDraw>();
         }
+
+        timeBar.onTimeEnd.AddListener(() => SelectAnswer(-1));
     }
 
     private void Start()
