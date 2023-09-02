@@ -76,6 +76,7 @@ public class WJ_Sample_Play : MonoBehaviour
     [Header("시간 게이지")]
     [SerializeField]
     TimeBar timeBar;
+    public TimeBar TimeBar => timeBar;
 
     [Header("연출 애니메이터")]
     [SerializeField]
