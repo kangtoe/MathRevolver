@@ -28,8 +28,8 @@ public class GameOverManager : MonoBehaviour
 
     public void GameOver()
     {
-        currentscoreTxt.text = ScoreManager.Instance.CurrentScore.ToString();
-        bestscoreTxt.text = SaveManager.BestScore.ToString();
+        currentscoreTxt.text = ScoreManager.Instance.CurrentScore.ToString("N0");
+        bestscoreTxt.text = SaveManager.BestScore.ToString("N0");
 
         Player.Instance.OnDead();
         UIManager_Play.Instance.ActiveOverUI(true);
