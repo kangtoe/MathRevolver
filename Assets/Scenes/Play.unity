@@ -32686,13 +32686,13 @@ MonoBehaviour:
   maxLv: 10
   attackSpeedLv: 0
   attackSpeedMin: 0.8
-  attackSpeedMax: 0.4
+  attackSpeedMax: 0.5
   skillTimeLv: 0
   skillTimeMin: 3
-  skillTimeMax: 7
+  skillTimeMax: 8
   solvingTimeLv: 0
   solvingTimeMin: 3
-  solvingTimeMax: 7
+  solvingTimeMax: 10
   attackSpeedBtn: {fileID: 408119100}
   skillTimeBtn: {fileID: 947384640}
   solvingTimeBtn: {fileID: 440352660}
