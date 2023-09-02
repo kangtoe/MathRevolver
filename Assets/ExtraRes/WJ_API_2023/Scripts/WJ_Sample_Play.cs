@@ -117,7 +117,7 @@ public class WJ_Sample_Play : MonoBehaviour
 
     #endregion
 
-    // 새로운 문제들 받아오기 : 최초 1번, 문제 묶음(8문항) 모두 풀었을 때 
+    // 새로운 문제들 받아오기 : 최초 1번만 (문제 묶음(8문항) 모두 풀었을 때 -> 문제 제출 시 자동으로 다음 문제들 받아옴)
     public void SetNewQuestionData()
     {
         if (wj_conn == null) Debug.LogError("Cannot find Connector");
@@ -134,7 +134,7 @@ public class WJ_Sample_Play : MonoBehaviour
         // 받아온 데이터를 가지고 문제를 표시
         void MakeQuestion(string textCn, string qstCn, string qstCransr, string qstWransr)
         {
-            Debug.Log("MakeQuestion");
+            //Debug.Log("MakeQuestion");
             timeBar.StartTimeBar(solveTime);   
 
             string correctAnswer;
@@ -178,7 +178,9 @@ public class WJ_Sample_Play : MonoBehaviour
         {
             Debug.Log("문제 표기 실패 : 데이터 받아오는 중");
             return;
-        }       
+        }
+
+        Debug.Log("SetQst : " + _index);
 
         // index에 해당하는 문제 ui에 표기
         qst = wj_conn.cLearnSet.data.qsts[_index];        
@@ -299,7 +301,7 @@ public class WJ_Sample_Play : MonoBehaviour
 
             // 문제 표기
             SetQst(currentQuestionIndex);
-            currentQuestionIndex++;
+            //currentQuestionIndex++;
 
             // 정답 여부 초기화
             isCorrect = false;

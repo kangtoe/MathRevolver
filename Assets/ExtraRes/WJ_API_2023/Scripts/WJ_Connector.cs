@@ -228,7 +228,7 @@ public class WJ_Connector : MonoBehaviour
                 catch (Exception e) { Debug.LogError(e.Message); }
 
                 cDiagnotics = null;                
-                cLearnSet = null;
+                //cLearnSet = null; Debug.Log("cLearnSet 비우기");
                 cLearnProg = null;
 
                 //Debug.Log("UWR_Post || output :" + output.ToString());
@@ -241,7 +241,7 @@ public class WJ_Connector : MonoBehaviour
                         break;
 
                     case Response_Learning_Setting ResponselearnSet:                        
-                        //Debug.Log("cLearnSet = ResponselearnSet");
+                        Debug.Log("cLearnSet 갱신!");
                         cLearnSet = ResponselearnSet;
                         break;
 

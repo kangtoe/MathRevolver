@@ -351,19 +351,19 @@ public class WJ_Sample_Diagonostic : MonoBehaviour
 
     public void AutoSkip()
     {
-        StartCoroutine(AutoSkipCr());
-    }
-
-    IEnumerator AutoSkipCr()
-    {
-        while (true)
+        IEnumerator AutoSkipCr()
         {
-            if (status == DiagonosticStatus.ChoosingDiff) OnChooseDifficulty(0);
-            if (status == DiagonosticStatus.OnSolving) SelectAnswer(-1);
-            if (status == DiagonosticStatus.DiagonosticFinished) break;
-            yield return new WaitForSeconds(0.1f);            
-        }        
-    }
+            while (true)
+            {
+                if (status == DiagonosticStatus.ChoosingDiff) OnChooseDifficulty(0);
+                if (status == DiagonosticStatus.OnSolving) SelectAnswer(-1);
+                if (status == DiagonosticStatus.DiagonosticFinished) break;
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+
+        StartCoroutine(AutoSkipCr());
+    }   
     
     #region 만료됨
 

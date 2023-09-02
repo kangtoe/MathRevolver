@@ -26,7 +26,7 @@ public class SelectionObject_Math : MonoBehaviour
 
             SoundManager.Instance.PlaySound("problem");
 
-            Debug.Log("매스피드 발판 밟음");
+            //Debug.Log("매스피드 발판 밟음");
             WJ_Sample_Play.Instance.ActivePanel(true);
         }
     }
