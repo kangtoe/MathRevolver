@@ -32691,7 +32691,7 @@ MonoBehaviour:
   skillTimeMin: 3
   skillTimeMax: 8
   solvingTimeLv: 0
-  solvingTimeMin: 3
+  solvingTimeMin: 4
   solvingTimeMax: 10
   attackSpeedBtn: {fileID: 408119100}
   skillTimeBtn: {fileID: 947384640}
