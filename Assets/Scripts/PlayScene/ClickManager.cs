@@ -61,12 +61,34 @@ public class ClickManager : MonoBehaviour
     void ClickCheck()
     {
         // ui 클릭시 지면 이동 입력은 무시
-        if (EventSystem.current.IsPointerOverGameObject() == true)
+        #if UNITY_EDITOR
         {
-            return;
-        }
+            // 에디터 환경
+            Debug.Log("UNITY_EDITOR");            
+            if (EventSystem.current.IsPointerOverGameObject() == true) return;
+        }        
+        #elif UNITY_ANDROID
+        {
+            //안드로이드 환경
+            //Debug.Log("UNITY_ANDROID");            
+            if (Input.touchCount > 0)
+            {                   
+                if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId) == true)
+                {
+                    return;
+                }
+            }
+            else return;
+        }            
+        #else
+        {
+            // 안드로이드 이외의 환경
+            //Debug.Log("not UNITY_ANDROID");            
+            if (EventSystem.current.IsPointerOverGameObject() == true) return;                    
+        }        
+        #endif
 
-            // 마우스 입력 처리
+        // 마우스 입력 처리
         if (Input.GetMouseButtonDown(0))
         {
             Vector3? point = GetClickPoint();
