@@ -1,11 +1,16 @@
-미리보기 이미지
-![그림2](https://github.com/user-attachments/assets/0ccdac3d-2316-4246-9d7a-12c8fead9480)
+## 개요
+|![1](https://github.com/user-attachments/assets/9773ec0d-99e8-430b-a9c7-5d74e1c50082)|![2](https://github.com/user-attachments/assets/2c69436c-7667-4df4-a1f1-b6b8020dc0ea)|
+|:---:|:---:|
+|러닝 액션|문제 풀이 화면|
 
+## 프로젝트 설명
+‘웅진 씽크빅 제3회 게임 제작 챌린지’ 출품작으로, 교육적 요소를 가미한 러닝 액션 장르 게임 제작을 목표로 했습니다.<br>
+[시연영상 보러가기](https://www.youtube.com/watch?v=8iBKH-Ci2Vc)
 
+- 사용 기술 : C＃9.0, Unity 2022.3 (LST)
+- 총원 2명 : 프로그래머 1명, 기획 1명
 
-### 프로젝트 설명
-‘웅진 씽크빅 제3회 게임 제작 챌린지’ 출품작으로, 교육적 요소를 가미한 러닝 액션 장르 게임 제작을 목표로 했습니다.
-### 구현 기능
+## 구현 기능
 1. 웹 API 데이터 통신
 2. 게임 컨텐츠 커스텀 에디터 확장
 3. 러닝게임을 위한 실시간 레벨 생성
